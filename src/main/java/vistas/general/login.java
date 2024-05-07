@@ -8,6 +8,9 @@ import java.awt.Color;
 import javax.swing.JOptionPane;
 import modelo.Persona;
 import modeloDAO.PersonaDao;
+import vistas.admin.admin_dashboard;
+import vistas.admin.admin_sidebar;
+import vistas.alumno.alum_sidebar;
 
 /**
  *
@@ -207,33 +210,40 @@ public class login extends javax.swing.JFrame {
             txtContraseña.setText("**********");
             txtContraseña.setForeground(new Color(204, 204, 204));
         }
-        
+
     }//GEN-LAST:event_txtUsuarioMousePressed
 
     private void btnIngresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIngresarActionPerformed
-       
-        
+
         Persona objPersona = new Persona();
         PersonaDao rd = new PersonaDao();
         String dni, password;
-        
-        
+
         dni = txtUsuario.getText();
         password = String.valueOf(txtContraseña.getPassword());
         objPersona = rd.validarLogueo(dni, password);
-//        if (r == null) {
-//            JOptionPane.showMessageDialog(this, "Código o Contraseña incorrectos");
-//        } else {
-//            Principal p = new Principal();
-//            p.datosRecep(txtCodigo.getText());
-//            dispose();
-//            objDesva.Abrir(p, 10);
-//            
-//        }
-        
-        
-        
-        
+        if (objPersona == null) {
+            JOptionPane.showMessageDialog(this, "Código o Contraseña incorrectos");
+        } else {
+            
+            if (objPersona.getRol().equals("Administrador")) {
+                //admin_dashboard ad = new admin_dashboard(dni);
+                System.out.println("ENTRANDO A ADMIN");
+                admin_sidebar adSide= new admin_sidebar();
+//                admin_dashboard ad = new admin_dashboard();
+                dispose();
+                adSide.setVisible(true);
+                
+            } else {
+                System.out.println("ENTRANDO A ALUM");
+                // alum_sidebar al = new alum_sidebar(dni);
+                alum_sidebar al = new alum_sidebar();
+                dispose();
+                al.setVisible(true);
+                
+            }
+
+        }
     }//GEN-LAST:event_btnIngresarActionPerformed
 
     /**

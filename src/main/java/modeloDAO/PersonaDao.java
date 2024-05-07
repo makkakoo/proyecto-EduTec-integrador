@@ -29,7 +29,8 @@ public class PersonaDao implements PersonaInterface{
     public Persona validarLogueo(String dni, String contraseña) {
 
         try {
-            String sql = "select * from Persona where dni =" + "'" + dni + "'" + "and password =" + "'" + contraseña + "'";
+            String sql = " select dni,password, rol from persona p JOIN tipo_usuario tp on p.id_rol = tp.id_rol "
+                    + "where dni =" + "'" + dni + "'" + "and password =" + "'" + contraseña + "'";
             conn = con.getConexion();
             ps = conn.prepareStatement(sql);
             rs = ps.executeQuery();
@@ -37,6 +38,7 @@ public class PersonaDao implements PersonaInterface{
                 objPersona = new Persona();
                 objPersona.setDni(rs.getString("dni"));
                 objPersona.setPassword(rs.getString("password"));
+                objPersona.setRol(rs.getString("rol"));
 
             }
             conn.close();
