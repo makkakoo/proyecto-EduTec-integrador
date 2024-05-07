@@ -5,6 +5,9 @@
 package vistas.general;
 
 import java.awt.Color;
+import javax.swing.JOptionPane;
+import modelo.Persona;
+import modeloDAO.PersonaDao;
 
 /**
  *
@@ -72,7 +75,7 @@ public class login extends javax.swing.JFrame {
         jLabel7.setText("Usuario");
 
         txtUsuario.setForeground(new java.awt.Color(204, 204, 204));
-        txtUsuario.setText("Ingrese su Usuario");
+        txtUsuario.setText("Ingrese su dni");
         txtUsuario.setToolTipText("");
         txtUsuario.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
@@ -188,14 +191,14 @@ public class login extends javax.swing.JFrame {
         }
 
         if (txtUsuario.getText().isEmpty()) {
-            txtUsuario.setText("Ingrese su Usuario");
+            txtUsuario.setText("Ingrese su dni");
             txtUsuario.setForeground(new Color(204, 204, 204));
         }
 
     }//GEN-LAST:event_txtContraseñaMousePressed
 
     private void txtUsuarioMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtUsuarioMousePressed
-        if (txtUsuario.getText().equals("Ingrese su Usuario")) {
+        if (txtUsuario.getText().equals("Ingrese su dni")) {
             txtUsuario.setText("");
             txtUsuario.setForeground(Color.black);
         }
@@ -210,6 +213,23 @@ public class login extends javax.swing.JFrame {
     private void btnIngresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIngresarActionPerformed
        
         
+        Persona objPersona = new Persona();
+        PersonaDao rd = new PersonaDao();
+        String dni, password;
+        
+        
+        dni = txtUsuario.getText();
+        password = String.valueOf(txtContraseña.getPassword());
+        objPersona = rd.validarLogueo(dni, password);
+//        if (r == null) {
+//            JOptionPane.showMessageDialog(this, "Código o Contraseña incorrectos");
+//        } else {
+//            Principal p = new Principal();
+//            p.datosRecep(txtCodigo.getText());
+//            dispose();
+//            objDesva.Abrir(p, 10);
+//            
+//        }
         
         
         
