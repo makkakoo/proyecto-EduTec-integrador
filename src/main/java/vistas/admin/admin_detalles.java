@@ -90,7 +90,7 @@ public class admin_detalles extends javax.swing.JPanel {
         jLabel14 = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
         jSeparator2 = new javax.swing.JSeparator();
-        txtAmbiente1 = new javax.swing.JTextField();
+        txtAmbiente = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
         jLabel15 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
@@ -332,7 +332,7 @@ public class admin_detalles extends javax.swing.JPanel {
         jPanel1.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 270, -1, -1));
         jPanel1.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 380, 580, 10));
         jPanel1.add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 190, 580, 10));
-        jPanel1.add(txtAmbiente1, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 70, 98, -1));
+        jPanel1.add(txtAmbiente, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 70, 98, -1));
 
         jLabel8.setBackground(new java.awt.Color(17, 49, 194));
         jLabel8.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
@@ -457,7 +457,7 @@ public class admin_detalles extends javax.swing.JPanel {
     private void btnIngresarAulaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIngresarAulaActionPerformed
         au = new Aula();
         aud = new AulaDAO();
-        au.setAmbiente(txtAforo.getText());
+        au.setAmbiente(txtAmbiente.getText());
         au.setAforo(Integer.parseInt(txtAforo.getText()));
         aud.agregar(au);
         
@@ -640,7 +640,7 @@ public class admin_detalles extends javax.swing.JPanel {
     private javax.swing.JTable tblTemas;
     private javax.swing.JTextField txt;
     private javax.swing.JTextField txtAforo;
-    private javax.swing.JTextField txtAmbiente1;
+    private javax.swing.JTextField txtAmbiente;
     private javax.swing.JTextField txtCodHorario;
     private javax.swing.JTextField txtCodTema;
     private javax.swing.JTextField txtInicio;
