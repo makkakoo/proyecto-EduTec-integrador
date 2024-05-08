@@ -264,7 +264,7 @@ public class admin_sidebar extends javax.swing.JFrame {
     private javax.swing.JPanel btn_cuenta;
     private javax.swing.JPanel btn_dashboard;
     private javax.swing.JPanel btn_programar;
-    private javax.swing.JPanel content;
+    public static javax.swing.JPanel content;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
