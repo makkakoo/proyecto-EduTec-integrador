@@ -96,7 +96,7 @@ public class AulaDAO implements  AulaInterface{
     @Override
     public Aula listarUno(String codigo) {
         try {
-            String sql = "select * from proveedor where ambiente = '"+codigo+"'";            
+            String sql = "select * from aula where ambiente = '"+codigo+"'";            
             conn = con.getConexion();
             ps = conn.prepareStatement(sql);
             rs = ps.executeQuery();
