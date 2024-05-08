@@ -9,6 +9,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import misInterfaces.AulaInterface;
 import modelo.Aula;
 
@@ -32,7 +33,14 @@ public class AulaDAO implements  AulaInterface{
             ps.setInt(2, au.getAforo());
             ps.executeUpdate();
         } catch (SQLException ex) {
-            Logger.getLogger(AulaDAO.class.getName()).log(Level.SEVERE, null, ex);
+            if (ex.getSQLState().equals("45000")) {
+                // Se ha alcanzado el límite máximo de registros en la tabla
+                //System.out.println("No se puede agregar más registros. Se ha alcanzado el límite máximo.");                
+                JOptionPane.showMessageDialog(null, "No se puede agregar más aulas. Se ha alcanzado el límite máximo.");
+            } else {
+                // Otro tipo de error SQL
+                Logger.getLogger(AulaDAO.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
         return false;
     }

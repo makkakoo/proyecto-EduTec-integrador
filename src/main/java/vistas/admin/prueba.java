@@ -13,6 +13,7 @@ public class prueba extends javax.swing.JFrame {
     public prueba() {
         initComponents();
         establecerColumnas();
+        mostrarAulas();
     }
     
     private void establecerColumnas(){
