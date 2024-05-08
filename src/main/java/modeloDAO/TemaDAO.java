@@ -29,7 +29,7 @@ public class TemaDAO implements  TemaInterface{
                     + " values (?, ?)";
             conn = con.getConexion();
             ps = conn.prepareStatement(sql);
-            ps.setString(1, t.getId_tema());
+            ps.setInt(1, t.getId_tema());
             ps.setString(2, t.getNombre());
             ps.executeUpdate();
         } catch (SQLException ex) {
@@ -61,11 +61,11 @@ public class TemaDAO implements  TemaInterface{
     @Override
     public boolean modificar(Tema t) {
         try {
-            String sql = "update aula set id_tema=?, nombre_tema=?"
+            String sql = "update tema set id_tema=?, nombre_tema=?"
                     + " where id_tema = '"+t.getId_tema()+"'";
             conn = con.getConexion();
             ps = conn.prepareStatement(sql);
-            ps.setString(1, t.getId_tema());
+            ps.setInt(1, t.getId_tema());
             ps.setString(2, t.getNombre());
             ps.executeUpdate();
         } catch (SQLException ex) {
@@ -82,7 +82,7 @@ public class TemaDAO implements  TemaInterface{
             rs = ps.executeQuery();
             while(rs.next()){
                 t = new Tema();
-                t.setId_tema(rs.getString("id_tema"));
+                t.setId_tema(rs.getInt("id_tema"));
                 t.setNombre(rs.getString("nombre_tema"));
                 lista.add(t);
             }
@@ -102,7 +102,7 @@ public class TemaDAO implements  TemaInterface{
             rs = ps.executeQuery();
             while(rs.next()){
                 t = new Tema();
-                t.setId_tema(rs.getString("id_tema"));
+                t.setId_tema(rs.getInt("id_tema"));
                 t.setNombre(rs.getString("nombre_tema"));
              }
             conn.close();
