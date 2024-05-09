@@ -95,7 +95,6 @@ public class admin_detalles extends javax.swing.JPanel {
         jLabel15 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         txtCodHorario = new javax.swing.JTextField();
-        txtInicio = new javax.swing.JTextField();
         btnIngresarHorario = new javax.swing.JButton();
         btnEliminarHorario = new javax.swing.JButton();
         btnModificarHorario = new javax.swing.JButton();
@@ -107,6 +106,14 @@ public class admin_detalles extends javax.swing.JPanel {
         jLabel16 = new javax.swing.JLabel();
         jLabel17 = new javax.swing.JLabel();
         btnGuardarHorario = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel18 = new javax.swing.JLabel();
+        jSpinner1 = new javax.swing.JSpinner();
+        jSpinner2 = new javax.swing.JSpinner();
+        jSpinner3 = new javax.swing.JSpinner();
+        jLabel19 = new javax.swing.JLabel();
+        jSpinner4 = new javax.swing.JSpinner();
+        jLabel10 = new javax.swing.JLabel();
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -115,12 +122,12 @@ public class admin_detalles extends javax.swing.JPanel {
         jLabel2.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(17, 49, 194));
         jLabel2.setText("Temas");
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 230, -1, -1));
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 210, -1, -1));
 
         jLabel3.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(153, 153, 153));
         jLabel3.setText("Nombre:");
-        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 300, -1, -1));
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 280, -1, -1));
         jPanel1.add(txtAforo, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 110, 120, -1));
 
         tblAulas.setModel(new javax.swing.table.DefaultTableModel(
@@ -231,9 +238,9 @@ public class admin_detalles extends javax.swing.JPanel {
         ));
         jScrollPane2.setViewportView(tblTemas);
 
-        jPanel1.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 240, 250, 114));
-        jPanel1.add(txtCodTema, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 270, 116, -1));
-        jPanel1.add(txtNomTema, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 300, 119, -1));
+        jPanel1.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 220, 250, 114));
+        jPanel1.add(txtCodTema, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 250, 116, -1));
+        jPanel1.add(txtNomTema, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 280, 119, -1));
 
         txtModCodTem.setEditable(false);
 
@@ -292,7 +299,7 @@ public class admin_detalles extends javax.swing.JPanel {
                 btnModificarTemaActionPerformed(evt);
             }
         });
-        jPanel1.add(btnModificarTema, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 290, -1, -1));
+        jPanel1.add(btnModificarTema, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 270, -1, -1));
 
         btnEliminarTema.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/crud_icons/delete.png"))); // NOI18N
         btnEliminarTema.addActionListener(new java.awt.event.ActionListener() {
@@ -300,7 +307,7 @@ public class admin_detalles extends javax.swing.JPanel {
                 btnEliminarTemaActionPerformed(evt);
             }
         });
-        jPanel1.add(btnEliminarTema, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 240, -1, -1));
+        jPanel1.add(btnEliminarTema, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 220, -1, -1));
 
         btnIngresarTema.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/crud_icons/add.png"))); // NOI18N
         btnIngresarTema.addActionListener(new java.awt.event.ActionListener() {
@@ -308,7 +315,7 @@ public class admin_detalles extends javax.swing.JPanel {
                 btnIngresarTemaActionPerformed(evt);
             }
         });
-        jPanel1.add(btnIngresarTema, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 240, -1, -1));
+        jPanel1.add(btnIngresarTema, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 220, -1, -1));
 
         jLabel7.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(153, 153, 153));
@@ -329,8 +336,8 @@ public class admin_detalles extends javax.swing.JPanel {
         jLabel14.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
         jLabel14.setForeground(new java.awt.Color(153, 153, 153));
         jLabel14.setText("Código:");
-        jPanel1.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 270, -1, -1));
-        jPanel1.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 380, 580, 10));
+        jPanel1.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 250, -1, -1));
+        jPanel1.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 350, 580, 10));
         jPanel1.add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 190, 580, 10));
         jPanel1.add(txtAmbiente, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 70, 98, -1));
 
@@ -338,19 +345,18 @@ public class admin_detalles extends javax.swing.JPanel {
         jLabel8.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(17, 49, 194));
         jLabel8.setText("Horarios");
-        jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 410, -1, -1));
+        jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 370, -1, -1));
 
         jLabel15.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
         jLabel15.setForeground(new java.awt.Color(153, 153, 153));
         jLabel15.setText("Código:");
-        jPanel1.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 450, -1, -1));
+        jPanel1.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 410, -1, -1));
 
         jLabel9.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
         jLabel9.setForeground(new java.awt.Color(153, 153, 153));
-        jLabel9.setText("Inicio:");
-        jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 480, -1, -1));
-        jPanel1.add(txtCodHorario, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 450, 116, -1));
-        jPanel1.add(txtInicio, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 480, 119, -1));
+        jLabel9.setText("Fin:");
+        jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 470, -1, -1));
+        jPanel1.add(txtCodHorario, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 410, 116, -1));
 
         btnIngresarHorario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/crud_icons/add.png"))); // NOI18N
         btnIngresarHorario.addActionListener(new java.awt.event.ActionListener() {
@@ -358,7 +364,7 @@ public class admin_detalles extends javax.swing.JPanel {
                 btnIngresarHorarioActionPerformed(evt);
             }
         });
-        jPanel1.add(btnIngresarHorario, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 420, -1, -1));
+        jPanel1.add(btnIngresarHorario, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 380, -1, -1));
 
         btnEliminarHorario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/crud_icons/delete.png"))); // NOI18N
         btnEliminarHorario.addActionListener(new java.awt.event.ActionListener() {
@@ -366,7 +372,7 @@ public class admin_detalles extends javax.swing.JPanel {
                 btnEliminarHorarioActionPerformed(evt);
             }
         });
-        jPanel1.add(btnEliminarHorario, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 420, -1, -1));
+        jPanel1.add(btnEliminarHorario, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 380, -1, -1));
 
         btnModificarHorario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/crud_icons/modify.png"))); // NOI18N
         btnModificarHorario.addActionListener(new java.awt.event.ActionListener() {
@@ -374,7 +380,7 @@ public class admin_detalles extends javax.swing.JPanel {
                 btnModificarHorarioActionPerformed(evt);
             }
         });
-        jPanel1.add(btnModificarHorario, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 470, -1, -1));
+        jPanel1.add(btnModificarHorario, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 430, -1, -1));
 
         tblHorarios.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -389,7 +395,7 @@ public class admin_detalles extends javax.swing.JPanel {
         ));
         jScrollPane3.setViewportView(tblHorarios);
 
-        jPanel1.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 420, 250, 114));
+        jPanel1.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 380, 250, 114));
 
         txtModCodHor.setEditable(false);
 
@@ -441,6 +447,24 @@ public class admin_detalles extends javax.swing.JPanel {
         );
 
         jPanel1.add(pnlModificarHorario, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 420, 230, 120));
+
+        jLabel1.setText(":");
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 440, 0, -1));
+
+        jLabel18.setText(":");
+        jPanel1.add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 440, 10, 20));
+        jPanel1.add(jSpinner1, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 440, 50, -1));
+        jPanel1.add(jSpinner2, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 440, 50, -1));
+        jPanel1.add(jSpinner3, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 470, 50, -1));
+
+        jLabel19.setText(":");
+        jPanel1.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 470, 10, 20));
+        jPanel1.add(jSpinner4, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 470, 50, -1));
+
+        jLabel10.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
+        jLabel10.setForeground(new java.awt.Color(153, 153, 153));
+        jLabel10.setText("Inicio:");
+        jPanel1.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 440, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -611,6 +635,8 @@ public class admin_detalles extends javax.swing.JPanel {
     private javax.swing.JButton btnModificarAula;
     private javax.swing.JButton btnModificarHorario;
     private javax.swing.JButton btnModificarTema;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
@@ -618,6 +644,8 @@ public class admin_detalles extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
+    private javax.swing.JLabel jLabel18;
+    private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -632,6 +660,10 @@ public class admin_detalles extends javax.swing.JPanel {
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
+    private javax.swing.JSpinner jSpinner1;
+    private javax.swing.JSpinner jSpinner2;
+    private javax.swing.JSpinner jSpinner3;
+    private javax.swing.JSpinner jSpinner4;
     private javax.swing.JPanel pnlModificarAula;
     private javax.swing.JPanel pnlModificarHorario;
     private javax.swing.JPanel pnlModificarTema;
@@ -643,7 +675,6 @@ public class admin_detalles extends javax.swing.JPanel {
     private javax.swing.JTextField txtAmbiente;
     private javax.swing.JTextField txtCodHorario;
     private javax.swing.JTextField txtCodTema;
-    private javax.swing.JTextField txtInicio;
     private javax.swing.JTextField txtModAfo;
     private javax.swing.JTextField txtModAmb;
     private javax.swing.JTextField txtModCodHor;
