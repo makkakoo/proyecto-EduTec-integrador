@@ -8,7 +8,6 @@ public class Persona {
     private String email;
     private String password;
     private int id_rol;
-    private String rol;
 
     public String getDni() {
         return dni;
@@ -58,17 +57,4 @@ public class Persona {
         this.id_rol = id_rol;
     }
 
-    /**
-     * @return the rol
-     */
-    public String getRol() {
-        return rol;
-    }
-
-    /**
-     * @param rol the rol to set
-     */
-    public void setRol(String rol) {
-        this.rol = rol;
-    }
 }

@@ -226,7 +226,7 @@ public class login extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Código o Contraseña incorrectos");
         } else {
             
-            if (objPersona.getRol().equals("Administrador")) {
+            if (objPersona.getId_rol() == 1001) {
                 //admin_dashboard ad = new admin_dashboard(dni);
                 System.out.println("ENTRANDO A ADMIN");
                 admin_sidebar adSide= new admin_sidebar();
