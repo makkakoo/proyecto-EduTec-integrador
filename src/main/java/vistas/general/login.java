@@ -4,6 +4,7 @@
  */
 package vistas.general;
 
+import com.formdev.flatlaf.intellijthemes.FlatLightFlatIJTheme;
 import java.awt.Color;
 import javax.swing.JOptionPane;
 import modelo.Persona;
@@ -225,22 +226,22 @@ public class login extends javax.swing.JFrame {
         if (objPersona == null) {
             JOptionPane.showMessageDialog(this, "Código o Contraseña incorrectos");
         } else {
-            
+
             if (objPersona.getRol().equals("Administrador")) {
                 //admin_dashboard ad = new admin_dashboard(dni);
                 System.out.println("ENTRANDO A ADMIN");
-                admin_sidebar adSide= new admin_sidebar();
+                admin_sidebar adSide = new admin_sidebar();
 //                admin_dashboard ad = new admin_dashboard();
                 dispose();
                 adSide.setVisible(true);
-                
+
             } else {
                 System.out.println("ENTRANDO A ALUM");
                 // alum_sidebar al = new alum_sidebar(dni);
                 alum_sidebar al = new alum_sidebar();
                 dispose();
                 al.setVisible(true);
-                
+
             }
 
         }
@@ -256,20 +257,11 @@ public class login extends javax.swing.JFrame {
          * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
          */
         try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//            UIManager.setLookAndFeel(new FlatLightLaf());
+//             FlatArcIJTheme.setup();
+            FlatLightFlatIJTheme.setup();
+        } catch (Exception ex) {
+            System.err.println("Failed to initialize LaF");
         }
         //</editor-fold>
 
