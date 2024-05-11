@@ -1,6 +1,6 @@
 package vistas.alumno;
 
-import vistas.admin.*;
+import com.formdev.flatlaf.intellijthemes.FlatLightFlatIJTheme;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import javax.swing.JPanel;
@@ -11,7 +11,7 @@ public class alum_sidebar extends javax.swing.JFrame {
         initComponents();
         
         //Para mostrar por defecto el panel del dashboard
-        d = new admin_dashboard();
+        d = new alum_dashboard();
         d.setSize(1040, 620);
         d.setLocation(0,0);
         
@@ -21,9 +21,10 @@ public class alum_sidebar extends javax.swing.JFrame {
         content.repaint();
     }
 
-    admin_dashboard d;
-    admin_clases c;
-    admin_programarclase p;
+    alum_dashboard d;
+    alum_clases c;
+    alum_reservarclase r;
+    alum_cuenta cu;
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -166,7 +167,7 @@ public class alum_sidebar extends javax.swing.JFrame {
         resetColor(btn_clases);
         
         // Abrir sección
-        d = new admin_dashboard();
+        d = new alum_dashboard();
         mostrarPanel(d);
     }//GEN-LAST:event_btn_dashboardMousePressed
 
@@ -175,6 +176,9 @@ public class alum_sidebar extends javax.swing.JFrame {
         resetColor(btn_dashboard);
         resetColor(btn_programar);
         resetColor(btn_clases);
+        // Abrir sección
+        cu = new alum_cuenta();
+        mostrarPanel(cu);
     }//GEN-LAST:event_btn_cuentaMousePressed
 
     private void btn_clasesMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_clasesMousePressed
@@ -184,7 +188,7 @@ public class alum_sidebar extends javax.swing.JFrame {
         resetColor(btn_cuenta);
         
         // Abrir sección
-        c = new admin_clases();
+        c = new alum_clases();
         mostrarPanel(c);
     }//GEN-LAST:event_btn_clasesMousePressed
 
@@ -195,8 +199,8 @@ public class alum_sidebar extends javax.swing.JFrame {
         resetColor(btn_cuenta);
         
         // Abrir sección
-        p = new admin_programarclase();
-        mostrarPanel(p);
+        r = new alum_reservarclase();
+        mostrarPanel(r);
     }//GEN-LAST:event_btn_programarMousePressed
 
     void setColor(JPanel panel){
@@ -221,21 +225,12 @@ public class alum_sidebar extends javax.swing.JFrame {
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
          * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
          */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(alum_sidebar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(alum_sidebar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(alum_sidebar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(alum_sidebar.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+       try {
+//            UIManager.setLookAndFeel(new FlatLightLaf());
+//             FlatArcIJTheme.setup();
+               FlatLightFlatIJTheme.setup();
+        } catch (Exception ex) {
+            System.err.println("Failed to initialize LaF");
         }
         //</editor-fold>
         //</editor-fold>

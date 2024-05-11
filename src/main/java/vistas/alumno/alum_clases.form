@@ -72,7 +72,7 @@
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="c2" green="31" red="11" type="rgb"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="Listar clases "/>
+            <Property name="text" type="java.lang.String" value="Mis clases "/>
           </Properties>
         </Component>
         <Container class="javax.swing.JScrollPane" name="jScrollPane1">

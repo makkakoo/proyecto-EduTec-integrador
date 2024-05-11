@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
-package vistas.admin;
+package vistas.alumno;
 
 import javax.swing.table.DefaultTableModel;
 
@@ -10,11 +10,11 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author lesly
  */
-public class admin_clases extends javax.swing.JPanel {
+public class alum_clases extends javax.swing.JPanel {
 
     DefaultTableModel modelo = new DefaultTableModel();
     
-    public admin_clases() {
+    public alum_clases() {
         initComponents();
         establecerColumnas();
     }
@@ -23,6 +23,7 @@ public class admin_clases extends javax.swing.JPanel {
     private void establecerColumnas(){
         modelo.addColumn("Aula");
         modelo.addColumn("Fecha");
+        modelo.addColumn("Hora");
         modelo.addColumn("Tema");
         modelo.addColumn("");
         tblClases.setModel(modelo);   
@@ -46,7 +47,7 @@ public class admin_clases extends javax.swing.JPanel {
 
         jLabel1.setFont(new java.awt.Font("Century Gothic", 1, 48)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(17, 49, 194));
-        jLabel1.setText("Listar clases ");
+        jLabel1.setText("Mis clases ");
 
         tblClases.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
