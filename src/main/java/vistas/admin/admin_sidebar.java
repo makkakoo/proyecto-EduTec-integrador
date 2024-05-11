@@ -36,6 +36,7 @@ public class admin_sidebar extends javax.swing.JFrame {
     admin_dashboard d;
     admin_clases c;
     admin_programarclase p;
+    admin_cuenta cu;
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -187,6 +188,9 @@ public class admin_sidebar extends javax.swing.JFrame {
         resetColor(btn_dashboard);
         resetColor(btn_programar);
         resetColor(btn_clases);
+        // Abrir sección
+        cu = new admin_cuenta();
+        mostrarPanel(cu);
     }//GEN-LAST:event_btn_cuentaMousePressed
 
     private void btn_clasesMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_clasesMousePressed
