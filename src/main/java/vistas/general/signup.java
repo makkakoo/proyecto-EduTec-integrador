@@ -6,8 +6,6 @@ import modeloDAO.PersonaDao;
 
 import com.formdev.flatlaf.intellijthemes.FlatLightFlatIJTheme;
 import java.awt.Color;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 public class signup extends javax.swing.JFrame {
 
