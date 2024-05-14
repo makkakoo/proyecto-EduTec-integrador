@@ -25,7 +25,7 @@ public class HorarioDAO implements  HorarioInterface{
     @Override
     public boolean agregar(Horario h) {
          try {
-            String sql = "insert into tema (id_hora, inicio, final)"
+            String sql = "insert into horario (id_hora, inicio, final)"
                     + " values (?, ?,?)";
             conn = con.getConexion();
             ps = conn.prepareStatement(sql);
