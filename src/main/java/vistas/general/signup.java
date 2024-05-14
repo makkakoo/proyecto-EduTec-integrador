@@ -6,11 +6,6 @@ import modeloDAO.PersonaDao;
 
 import com.formdev.flatlaf.intellijthemes.FlatLightFlatIJTheme;
 import java.awt.Color;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import javax.swing.JLabel;
-import javax.swing.JTextField;
-import javax.swing.Timer;
 
 public class signup extends javax.swing.JFrame {
 
