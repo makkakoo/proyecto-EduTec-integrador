@@ -1,36 +1,39 @@
-
 package vistas.admin;
 
 import java.util.ArrayList;
 import modelo.Aula;
+import modelo.Horario;
 import modelo.Persona;
 import modelo.Tema;
 import modeloDAO.AulaDAO;
+import modeloDAO.HorarioDAO;
 import modeloDAO.PersonaDao;
 import modeloDAO.TemaDAO;
 
 public class admin_programarclase extends javax.swing.JPanel {
-    
-    
+
     ArrayList<Tema> listaTema = new ArrayList<>();
     TemaDAO objTemaDAO = new TemaDAO();
-    
+
     ArrayList<Aula> listaAula = new ArrayList<>();
     AulaDAO objAulaDAO = new AulaDAO();
-    
+
     ArrayList<Persona> listaPersona = new ArrayList<>();
     PersonaDao objPersonaDao = new PersonaDao();
     
+    ArrayList<Horario> listaHorario = new ArrayList<>();
+    HorarioDAO objHorarioDao = new HorarioDAO();
+
     public admin_programarclase() {
         initComponents();
         mostrarTema();
         mostrarAula();
         mostrarProfesor();
+        mostrarHorario();
     }
-    
-    
+
     private void mostrarTema() {
-        
+
         cbxTema.removeAllItems();
         listaTema = objTemaDAO.listarTodos();
 
@@ -39,8 +42,9 @@ public class admin_programarclase extends javax.swing.JPanel {
             cbxTema.addItem(listaTema.get(i).getNombre());
         }
     }
+
     private void mostrarAula() {
-        
+
         cbxAula.removeAllItems();
         listaAula = objAulaDAO.listarTodos();
 
@@ -48,13 +52,29 @@ public class admin_programarclase extends javax.swing.JPanel {
             cbxAula.addItem(listaAula.get(i).getAmbiente());
         }
     }
+
     private void mostrarProfesor() {
-        
+
         cbxTutor.removeAllItems();
         listaPersona = objPersonaDao.listarTodos();
 
         for (int i = 0; i < listaPersona.size(); i++) {
-            cbxTutor.addItem(listaPersona.get(i).getNombre() + listaPersona.get(i).getApellido()) ;
+            if (listaPersona.get(i).getId_rol() == 1003) {
+                cbxTutor.addItem( listaPersona.get(i).getApellido() + " " + listaPersona.get(i).getNombre());
+            }
+
+        }
+    }
+    
+    private void mostrarHorario() {
+
+        cbxHorario.removeAllItems();
+        listaHorario = objHorarioDao.listarTodos();
+
+        for (int i = 0; i < listaHorario.size(); i++) {
+                cbxHorario.addItem( listaHorario.get(i).getInicio()  + " - "  + listaHorario.get(i).getFinale());
+            
+
         }
     }
     @SuppressWarnings("unchecked")
@@ -148,13 +168,13 @@ public class admin_programarclase extends javax.swing.JPanel {
                     .addComponent(cbxAula, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(cbxTutor, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(cbxTema, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 20, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(cbxHorario, 0, 261, Short.MAX_VALUE)
+                            .addComponent(cbxHorario, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(txtFecha, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnReservar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(btnReservar, javax.swing.GroupLayout.DEFAULT_SIZE, 261, Short.MAX_VALUE))
                         .addGap(144, 144, 144))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -164,7 +184,7 @@ public class admin_programarclase extends javax.swing.JPanel {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(327, 327, 327)
                 .addComponent(jLabel1)
-                .addContainerGap(98, Short.MAX_VALUE))
+                .addContainerGap(328, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -202,8 +222,7 @@ public class admin_programarclase extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(230, 230, 230))
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

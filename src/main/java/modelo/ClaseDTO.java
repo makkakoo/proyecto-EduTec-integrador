@@ -6,6 +6,7 @@ public class ClaseDTO {
     private String cod_aula;
     private Tema tema;
     private Horario horario;
+    private Persona persona;
 
     public String getEstado() {
         return estado;

@@ -21,6 +21,8 @@ public class PersonaDao implements PersonaInterface {
     ResultSet rs;
 
     Persona objPersona;
+    
+    ArrayList<Persona> lista = new ArrayList<>(); 
 
     @Override
     public Persona validarLogueo(String dni, String contraseña) {
@@ -83,7 +85,28 @@ public class PersonaDao implements PersonaInterface {
 
     @Override
     public ArrayList<Persona> listarTodos() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+ 
+        try {
+            String sql = "select * from persona";            
+            conn = con.getConexion();
+            ps = conn.prepareStatement(sql);
+            rs = ps.executeQuery();
+            while(rs.next()){
+                objPersona = new Persona();
+                objPersona.setDni(rs.getString("dni"));
+                objPersona.setNombre(rs.getString("nombre"));
+                objPersona.setApellido(rs.getString("apellido"));
+                objPersona.setEmail(rs.getString("email"));
+                objPersona.setPassword(rs.getString("password"));
+                objPersona.setId_rol(rs.getInt("id_rol"));
+                
+                lista.add(objPersona);
+            }
+            conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(AulaDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return lista;
     }
 
     @Override
