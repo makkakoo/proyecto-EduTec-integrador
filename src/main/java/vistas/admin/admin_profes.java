@@ -1,5 +1,11 @@
 package vistas.admin;
+//Para la funcionalidad de buscar
+import javax.swing.table.TableRowSorter;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import javax.swing.RowFilter;
 
+//Otros imports
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -16,12 +22,21 @@ public class admin_profes extends javax.swing.JPanel {
     DefaultTableModel modelo = new DefaultTableModel();
     Persona p;
     
+    //Para el filtro de busqueda
+    private TableRowSorter trsfiltro;
+    String filtro;
+    
     public admin_profes() {
         initComponents();
         establecerColumnas();
         mostrarProfes();
         ocultarCamposObligatorios();
         btnGuardarCambios.setVisible(false);
+        
+        lblNombre.setVisible(false);
+        txtNomProf.setVisible(false);
+        lblDNI.setVisible(false);
+        txtDNIProf.setVisible(false);
         
     }
     
@@ -37,6 +52,7 @@ public class admin_profes extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        buttonGroup1 = new javax.swing.ButtonGroup();
         jPanel1 = new javax.swing.JPanel();
         lblTitulo = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -54,6 +70,13 @@ public class admin_profes extends javax.swing.JPanel {
         btnEliminarProfe = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
+        rbtnDNI = new javax.swing.JRadioButton();
+        rbtnNombre = new javax.swing.JRadioButton();
+        lblNombre = new javax.swing.JLabel();
+        txtNomProf = new javax.swing.JTextField();
+        lblDNI = new javax.swing.JLabel();
+        txtDNIProf = new javax.swing.JTextField();
         lblCampoNombreP = new javax.swing.JLabel();
         lblCampoApellidosP = new javax.swing.JLabel();
         lblCampoCorreoP = new javax.swing.JLabel();
@@ -120,7 +143,7 @@ public class admin_profes extends javax.swing.JPanel {
         });
         jScrollPane1.setViewportView(tblProfes);
 
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(471, 120, 530, 410));
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 130, 530, 410));
 
         btnAgregarProfe.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/crud_icons/add.png"))); // NOI18N
         btnAgregarProfe.addActionListener(new java.awt.event.ActionListener() {
@@ -143,26 +166,78 @@ public class admin_profes extends javax.swing.JPanel {
 
         jLabel6.setFont(new java.awt.Font("Century Gothic", 1, 24)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(17, 49, 194));
-        jLabel6.setText("Buscar profesores");
+        jLabel6.setText("Lista de profesores");
+
+        jLabel1.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
+        jLabel1.setText("Buscar por");
+
+        buttonGroup1.add(rbtnDNI);
+        rbtnDNI.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
+        rbtnDNI.setText("DNI");
+        rbtnDNI.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rbtnDNIActionPerformed(evt);
+            }
+        });
+
+        buttonGroup1.add(rbtnNombre);
+        rbtnNombre.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
+        rbtnNombre.setText("Apellido");
+        rbtnNombre.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rbtnNombreActionPerformed(evt);
+            }
+        });
+
+        lblNombre.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
+        lblNombre.setText("Apellido:");
+
+        lblDNI.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
+        lblDNI.setText("DNI:");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(15, 15, 15)
-                .addComponent(jLabel6)
-                .addContainerGap(310, Short.MAX_VALUE))
+                .addGap(17, 17, 17)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel6)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addGap(18, 18, 18)
+                        .addComponent(rbtnDNI)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(rbtnNombre)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 48, Short.MAX_VALUE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblDNI)
+                    .addComponent(lblNombre))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(txtNomProf, javax.swing.GroupLayout.DEFAULT_SIZE, 125, Short.MAX_VALUE)
+                    .addComponent(txtDNIProf))
+                .addContainerGap(41, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel6)
-                .addContainerGap(39, Short.MAX_VALUE))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel6)
+                    .addComponent(lblNombre)
+                    .addComponent(txtNomProf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(rbtnDNI)
+                    .addComponent(rbtnNombre)
+                    .addComponent(lblDNI)
+                    .addComponent(txtDNIProf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(13, Short.MAX_VALUE))
         );
 
-        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(471, 30, 530, -1));
+        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(471, 30, 530, 80));
 
         lblCampoNombreP.setForeground(new java.awt.Color(255, 51, 51));
         lblCampoNombreP.setText("Campo obligatorio");
@@ -259,6 +334,53 @@ public class admin_profes extends javax.swing.JPanel {
         btnGuardarCambios.setVisible(false);
         mostrarProfes();
     }//GEN-LAST:event_btnGuardarCambiosActionPerformed
+
+    private void rbtnDNIActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbtnDNIActionPerformed
+        lblNombre.setVisible(false);
+        txtNomProf.setVisible(false);
+        lblDNI.setVisible(true);
+        txtDNIProf.setVisible(true);
+        txtDNIProf.addKeyListener(new KeyAdapter(){
+            @Override
+            public void keyReleased(final KeyEvent e){
+                    String cadena=txtDNIProf.getText();
+                    txtDNIProf.setText(cadena);
+                    repaint();
+                    filtro1();
+                    }
+            }); 
+    }//GEN-LAST:event_rbtnDNIActionPerformed
+
+    private void rbtnNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbtnNombreActionPerformed
+        lblDNI.setVisible(false);
+        txtDNIProf.setVisible(false);
+        lblNombre.setVisible(true);
+        txtNomProf.setVisible(true);
+        txtNomProf.addKeyListener(new KeyAdapter(){
+                @Override
+                public void keyReleased(final KeyEvent e){
+                String cadena=txtNomProf.getText();
+                txtNomProf.setText(cadena);
+                repaint();
+                filtro2();
+                   }
+            });
+    }//GEN-LAST:event_rbtnNombreActionPerformed
+    
+    public void filtro1(){
+        filtro=txtDNIProf.getText();
+        trsfiltro = new TableRowSorter(tblProfes.getModel()); 
+        trsfiltro.setRowFilter(RowFilter.regexFilter(txtDNIProf.getText(), 0));
+        tblProfes.setRowSorter(trsfiltro);
+    }
+    
+    public void filtro2(){
+        filtro=txtNomProf.getText();
+        trsfiltro = new TableRowSorter(tblProfes.getModel()); 
+        trsfiltro.setRowFilter(RowFilter.regexFilter(txtNomProf.getText(), 2));
+        tblProfes.setRowSorter(trsfiltro);
+    }
+
     public void mostrarProfes(){
         modelo.setRowCount(0);
         pd = new PersonaDao();
@@ -408,6 +530,8 @@ public class admin_profes extends javax.swing.JPanel {
     private javax.swing.JButton btnEliminarProfe;
     private javax.swing.JButton btnGuardarCambios;
     private javax.swing.JButton btnModificarProfe;
+    private javax.swing.ButtonGroup buttonGroup1;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -421,11 +545,17 @@ public class admin_profes extends javax.swing.JPanel {
     private javax.swing.JLabel lblCampoCorreoP;
     private javax.swing.JLabel lblCampoDNIP;
     private javax.swing.JLabel lblCampoNombreP;
+    private javax.swing.JLabel lblDNI;
+    private javax.swing.JLabel lblNombre;
     private javax.swing.JLabel lblTitulo;
+    private javax.swing.JRadioButton rbtnDNI;
+    private javax.swing.JRadioButton rbtnNombre;
     private javax.swing.JTable tblProfes;
     private javax.swing.JTextField txtApellidosProfe;
     private javax.swing.JTextField txtCorreoProfe;
+    private javax.swing.JTextField txtDNIProf;
     private javax.swing.JTextField txtDNIProfe;
+    private javax.swing.JTextField txtNomProf;
     private javax.swing.JTextField txtNombreProfe;
     // End of variables declaration//GEN-END:variables
 }
