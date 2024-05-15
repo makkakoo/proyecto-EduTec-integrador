@@ -13,6 +13,8 @@ public class signup extends javax.swing.JFrame {
         initComponents();
         ocultarContra.setVisible(false);
         ocultarRepetir.setVisible(false);
+        lblCampoRepe.setVisible(false);
+        ocultarCamposObligatorios();
     }
 
     @SuppressWarnings("unchecked")
@@ -41,6 +43,12 @@ public class signup extends javax.swing.JFrame {
         mostrarRepetir = new javax.swing.JLabel();
         ocultarRepetir = new javax.swing.JLabel();
         ocultarContra = new javax.swing.JLabel();
+        lblCampoRepe = new javax.swing.JLabel();
+        lblCampoNombre = new javax.swing.JLabel();
+        lblCampoApe = new javax.swing.JLabel();
+        lblCampoDNI = new javax.swing.JLabel();
+        lblCampoCorreo = new javax.swing.JLabel();
+        lblCampoContra = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -65,7 +73,7 @@ public class signup extends javax.swing.JFrame {
         jLabel5.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(102, 102, 102));
         jLabel5.setText("Apellidos");
-        jPanel2.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(127, 200, -1, -1));
+        jPanel2.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 220, -1, -1));
 
         jLabel6.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(153, 153, 153));
@@ -84,7 +92,7 @@ public class signup extends javax.swing.JFrame {
                 txtApellidosMousePressed(evt);
             }
         });
-        jPanel2.add(txtApellidos, new org.netbeans.lib.awtextra.AbsoluteConstraints(127, 229, 262, 30));
+        jPanel2.add(txtApellidos, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 250, 262, 30));
 
         txtNombre.setForeground(new java.awt.Color(204, 204, 204));
         txtNombre.setText("Ingrese sus nombres");
@@ -104,12 +112,12 @@ public class signup extends javax.swing.JFrame {
                 btnRegistrarActionPerformed(evt);
             }
         });
-        jPanel2.add(btnRegistrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 370, 215, 43));
+        jPanel2.add(btnRegistrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 410, 215, 43));
 
         jLabel9.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
         jLabel9.setForeground(new java.awt.Color(102, 102, 102));
         jLabel9.setText("DNI");
-        jPanel2.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(127, 277, -1, -1));
+        jPanel2.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 310, -1, -1));
 
         jLabel10.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
         jLabel10.setForeground(new java.awt.Color(102, 102, 102));
@@ -128,7 +136,7 @@ public class signup extends javax.swing.JFrame {
         jLabel11.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
         jLabel11.setForeground(new java.awt.Color(102, 102, 102));
         jLabel11.setText("Repetir contraseña");
-        jPanel2.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 270, -1, 30));
+        jPanel2.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 300, -1, 30));
 
         btn_regresar.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
         btn_regresar.setForeground(new java.awt.Color(153, 153, 153));
@@ -150,7 +158,7 @@ public class signup extends javax.swing.JFrame {
                 txtPassordMousePressed(evt);
             }
         });
-        jPanel2.add(txtPassord, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 310, 260, 30));
+        jPanel2.add(txtPassord, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 340, 260, 30));
 
         txtDNI.setForeground(new java.awt.Color(204, 204, 204));
         txtDNI.setText("Ingrese DNI");
@@ -165,12 +173,12 @@ public class signup extends javax.swing.JFrame {
                 txtDNIActionPerformed(evt);
             }
         });
-        jPanel2.add(txtDNI, new org.netbeans.lib.awtextra.AbsoluteConstraints(127, 306, 262, 30));
+        jPanel2.add(txtDNI, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 340, 262, 30));
 
         jLabel13.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
         jLabel13.setForeground(new java.awt.Color(102, 102, 102));
         jLabel13.setText("Contraseña");
-        jPanel2.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 193, -1, 30));
+        jPanel2.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 210, -1, 30));
 
         txtRepetirContra.setForeground(new java.awt.Color(204, 204, 204));
         txtRepetirContra.setText("**********");
@@ -182,7 +190,7 @@ public class signup extends javax.swing.JFrame {
                 txtRepetirContraMouseReleased(evt);
             }
         });
-        jPanel2.add(txtRepetirContra, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 230, 260, 30));
+        jPanel2.add(txtRepetirContra, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 250, 260, 30));
 
         mostrarContra.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/img_login/mostrar contra.png"))); // NOI18N
         mostrarContra.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -190,7 +198,7 @@ public class signup extends javax.swing.JFrame {
                 mostrarContraMouseClicked(evt);
             }
         });
-        jPanel2.add(mostrarContra, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 230, 20, 30));
+        jPanel2.add(mostrarContra, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 250, 20, 30));
 
         mostrarRepetir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/img_login/mostrar contra.png"))); // NOI18N
         mostrarRepetir.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -198,7 +206,7 @@ public class signup extends javax.swing.JFrame {
                 mostrarRepetirMouseClicked(evt);
             }
         });
-        jPanel2.add(mostrarRepetir, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 316, 20, 20));
+        jPanel2.add(mostrarRepetir, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 340, 20, 20));
 
         ocultarRepetir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/img_login/hide-password.png"))); // NOI18N
         ocultarRepetir.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -206,7 +214,7 @@ public class signup extends javax.swing.JFrame {
                 ocultarRepetirMouseClicked(evt);
             }
         });
-        jPanel2.add(ocultarRepetir, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 316, 20, 20));
+        jPanel2.add(ocultarRepetir, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 340, 20, 20));
 
         ocultarContra.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/img_login/hide-password.png"))); // NOI18N
         ocultarContra.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -214,9 +222,33 @@ public class signup extends javax.swing.JFrame {
                 ocultarContraMouseClicked(evt);
             }
         });
-        jPanel2.add(ocultarContra, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 230, 20, 30));
+        jPanel2.add(ocultarContra, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 250, 20, 30));
 
-        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 110, 835, 435));
+        lblCampoRepe.setForeground(new java.awt.Color(255, 0, 0));
+        lblCampoRepe.setText("Campo obligatorio");
+        jPanel2.add(lblCampoRepe, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 360, 110, 40));
+
+        lblCampoNombre.setForeground(new java.awt.Color(255, 0, 0));
+        lblCampoNombre.setText("Campo obligatorio");
+        jPanel2.add(lblCampoNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 180, 110, 40));
+
+        lblCampoApe.setForeground(new java.awt.Color(255, 0, 0));
+        lblCampoApe.setText("Campo obligatorio");
+        jPanel2.add(lblCampoApe, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 270, 110, 40));
+
+        lblCampoDNI.setForeground(new java.awt.Color(255, 0, 0));
+        lblCampoDNI.setText("Campo obligatorio");
+        jPanel2.add(lblCampoDNI, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 360, 260, 40));
+
+        lblCampoCorreo.setForeground(new java.awt.Color(255, 0, 0));
+        lblCampoCorreo.setText("Campo obligatorio");
+        jPanel2.add(lblCampoCorreo, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 180, 260, 40));
+
+        lblCampoContra.setForeground(new java.awt.Color(255, 0, 0));
+        lblCampoContra.setText("Campo obligatorio");
+        jPanel2.add(lblCampoContra, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 270, 110, 40));
+
+        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 110, 835, 470));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/img_login/curvas1.png"))); // NOI18N
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
@@ -227,12 +259,12 @@ public class signup extends javax.swing.JFrame {
         jLabel3.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(153, 153, 153));
         jLabel3.setText("© Grupo10");
-        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 580, -1, -1));
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 610, -1, -1));
 
         jLabel12.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
         jLabel12.setForeground(new java.awt.Color(153, 153, 153));
         jLabel12.setText("© Diseñado y desarrollado por Leslie, Adrián y Walter");
-        jPanel1.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 560, -1, -1));
+        jPanel1.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 590, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -250,47 +282,135 @@ public class signup extends javax.swing.JFrame {
 
     private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed
 
-        verificacionDNI();
+        verificacionDeCampos();
 
 
     }//GEN-LAST:event_btnRegistrarActionPerformed
 
+    public void ocultarCamposObligatorios() {
+        lblCampoNombre.setVisible(false);
+        
+        lblCampoApe.setVisible(false);
+        lblCampoDNI.setVisible(false);
+        lblCampoCorreo.setVisible(false);
+        lblCampoContra.setVisible(false);
+        lblCampoRepe.setVisible(false);
+        
+        
+        lblCampoCorreo.setText("Campo obligatorio");
+        lblCampoApe.setText("Campo obligatorio");
+        lblCampoDNI.setText("Campo obligatorio");
+        lblCampoCorreo.setText("Campo obligatorio");
+        lblCampoContra.setText("Campo obligatorio");
+        lblCampoRepe.setText("Campo obligatorio");
+        
+
+    }
+
+    public void verificacionDeCampos() {
+        ocultarCamposObligatorios();
+        int a = 0;
+
+        if (txtNombre.getText().isEmpty() || txtNombre.getText().equals("Ingrese sus nombres")) {
+            lblCampoNombre.setVisible(true);
+            a = -1;
+        }
+
+        if (txtApellidos.getText().isEmpty() || txtApellidos.getText().equals("Ingrese sus apellidos")) {
+            lblCampoApe.setVisible(true);
+            a = -1;
+        }
+        if (txtDNI.getText().isEmpty() || txtDNI.getText().equals("Ingrese DNI")) {
+            lblCampoDNI.setVisible(true);
+            a = -1;
+
+        }
+        if (txtCorreo.getText().isEmpty() || txtCorreo.getText().equals("Ingrese correo electronico")) {
+            lblCampoCorreo.setVisible(true);
+            a = -1;
+        }
+
+        if (String.valueOf(txtRepetirContra.getPassword()).isEmpty() || String.valueOf(txtRepetirContra.getPassword()).equals("**********")) {
+            lblCampoContra.setVisible(true);
+            a = -1;
+        }
+
+        if (String.valueOf(txtPassord.getPassword()).isEmpty() || String.valueOf(txtPassord.getPassword()).equals("**********")) {
+            lblCampoRepe.setVisible(true);
+            a = -1;
+        }
+
+        if (a == 0) {
+            verificacionDNI();
+        }
+    }
+
     public void verificacionDNI() {
-        int a= -1;
+        int a = -1;
 
         // Verificar si el texto tiene exactamente 8 caracteres
         if (txtDNI.getText().length() == 8) {
             // Verificar si todos los caracteres son dígitos
             for (int i = 0; i < txtDNI.getText().length(); i++) {
-                System.out.println("i antes:   " + i);
+                
                 if (!Character.isDigit(txtDNI.getText().charAt(i))) {
-                    
+
                     i = txtDNI.getText().length();
                     a = txtDNI.getText().length();
-                    JOptionPane.showMessageDialog(null, "El Dni deben ser números", "Alerta", JOptionPane.ERROR_MESSAGE);
+                    
+                    lblCampoDNI.setText("El DNI deben ser números");
+                    lblCampoDNI.setVisible(true);
+//                    JOptionPane.showMessageDialog(null, "El Dni deben ser números", "Alerta", JOptionPane.ERROR_MESSAGE);
                 }
             }
         } else {
             a = txtDNI.getText().length();
-            JOptionPane.showMessageDialog(null, "El DNI debe tener 8 dígitos", "Alerta", JOptionPane.ERROR_MESSAGE);
+            lblCampoDNI.setText("El DNI debe tener 8 dígitos");
+            lblCampoDNI.setVisible(true);
+//            JOptionPane.showMessageDialog(null, "El DNI debe tener 8 dígitos", "Alerta", JOptionPane.ERROR_MESSAGE);
         }
-        
-        
-        if( a != txtDNI.getText().length()){
-            verificacionContra();
+
+        if (a != txtDNI.getText().length()) {
+            ocultarCamposObligatorios();
+            verificacionEmail();
         }
 
     }
-    
-    public void verificacionContra(){
-        if(  String.valueOf(txtRepetirContra.getPassword()).equals(String.valueOf(txtPassord.getPassword())) ){
-            registroAccion();
+
+    public void verificacionEmail() {
+
+        int a = 0;
+        // Verificar si el correo electrónico contiene exactamente un '@'
+        int atIndex = txtCorreo.getText().indexOf('@');
+        if (atIndex == -1 || txtCorreo.getText().indexOf('@', atIndex + 1) != -1) {
+            a = -1;
+        }
+
+        // Verificar si el dominio termina en '.com'
+        int dotIndex = txtCorreo.getText().lastIndexOf('.');
+        if (dotIndex == -1 || !txtCorreo.getText().substring(dotIndex).equals(".com")) {
+            a = -1;
+        }
+
+        if (a == 0) {
+            
+            ocultarCamposObligatorios();
+            verificacionContra();
         }else{
+            lblCampoCorreo.setText("Ingrese un correo válido");
+            lblCampoCorreo.setVisible(true);
+        }
+
+    }
+
+    public void verificacionContra() {
+        
+        if (String.valueOf(txtRepetirContra.getPassword()).equals(String.valueOf(txtPassord.getPassword()))) {
+            registroAccion();
+        } else {
             JOptionPane.showMessageDialog(null, "La contraseña no coinciden", "Alerta", JOptionPane.ERROR_MESSAGE);
         }
     }
-    
-    
 
     public void registroAccion() {
         Persona objPersona = new Persona();
@@ -306,7 +426,11 @@ public class signup extends javax.swing.JFrame {
 
         objPerDAO.agregar(objPersona);
 
-        JOptionPane.showMessageDialog(null, "El doctor se ha agregado correctamente.", "Confirmación", JOptionPane.INFORMATION_MESSAGE);
+        JOptionPane.showMessageDialog(null, "El usuario se ha agregado correctamente.", "Confirmación", JOptionPane.INFORMATION_MESSAGE);
+
+        login lg = new login();
+        lg.setVisible(true);
+        dispose();
 
     }
     private void btn_regresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_regresarActionPerformed
@@ -326,12 +450,12 @@ public class signup extends javax.swing.JFrame {
             txtNombre.setText("Ingrese sus nombres");
             txtNombre.setForeground(new Color(204, 204, 204));
         }
-        
+
         if (String.valueOf(txtRepetirContra.getPassword()).isEmpty()) {
             txtRepetirContra.setText("**********");
             txtRepetirContra.setForeground(new Color(204, 204, 204));
         }
-        
+
         if (txtApellidos.getText().isEmpty()) {
             txtApellidos.setText("Ingrese sus apellidos");
             txtApellidos.setForeground(new Color(204, 204, 204));
@@ -359,14 +483,12 @@ public class signup extends javax.swing.JFrame {
             txtPassord.setText("**********");
             txtPassord.setForeground(new Color(204, 204, 204));
         }
-        
-        
+
         if (String.valueOf(txtRepetirContra.getPassword()).isEmpty()) {
             txtRepetirContra.setText("**********");
             txtRepetirContra.setForeground(new Color(204, 204, 204));
         }
-        
-        
+
         if (txtApellidos.getText().isEmpty()) {
             txtApellidos.setText("Ingrese sus apellidos");
             txtApellidos.setForeground(new Color(204, 204, 204));
@@ -392,12 +514,12 @@ public class signup extends javax.swing.JFrame {
             txtPassord.setText("**********");
             txtPassord.setForeground(new Color(204, 204, 204));
         }
-        
+
         if (String.valueOf(txtRepetirContra.getPassword()).isEmpty()) {
             txtRepetirContra.setText("**********");
             txtRepetirContra.setForeground(new Color(204, 204, 204));
         }
-        
+
         if (txtNombre.getText().isEmpty()) {
             txtNombre.setText("Ingrese sus nombres");
             txtNombre.setForeground(new Color(204, 204, 204));
@@ -424,19 +546,17 @@ public class signup extends javax.swing.JFrame {
             txtPassord.setText("**********");
             txtPassord.setForeground(new Color(204, 204, 204));
         }
-        
+
         if (String.valueOf(txtRepetirContra.getPassword()).isEmpty()) {
             txtRepetirContra.setText("**********");
             txtRepetirContra.setForeground(new Color(204, 204, 204));
         }
-        
-        
+
         if (String.valueOf(txtRepetirContra.getPassword()).isEmpty()) {
             txtRepetirContra.setText("**********");
             txtRepetirContra.setForeground(new Color(204, 204, 204));
         }
-        
-        
+
         if (txtNombre.getText().isEmpty()) {
             txtNombre.setText("Ingrese sus nombres");
             txtNombre.setForeground(new Color(204, 204, 204));
@@ -465,13 +585,12 @@ public class signup extends javax.swing.JFrame {
             txtPassord.setText("**********");
             txtPassord.setForeground(new Color(204, 204, 204));
         }
-        
+
         if (String.valueOf(txtRepetirContra.getPassword()).isEmpty()) {
             txtRepetirContra.setText("**********");
             txtRepetirContra.setForeground(new Color(204, 204, 204));
         }
-        
-        
+
         if (txtNombre.getText().isEmpty()) {
             txtNombre.setText("Ingrese sus nombres");
             txtNombre.setForeground(new Color(204, 204, 204));
@@ -498,12 +617,12 @@ public class signup extends javax.swing.JFrame {
             txtNombre.setText("Ingrese sus nombres");
             txtNombre.setForeground(new Color(204, 204, 204));
         }
-        
+
         if (String.valueOf(txtPassord.getPassword()).isEmpty()) {
             txtPassord.setText("**********");
             txtPassord.setForeground(new Color(204, 204, 204));
         }
-        
+
         if (txtApellidos.getText().isEmpty()) {
             txtApellidos.setText("Ingrese sus apellidos");
             txtApellidos.setForeground(new Color(204, 204, 204));
@@ -528,24 +647,24 @@ public class signup extends javax.swing.JFrame {
     }//GEN-LAST:event_txtRepetirContraMouseReleased
 
     private void mostrarContraMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mostrarContraMouseClicked
-        txtRepetirContra.setEchoChar((char)0);
+        txtRepetirContra.setEchoChar((char) 0);
         ocultarContra.setVisible(true);
         mostrarContra.setVisible(false);
-        
+
     }//GEN-LAST:event_mostrarContraMouseClicked
 
     private void mostrarRepetirMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mostrarRepetirMouseClicked
-        txtPassord.setEchoChar((char)0);
+        txtPassord.setEchoChar((char) 0);
         ocultarRepetir.setVisible(true);
         mostrarRepetir.setVisible(false);
-        
+
     }//GEN-LAST:event_mostrarRepetirMouseClicked
 
     private void ocultarRepetirMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ocultarRepetirMouseClicked
-       txtPassord.setEchoChar('*');
-       mostrarRepetir.setVisible(true);
-       ocultarRepetir.setVisible(false);
-       
+        txtPassord.setEchoChar('*');
+        mostrarRepetir.setVisible(true);
+        ocultarRepetir.setVisible(false);
+
     }//GEN-LAST:event_ocultarRepetirMouseClicked
 
     private void ocultarContraMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ocultarContraMouseClicked
@@ -598,6 +717,12 @@ public class signup extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JLabel lblCampoApe;
+    private javax.swing.JLabel lblCampoContra;
+    private javax.swing.JLabel lblCampoCorreo;
+    private javax.swing.JLabel lblCampoDNI;
+    private javax.swing.JLabel lblCampoNombre;
+    private javax.swing.JLabel lblCampoRepe;
     private javax.swing.JLabel mostrarContra;
     private javax.swing.JLabel mostrarRepetir;
     private javax.swing.JLabel ocultarContra;
