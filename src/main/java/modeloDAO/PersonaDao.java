@@ -77,8 +77,21 @@ public class PersonaDao implements PersonaInterface {
     }
 
     @Override
-    public boolean modificar(Persona c) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public boolean modificar(Persona p) {
+        try {
+            String sql = "update persona set dni=?, nombre=?, apellido=?, email=?"
+                    + " where dni = '"+p.getDni()+"'";
+            conn = con.getConexion();
+            ps = conn.prepareStatement(sql);
+            ps.setString(1, p.getDni());
+            ps.setString(2, p.getNombre());
+            ps.setString(3, p.getApellido());
+            ps.setString(4, p.getEmail());
+            ps.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(AulaDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return false; 
     }
 
     @Override
@@ -105,7 +118,7 @@ public class PersonaDao implements PersonaInterface {
     @Override
     public Persona listarUno(String codigo) {
          try {
-            String sql = "select * from persona where id_hora = '"+codigo+"'";            
+            String sql = "select * from persona where dni = '"+codigo+"'";            
             conn = con.getConexion();
             ps = conn.prepareStatement(sql);
             rs = ps.executeQuery();
