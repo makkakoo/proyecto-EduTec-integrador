@@ -10,6 +10,7 @@ public class admin_dashboard extends javax.swing.JPanel {
     }
     
     admin_detalles dt;
+    admin_profes pf;
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -17,6 +18,8 @@ public class admin_dashboard extends javax.swing.JPanel {
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         btnDetalles = new javax.swing.JButton();
+        btnProfes = new javax.swing.JButton();
+        btnAlumnos = new javax.swing.JButton();
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -30,6 +33,15 @@ public class admin_dashboard extends javax.swing.JPanel {
             }
         });
 
+        btnProfes.setText("Ver personas");
+
+        btnAlumnos.setText("Profesores");
+        btnAlumnos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAlumnosActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -37,6 +49,8 @@ public class admin_dashboard extends javax.swing.JPanel {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(67, 67, 67)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnAlumnos)
+                    .addComponent(btnProfes)
                     .addComponent(btnDetalles)
                     .addComponent(jLabel1))
                 .addContainerGap(631, Short.MAX_VALUE))
@@ -48,7 +62,11 @@ public class admin_dashboard extends javax.swing.JPanel {
                 .addComponent(jLabel1)
                 .addGap(28, 28, 28)
                 .addComponent(btnDetalles)
-                .addContainerGap(457, Short.MAX_VALUE))
+                .addGap(31, 31, 31)
+                .addComponent(btnAlumnos)
+                .addGap(18, 18, 18)
+                .addComponent(btnProfes)
+                .addContainerGap(362, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -68,6 +86,12 @@ public class admin_dashboard extends javax.swing.JPanel {
         dt = new admin_detalles();
         mostrarPanel(dt);
     }//GEN-LAST:event_btnDetallesActionPerformed
+
+    private void btnAlumnosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAlumnosActionPerformed
+        // Abrir sección
+        pf = new admin_profes();
+        mostrarPanel(pf);
+    }//GEN-LAST:event_btnAlumnosActionPerformed
     private void mostrarPanel(JPanel p){
         p.setSize(1040, 620);
         p.setLocation(0,0);
@@ -79,7 +103,9 @@ public class admin_dashboard extends javax.swing.JPanel {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnAlumnos;
     private javax.swing.JButton btnDetalles;
+    private javax.swing.JButton btnProfes;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
