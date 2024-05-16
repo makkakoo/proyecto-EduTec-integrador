@@ -1,6 +1,9 @@
 package modelo;
 
 //Superclase B)
+
+import java.io.File;
+
 public class Persona {
     private String dni;
     private String nombre;
@@ -8,6 +11,8 @@ public class Persona {
     private String email;
     private String password;
     private int id_rol;
+    private String nom_imagen;
+    private File archivoFoto;
 
     public String getDni() {
         return dni;
@@ -55,6 +60,22 @@ public class Persona {
 
     public void setId_rol(int id_rol) {
         this.id_rol = id_rol;
+    }
+
+    public String getNom_imagen() {
+        return nom_imagen;
+    }
+
+    public void setNom_imagen(String nom_imagen) {
+        this.nom_imagen = nom_imagen;
+    }
+
+    public File getArchivoFoto() {
+        return archivoFoto;
+    }
+
+    public void setArchivoFoto(File archivoFoto) {
+        this.archivoFoto = archivoFoto;
     }
 
 }

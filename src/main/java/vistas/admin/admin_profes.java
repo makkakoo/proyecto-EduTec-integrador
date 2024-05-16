@@ -1,13 +1,22 @@
 package vistas.admin;
 //Para la funcionalidad de buscar
+import java.awt.Image;
 import javax.swing.table.TableRowSorter;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import javax.swing.RowFilter;
 
 //Otros imports
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.ImageIcon;
+import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.table.DefaultTableModel;
 import modelo.Persona;
 import modelo.Profesor;
@@ -26,6 +35,7 @@ public class admin_profes extends javax.swing.JPanel {
     private TableRowSorter trsfiltro;
     String filtro;
     
+    File file;
     public admin_profes() {
         initComponents();
         establecerColumnas();
@@ -37,6 +47,7 @@ public class admin_profes extends javax.swing.JPanel {
         txtNomProf.setVisible(false);
         lblDNI.setVisible(false);
         txtDNIProf.setVisible(false);
+        pnlGuardar.setVisible(false);
         
     }
     
@@ -82,7 +93,12 @@ public class admin_profes extends javax.swing.JPanel {
         lblCampoCorreoP = new javax.swing.JLabel();
         lblCampoDNIP = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
+        pnlGuardar = new javax.swing.JPanel();
+        btnYei = new javax.swing.JButton();
         btnGuardarCambios = new javax.swing.JButton();
+        btnSeleccionar = new javax.swing.JButton();
+        txtNomImagen = new javax.swing.JTextField();
+        lblFoto = new javax.swing.JLabel();
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -111,16 +127,16 @@ public class admin_profes extends javax.swing.JPanel {
         jLabel5.setForeground(new java.awt.Color(102, 102, 102));
         jLabel5.setText("Correo: ");
         jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 280, -1, -1));
-        jPanel1.add(txtNombreProfe, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 100, 123, -1));
-        jPanel1.add(txtCorreoProfe, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 280, 123, -1));
-        jPanel1.add(txtApellidosProfe, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 160, 123, -1));
+        jPanel1.add(txtNombreProfe, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 100, 170, -1));
+        jPanel1.add(txtCorreoProfe, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 280, 170, -1));
+        jPanel1.add(txtApellidosProfe, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 160, 170, -1));
 
         txtDNIProfe.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtDNIProfeActionPerformed(evt);
             }
         });
-        jPanel1.add(txtDNIProfe, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 220, 123, -1));
+        jPanel1.add(txtDNIProfe, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 220, 170, -1));
 
         tblProfes.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -151,7 +167,7 @@ public class admin_profes extends javax.swing.JPanel {
                 btnAgregarProfeActionPerformed(evt);
             }
         });
-        jPanel1.add(btnAgregarProfe, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 100, 40, -1));
+        jPanel1.add(btnAgregarProfe, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 100, 40, -1));
 
         btnModificarProfe.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/crud_icons/modify.png"))); // NOI18N
         btnModificarProfe.addActionListener(new java.awt.event.ActionListener() {
@@ -159,10 +175,10 @@ public class admin_profes extends javax.swing.JPanel {
                 btnModificarProfeActionPerformed(evt);
             }
         });
-        jPanel1.add(btnModificarProfe, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 150, -1, -1));
+        jPanel1.add(btnModificarProfe, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 150, -1, -1));
 
         btnEliminarProfe.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/crud_icons/delete.png"))); // NOI18N
-        jPanel1.add(btnEliminarProfe, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 200, 40, -1));
+        jPanel1.add(btnEliminarProfe, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 210, 40, -1));
 
         jLabel6.setFont(new java.awt.Font("Century Gothic", 1, 24)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(17, 49, 194));
@@ -258,6 +274,15 @@ public class admin_profes extends javax.swing.JPanel {
         jSeparator1.setOrientation(javax.swing.SwingConstants.VERTICAL);
         jPanel1.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 40, 10, 570));
 
+        pnlGuardar.setBackground(new java.awt.Color(255, 255, 255));
+
+        btnYei.setText("Yeiiiii");
+        btnYei.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnYeiActionPerformed(evt);
+            }
+        });
+
         btnGuardarCambios.setBackground(new java.awt.Color(27, 68, 255));
         btnGuardarCambios.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
         btnGuardarCambios.setForeground(new java.awt.Color(255, 255, 255));
@@ -267,7 +292,49 @@ public class admin_profes extends javax.swing.JPanel {
                 btnGuardarCambiosActionPerformed(evt);
             }
         });
-        jPanel1.add(btnGuardarCambios, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 270, 90, 30));
+
+        btnSeleccionar.setText("Subir foto");
+        btnSeleccionar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSeleccionarActionPerformed(evt);
+            }
+        });
+
+        lblFoto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/cuenta/Profe.png"))); // NOI18N
+
+        javax.swing.GroupLayout pnlGuardarLayout = new javax.swing.GroupLayout(pnlGuardar);
+        pnlGuardar.setLayout(pnlGuardarLayout);
+        pnlGuardarLayout.setHorizontalGroup(
+            pnlGuardarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlGuardarLayout.createSequentialGroup()
+                .addContainerGap(28, Short.MAX_VALUE)
+                .addComponent(lblFoto, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(pnlGuardarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnGuardarCambios, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnYei)
+                    .addComponent(txtNomImagen, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnSeleccionar))
+                .addGap(38, 38, 38))
+        );
+        pnlGuardarLayout.setVerticalGroup(
+            pnlGuardarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlGuardarLayout.createSequentialGroup()
+                .addGap(18, 18, 18)
+                .addComponent(btnSeleccionar)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(txtNomImagen, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(btnYei)
+                .addGap(18, 18, 18)
+                .addComponent(btnGuardarCambios, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(pnlGuardarLayout.createSequentialGroup()
+                .addComponent(lblFoto, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 50, Short.MAX_VALUE))
+        );
+
+        jPanel1.add(pnlGuardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 340, 400, 260));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -277,7 +344,7 @@ public class admin_profes extends javax.swing.JPanel {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 630, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -291,6 +358,7 @@ public class admin_profes extends javax.swing.JPanel {
 
     private void btnModificarProfeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarProfeActionPerformed
         lblTitulo.setText("Modificar datos");
+        pnlGuardar.setVisible(true);
         btnAgregarProfe.setVisible(false);
         btnEliminarProfe.setVisible(false);
         btnGuardarCambios.setVisible(true);
@@ -333,6 +401,7 @@ public class admin_profes extends javax.swing.JPanel {
         btnEliminarProfe.setVisible(true);
         btnGuardarCambios.setVisible(false);
         mostrarProfes();
+        pnlGuardar.setVisible(false);
     }//GEN-LAST:event_btnGuardarCambiosActionPerformed
 
     private void rbtnDNIActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbtnDNIActionPerformed
@@ -366,6 +435,51 @@ public class admin_profes extends javax.swing.JPanel {
                    }
             });
     }//GEN-LAST:event_rbtnNombreActionPerformed
+
+    private void btnSeleccionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSeleccionarActionPerformed
+        // Crear un filtro para permitir solo archivos con extensión JPEG (JPG, JPEG)
+        FileNameExtensionFilter filtro = new FileNameExtensionFilter("Formatos de archivos JPEG(*.JPG;*.JPEG)", "jpg", "jpeg");
+        // Crear un selector de archivos
+        JFileChooser archivo = new JFileChooser();
+        // Añadir el filtro al selector de archivos
+        archivo.addChoosableFileFilter(filtro);
+        // Establecer el título del diálogo del selector de archivos
+        archivo.setDialogTitle("Abrir archivo");
+        // Mostrar el diálogo de selección de archivos y guardar la respuesta del usuario
+        int ventana = archivo.showOpenDialog(null);
+        // Verificar si el usuario seleccionó un archivo (aprobó la selección)
+        if (ventana == JFileChooser.APPROVE_OPTION) {
+            // Obtener el archivo seleccionado
+            file = archivo.getSelectedFile();
+            // Establecer la ruta del archivo seleccionado en un campo de texto (txtNomImagen)
+            txtNomImagen.setText(String.valueOf(file));
+            // Cargar la imagen desde la ruta del archivo
+            Image foto = getToolkit().getImage(txtNomImagen.getText());
+            // Escalar la imagen a un tamaño de 200x200 píxeles
+            foto = foto.getScaledInstance(200, 200, Image.SCALE_DEFAULT);
+            // Establecer la imagen escalada como un icono en una etiqueta (lblFoto)
+            lblFoto.setIcon(new ImageIcon(foto));
+        }
+
+    }//GEN-LAST:event_btnSeleccionarActionPerformed
+
+    private void btnYeiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnYeiActionPerformed
+        int fila = tblProfes.getSelectedRow();
+        codigo = tblProfes.getValueAt(fila, 0).toString();
+        pd = new PersonaDao();
+        // Obtener solo el nombre del archivo sin la ruta
+        String nombreArchivo = file.getName();
+        
+        p = pd.listarUno(codigo);
+        p.setNom_imagen(nombreArchivo);
+        
+        p.setArchivoFoto(file);
+        try {
+            pd.agregarFoto(p);
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(admin_profes.class.getName()).log(Level.SEVERE, null, ex);
+        } 
+    }//GEN-LAST:event_btnYeiActionPerformed
     
     public void filtro1(){
         filtro=txtDNIProf.getText();
@@ -530,6 +644,8 @@ public class admin_profes extends javax.swing.JPanel {
     private javax.swing.JButton btnEliminarProfe;
     private javax.swing.JButton btnGuardarCambios;
     private javax.swing.JButton btnModificarProfe;
+    private javax.swing.JButton btnSeleccionar;
+    private javax.swing.JButton btnYei;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -546,8 +662,10 @@ public class admin_profes extends javax.swing.JPanel {
     private javax.swing.JLabel lblCampoDNIP;
     private javax.swing.JLabel lblCampoNombreP;
     private javax.swing.JLabel lblDNI;
+    private javax.swing.JLabel lblFoto;
     private javax.swing.JLabel lblNombre;
     private javax.swing.JLabel lblTitulo;
+    private javax.swing.JPanel pnlGuardar;
     private javax.swing.JRadioButton rbtnDNI;
     private javax.swing.JRadioButton rbtnNombre;
     private javax.swing.JTable tblProfes;
@@ -555,6 +673,7 @@ public class admin_profes extends javax.swing.JPanel {
     private javax.swing.JTextField txtCorreoProfe;
     private javax.swing.JTextField txtDNIProf;
     private javax.swing.JTextField txtDNIProfe;
+    private javax.swing.JTextField txtNomImagen;
     private javax.swing.JTextField txtNomProf;
     private javax.swing.JTextField txtNombreProfe;
     // End of variables declaration//GEN-END:variables
