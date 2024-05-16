@@ -37,6 +37,9 @@ public class admin_profes extends javax.swing.JPanel {
     String filtro;
     
     File file;
+    ImageIcon icono;
+    ImageIcon iconoDefault = new ImageIcon("/img/cuenta/Profe.png");
+    
     public admin_profes() {
         initComponents();
         establecerColumnas();
@@ -366,23 +369,19 @@ public class admin_profes extends javax.swing.JPanel {
         BufferedImage imagen = null;
 
     try {
+        //Recuperar la imagen segun el codigo
         imagen = pd.obtenerImagen(codigo);
 
         if (imagen != null) {
-            ImageIcon icono = new ImageIcon(imagen);
+            icono = new ImageIcon(imagen);
             lblFoto.setIcon(icono);
-        } else {
-            // Si no se encuentra la imagen, puedes mostrar un mensaje o un icono por defecto en el JLabel
-            lblFoto.setText("Imagen no encontrada");
-            // Crear un ImageIcon con la URL de la imagen predeterminada
-            ImageIcon iconoDefault = new ImageIcon("/img/cuenta/Profe.png");
-            // Establecer el icono predeterminado en el JLabel
+        } else { // Si no se encuentra la imagen, se muestra una imagen por defecto en el JLabel
             lblFoto.setIcon(iconoDefault);
+            }
+        } catch (Exception ex) {
+            // Manejar cualquier excepción que pueda ocurrir durante la recuperación de la imagen
+    //        ex.printStackTrace(); // Opcional: imprime el stack trace para depuración
         }
-    } catch (Exception ex) {
-        // Manejar cualquier excepción que pueda ocurrir durante la recuperación de la imagen
-//        ex.printStackTrace(); // Opcional: imprime el stack trace para depuración
-    }
         
     }//GEN-LAST:event_btnModificarProfeActionPerformed
 
@@ -405,7 +404,7 @@ public class admin_profes extends javax.swing.JPanel {
         p.setEmail(txtCorreoProfe.getText());
         pd.modificar(p);
         
-        
+        //Si se requiere agregar y/o modificar la foto
         if(file!=null){
             // Obtener solo el nombre del archivo sin la ruta
             String nombreArchivo = file.getName();
