@@ -4,6 +4,7 @@ import java.awt.Image;
 import javax.swing.table.TableRowSorter;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -41,7 +42,6 @@ public class admin_profes extends javax.swing.JPanel {
         establecerColumnas();
         mostrarProfes();
         ocultarCamposObligatorios();
-        btnGuardarCambios.setVisible(false);
         
         lblNombre.setVisible(false);
         txtNomProf.setVisible(false);
@@ -94,7 +94,6 @@ public class admin_profes extends javax.swing.JPanel {
         lblCampoDNIP = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
         pnlGuardar = new javax.swing.JPanel();
-        btnYei = new javax.swing.JButton();
         btnGuardarCambios = new javax.swing.JButton();
         btnSeleccionar = new javax.swing.JButton();
         txtNomImagen = new javax.swing.JTextField();
@@ -274,15 +273,6 @@ public class admin_profes extends javax.swing.JPanel {
         jSeparator1.setOrientation(javax.swing.SwingConstants.VERTICAL);
         jPanel1.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 40, 10, 570));
 
-        pnlGuardar.setBackground(new java.awt.Color(255, 255, 255));
-
-        btnYei.setText("Yeiiiii");
-        btnYei.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnYeiActionPerformed(evt);
-            }
-        });
-
         btnGuardarCambios.setBackground(new java.awt.Color(27, 68, 255));
         btnGuardarCambios.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
         btnGuardarCambios.setForeground(new java.awt.Color(255, 255, 255));
@@ -293,12 +283,15 @@ public class admin_profes extends javax.swing.JPanel {
             }
         });
 
+        btnSeleccionar.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
         btnSeleccionar.setText("Subir foto");
         btnSeleccionar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSeleccionarActionPerformed(evt);
             }
         });
+
+        txtNomImagen.setEditable(false);
 
         lblFoto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/cuenta/Profe.png"))); // NOI18N
 
@@ -312,29 +305,26 @@ public class admin_profes extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(pnlGuardarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnGuardarCambios, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnYei)
-                    .addComponent(txtNomImagen, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnSeleccionar))
-                .addGap(38, 38, 38))
+                    .addComponent(btnSeleccionar)
+                    .addComponent(txtNomImagen, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(16, 16, 16))
         );
         pnlGuardarLayout.setVerticalGroup(
             pnlGuardarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlGuardarLayout.createSequentialGroup()
-                .addGap(18, 18, 18)
+                .addGap(42, 42, 42)
                 .addComponent(btnSeleccionar)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(18, 18, 18)
                 .addComponent(txtNomImagen, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(btnYei)
-                .addGap(18, 18, 18)
+                .addGap(26, 26, 26)
                 .addComponent(btnGuardarCambios, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(pnlGuardarLayout.createSequentialGroup()
                 .addComponent(lblFoto, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 50, Short.MAX_VALUE))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
-        jPanel1.add(pnlGuardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 340, 400, 260));
+        jPanel1.add(pnlGuardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 340, 400, 200));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -361,7 +351,6 @@ public class admin_profes extends javax.swing.JPanel {
         pnlGuardar.setVisible(true);
         btnAgregarProfe.setVisible(false);
         btnEliminarProfe.setVisible(false);
-        btnGuardarCambios.setVisible(true);
         
         int fila = tblProfes.getSelectedRow();
         codigo = tblProfes.getValueAt(fila, 0).toString();
@@ -372,6 +361,28 @@ public class admin_profes extends javax.swing.JPanel {
         txtNombreProfe.setText(p.getNombre());
         txtApellidosProfe.setText(p.getApellido());
         txtCorreoProfe.setText(p.getEmail());
+        
+        //Para cargar la imagen
+        BufferedImage imagen = null;
+
+    try {
+        imagen = pd.obtenerImagen(codigo);
+
+        if (imagen != null) {
+            ImageIcon icono = new ImageIcon(imagen);
+            lblFoto.setIcon(icono);
+        } else {
+            // Si no se encuentra la imagen, puedes mostrar un mensaje o un icono por defecto en el JLabel
+            lblFoto.setText("Imagen no encontrada");
+            // Crear un ImageIcon con la URL de la imagen predeterminada
+            ImageIcon iconoDefault = new ImageIcon("/img/cuenta/Profe.png");
+            // Establecer el icono predeterminado en el JLabel
+            lblFoto.setIcon(iconoDefault);
+        }
+    } catch (Exception ex) {
+        // Manejar cualquier excepción que pueda ocurrir durante la recuperación de la imagen
+//        ex.printStackTrace(); // Opcional: imprime el stack trace para depuración
+    }
         
     }//GEN-LAST:event_btnModificarProfeActionPerformed
 
@@ -387,19 +398,31 @@ public class admin_profes extends javax.swing.JPanel {
         pd = new PersonaDao();
         p = pd.listarUno(codigo);
         
+        //Modificar datos
         p.setDni(txtDNIProfe.getText());
         p.setNombre(txtNombreProfe.getText());
         p.setApellido(txtApellidosProfe.getText());
         p.setEmail(txtCorreoProfe.getText());
-        
         pd.modificar(p);
         
+        
+        if(file!=null){
+            // Obtener solo el nombre del archivo sin la ruta
+            String nombreArchivo = file.getName();
+            p.setNom_imagen(nombreArchivo);
+            p.setArchivoFoto(file);
+            try {
+                pd.agregarFoto(p);
+            } catch (FileNotFoundException ex) {
+                Logger.getLogger(admin_profes.class.getName()).log(Level.SEVERE, null, ex);
+            } 
+        }
+
         JOptionPane.showMessageDialog(null, "Cambios guardados", "Información", JOptionPane.INFORMATION_MESSAGE);
         limpiarCampos();
         lblTitulo.setText("Registro de profesores");
         btnAgregarProfe.setVisible(true);
         btnEliminarProfe.setVisible(true);
-        btnGuardarCambios.setVisible(false);
         mostrarProfes();
         pnlGuardar.setVisible(false);
     }//GEN-LAST:event_btnGuardarCambiosActionPerformed
@@ -462,24 +485,6 @@ public class admin_profes extends javax.swing.JPanel {
         }
 
     }//GEN-LAST:event_btnSeleccionarActionPerformed
-
-    private void btnYeiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnYeiActionPerformed
-        int fila = tblProfes.getSelectedRow();
-        codigo = tblProfes.getValueAt(fila, 0).toString();
-        pd = new PersonaDao();
-        // Obtener solo el nombre del archivo sin la ruta
-        String nombreArchivo = file.getName();
-        
-        p = pd.listarUno(codigo);
-        p.setNom_imagen(nombreArchivo);
-        
-        p.setArchivoFoto(file);
-        try {
-            pd.agregarFoto(p);
-        } catch (FileNotFoundException ex) {
-            Logger.getLogger(admin_profes.class.getName()).log(Level.SEVERE, null, ex);
-        } 
-    }//GEN-LAST:event_btnYeiActionPerformed
     
     public void filtro1(){
         filtro=txtDNIProf.getText();
@@ -645,7 +650,6 @@ public class admin_profes extends javax.swing.JPanel {
     private javax.swing.JButton btnGuardarCambios;
     private javax.swing.JButton btnModificarProfe;
     private javax.swing.JButton btnSeleccionar;
-    private javax.swing.JButton btnYei;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
