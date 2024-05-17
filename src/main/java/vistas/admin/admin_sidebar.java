@@ -21,12 +21,12 @@ public class admin_sidebar extends javax.swing.JFrame {
      */
     public admin_sidebar() {
         initComponents();
-        
+
         //Para mostrar por defecto el panel del dashboard
         d = new admin_dashboard();
         d.setSize(1040, 620);
-        d.setLocation(0,0);
-        
+        d.setLocation(0, 0);
+
         content.removeAll();
         content.add(d, BorderLayout.CENTER);
         content.revalidate();
@@ -37,6 +37,7 @@ public class admin_sidebar extends javax.swing.JFrame {
     admin_clases c;
     admin_programarclase p;
     admin_cuenta cu;
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -172,12 +173,32 @@ public class admin_sidebar extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    public admin_sidebar(String dniObtenido) {
+        initComponents();
+        dni = dniObtenido;//se reserva el dni
+        //Para mostrar por defecto el panel del dashboard
+        d = new admin_dashboard();
+        d.setSize(1040, 620);
+        d.setLocation(0, 0);
+
+        content.removeAll();
+        content.add(d, BorderLayout.CENTER);
+        content.revalidate();
+        content.repaint();
+        System.out.println(dniObtenido + " es el dni obtenido");
+        prueba();
+    }
+    String dni;
+
+    public void prueba() {
+        System.out.println(dni);
+    }
     private void btn_dashboardMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_dashboardMousePressed
         setColor(btn_dashboard);
         resetColor(btn_cuenta);
         resetColor(btn_programar);
         resetColor(btn_clases);
-        
+
         // Abrir sección
         d = new admin_dashboard();
         mostrarPanel(d);
@@ -189,7 +210,7 @@ public class admin_sidebar extends javax.swing.JFrame {
         resetColor(btn_programar);
         resetColor(btn_clases);
         // Abrir sección
-        cu = new admin_cuenta();
+        cu = new admin_cuenta(dni);
         mostrarPanel(cu);
     }//GEN-LAST:event_btn_cuentaMousePressed
 
@@ -198,7 +219,7 @@ public class admin_sidebar extends javax.swing.JFrame {
         resetColor(btn_dashboard);
         resetColor(btn_programar);
         resetColor(btn_cuenta);
-        
+
         // Abrir sección
         c = new admin_clases();
         mostrarPanel(c);
@@ -209,38 +230,40 @@ public class admin_sidebar extends javax.swing.JFrame {
         resetColor(btn_dashboard);
         resetColor(btn_clases);
         resetColor(btn_cuenta);
-        
+
         // Abrir sección
         p = new admin_programarclase();
         mostrarPanel(p);
     }//GEN-LAST:event_btn_programarMousePressed
 
-    void setColor(JPanel panel){
-        panel.setBackground(new Color(184,218,255));
+    void setColor(JPanel panel) {
+        panel.setBackground(new Color(184, 218, 255));
     }
-    void resetColor(JPanel panel){
-        panel.setBackground(new Color(198,223,255));
+
+    void resetColor(JPanel panel) {
+        panel.setBackground(new Color(198, 223, 255));
     }
-    
-    private void mostrarPanel(JPanel p){
+
+    private void mostrarPanel(JPanel p) {
         p.setSize(1040, 620);
-        p.setLocation(0,0);
+        p.setLocation(0, 0);
 
         content.removeAll();
         content.add(p, BorderLayout.CENTER);
         content.revalidate();
         content.repaint();
     }
+
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
          * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
          */
-         try {
+        try {
 //            UIManager.setLookAndFeel(new FlatLightLaf());
 //             FlatArcIJTheme.setup();
-               FlatLightFlatIJTheme.setup();
+            FlatLightFlatIJTheme.setup();
         } catch (Exception ex) {
             System.err.println("Failed to initialize LaF");
         }
