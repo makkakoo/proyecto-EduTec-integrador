@@ -34,9 +34,10 @@ public class ClaseDAO implements ClaseInterface {
             ps.setString(1, objCLase.getCod_aula());
             ps.setInt(2, objCLase.getHorario().getId_hora());
             ps.setInt(3, objCLase.getTema().getId_tema());
-            ps.setInt(4, objCLase.get);
-            ps.setInt(5, objCLase.getTema().getId_tema());
-            ps.setInt(6, objCLase.getTema().getId_tema());
+            ps.setString(4, objCLase.getPersona().getDni());
+            
+            ps.setString(5, objCLase.getEstado());
+            ps.setString(6, objCLase.getFecha());
             
             ps.executeUpdate();
             

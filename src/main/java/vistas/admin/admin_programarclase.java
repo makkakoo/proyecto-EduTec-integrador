@@ -20,7 +20,7 @@ public class admin_programarclase extends javax.swing.JPanel {
 
     ArrayList<Persona> listaPersona = new ArrayList<>();
     PersonaDao objPersonaDao = new PersonaDao();
-    
+
     ArrayList<Horario> listaHorario = new ArrayList<>();
     HorarioDAO objHorarioDao = new HorarioDAO();
 
@@ -38,7 +38,6 @@ public class admin_programarclase extends javax.swing.JPanel {
         listaTema = objTemaDAO.listarTodos();
 
         for (int i = 0; i < listaTema.size(); i++) {
-            System.out.println("ex");
             cbxTema.addItem(listaTema.get(i).getNombre());
         }
     }
@@ -56,27 +55,25 @@ public class admin_programarclase extends javax.swing.JPanel {
     private void mostrarProfesor() {
 
         cbxTutor.removeAllItems();
-        listaPersona = objPersonaDao.listarTodos();
+        listaPersona = objPersonaDao.listarTodos(1003);
 
         for (int i = 0; i < listaPersona.size(); i++) {
-            if (listaPersona.get(i).getId_rol() == 1003) {
-                cbxTutor.addItem( listaPersona.get(i).getApellido() + " " + listaPersona.get(i).getNombre());
-            }
+            cbxTutor.addItem(listaPersona.get(i).getApellido() + " " + listaPersona.get(i).getNombre());
 
         }
     }
-    
+
     private void mostrarHorario() {
 
         cbxHorario.removeAllItems();
         listaHorario = objHorarioDao.listarTodos();
 
         for (int i = 0; i < listaHorario.size(); i++) {
-                cbxHorario.addItem( listaHorario.get(i).getInicio()  + " - "  + listaHorario.get(i).getFinale());
-            
+            cbxHorario.addItem(listaHorario.get(i).getInicio() + " - " + listaHorario.get(i).getFinale());
 
         }
     }
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {

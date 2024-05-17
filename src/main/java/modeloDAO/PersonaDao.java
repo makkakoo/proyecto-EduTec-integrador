@@ -114,4 +114,24 @@ public class PersonaDao implements PersonaInterface {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
+    
+    public ArrayList<Persona> listarTodos(int tipo) {
+        try {
+            String sql = "select * from persona where id_rol='"+tipo+"'";            
+            conn = con.getConexion();
+            ps = conn.prepareStatement(sql);
+            rs = ps.executeQuery();
+            while(rs.next()){
+                objPersona = new Persona();
+                objPersona.setDni(rs.getString("dni"));
+                objPersona.setNombre(rs.getString("nombre"));
+                objPersona.setApellido(rs.getString("apellido"));
+                objPersona.setEmail(rs.getString("email"));
+                lista.add(objPersona);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(PersonaDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return lista;         
+    }
 }
