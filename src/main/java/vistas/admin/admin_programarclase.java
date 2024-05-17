@@ -1,11 +1,18 @@
 package vistas.admin;
 
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+import modelo.Alumno;
 import modelo.Aula;
+import modelo.ClaseDTO;
 import modelo.Horario;
 import modelo.Persona;
 import modelo.Tema;
 import modeloDAO.AulaDAO;
+import modeloDAO.ClaseDAO;
 import modeloDAO.HorarioDAO;
 import modeloDAO.PersonaDao;
 import modeloDAO.TemaDAO;
@@ -24,12 +31,33 @@ public class admin_programarclase extends javax.swing.JPanel {
     ArrayList<Horario> listaHorario = new ArrayList<>();
     HorarioDAO objHorarioDao = new HorarioDAO();
 
+
     public admin_programarclase() {
         initComponents();
+        listener();
+        txtFecha.getDateEditor().setEnabled(false);
+
+    }
+
+    public void listener() {
+        txtFecha.getDateEditor().addPropertyChangeListener("date", new PropertyChangeListener() {
+            @Override
+            public void propertyChange(PropertyChangeEvent evt) {
+                // Depuración: Imprimir mensaje cuando se detecta un cambio
+                System.out.println("Cambio detectado en la fecha");
+
+                mostrarDatos();
+
+            }
+        });
+    }
+
+    public void mostrarDatos() {
         mostrarTema();
         mostrarAula();
         mostrarProfesor();
         mostrarHorario();
+
     }
 
     private void mostrarTema() {
@@ -65,8 +93,11 @@ public class admin_programarclase extends javax.swing.JPanel {
 
     private void mostrarHorario() {
 
+
         cbxHorario.removeAllItems();
-        listaHorario = objHorarioDao.listarTodos();
+        listaHorario.clear();
+        System.out.println("fecha: " +obtenerFecha() );
+        listaHorario = objHorarioDao.listarHorarioPorFecha(obtenerFecha());
 
         for (int i = 0; i < listaHorario.size(); i++) {
             cbxHorario.addItem(listaHorario.get(i).getInicio() + " - " + listaHorario.get(i).getFinale());
@@ -151,52 +182,64 @@ public class admin_programarclase extends javax.swing.JPanel {
 
         txtFecha.setForeground(new java.awt.Color(153, 153, 153));
         txtFecha.setFont(new java.awt.Font("Century Gothic", 2, 14)); // NOI18N
+        txtFecha.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                txtFechaMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(146, 146, 146)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel5)
-                    .addComponent(jLabel3)
-                    .addComponent(cbxAula, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(cbxTutor, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(cbxTema, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(cbxHorario, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(txtFecha, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnReservar, javax.swing.GroupLayout.DEFAULT_SIZE, 261, Short.MAX_VALUE))
-                        .addGap(144, 144, 144))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel6)
-                            .addComponent(jLabel2))
-                        .addContainerGap())))
-            .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(327, 327, 327)
                 .addComponent(jLabel1)
-                .addContainerGap(328, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(146, 146, 146)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel5)
+                            .addComponent(cbxAula, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(cbxTutor, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addComponent(cbxHorario, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(btnReservar, javax.swing.GroupLayout.DEFAULT_SIZE, 261, Short.MAX_VALUE))
+                                .addGap(144, 144, 144))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel6)
+                                .addContainerGap())))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel3)
+                        .addGap(238, 238, 238))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(txtFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 261, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 230, Short.MAX_VALUE)
+                        .addComponent(cbxTema, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(147, 147, 147))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1)
-                .addGap(25, 25, 25)
+                .addGap(12, 12, 12)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(jLabel2))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(cbxTema, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
-                    .addComponent(txtFecha, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(30, 30, 30)
+                    .addComponent(jLabel2)
+                    .addComponent(jLabel3))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(txtFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cbxTema, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(37, 37, 37)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
                     .addComponent(jLabel6))
@@ -227,13 +270,98 @@ public class admin_programarclase extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+
     private void btnReservarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReservarActionPerformed
-        // TODO add your handling code here:
+
+        //CLASE DAO
+        ClaseDAO objClaseDao = new ClaseDAO();
+
+        //CLASE 
+        ClaseDTO ObjClase = new ClaseDTO();
+
+        //AULA
+        Aula objAula = new Aula();
+        AulaDAO objAulaDAO = new AulaDAO();
+
+        //Horario
+        Horario objHorario = new Horario();
+        HorarioDAO objHorarioDAO = new HorarioDAO();
+
+        //TEMA
+        Tema objTema = new Tema();
+        TemaDAO objTemaDAO = new TemaDAO();
+
+        //Persona
+        Persona objPersona = new Alumno();
+        PersonaDao objPersonaDao = new PersonaDao();
+
+        //ORDEN EN BASE A LA BASE DE DATOS
+        //Agregando objeto Aula
+        int indiceAmbiente = cbxAula.getSelectedIndex();
+        objAula = objAulaDAO.listarUno(listaAula.get(indiceAmbiente).getAmbiente());
+        ObjClase.setAula(objAula);
+
+        //Agregando horario
+        int indiceHora = cbxHorario.getSelectedIndex();
+        objHorario = objHorarioDAO.listarUno(listaHorario.get(indiceHora).getId_hora() + "");
+        System.out.println("" + listaHorario.get(indiceHora).getId_hora());
+        ObjClase.setHorario(objHorario);
+
+        //Agregando TEMA
+        int indiceTema = cbxTema.getSelectedIndex();
+        objTema = objTemaDAO.listarUno(listaTema.get(indiceTema).getId_tema() + "");
+        ObjClase.setTema(objTema);
+
+        //Agregando DNI
+        int indiceDNI = cbxTutor.getSelectedIndex();
+        objPersona = objPersonaDao.listarUno(listaPersona.get(indiceDNI).getDni() + "");
+        ObjClase.setPersona(objPersona);
+
+        //Agregando estado
+        String estado = "En curso";
+        ObjClase.setEstado(estado);
+
+        //agregando fecha
+        
+        ObjClase.setFecha(obtenerFecha());
+
+        objClaseDao.agregar(ObjClase);
+
+        limpiar();
+
+
     }//GEN-LAST:event_btnReservarActionPerformed
+
+    
+    public String obtenerFecha(){
+        Date date = txtFecha.getDate();
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        String formattedDate = dateFormat.format(date);
+        return formattedDate;
+    }
+    public void limpiar() {
+
+        cbxAula.removeAllItems();
+        cbxAula.addItem("Seleccionar fecha");
+
+        cbxTutor.removeAllItems();
+        cbxTutor.addItem("Seleccionar fecha");
+
+        cbxTema.removeAllItems();
+        cbxTema.addItem("Seleccionar fecha");
+
+        cbxHorario.removeAllItems();
+        cbxHorario.addItem("Seleccionar fecha");
+    }
+
 
     private void cbxHorarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxHorarioActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_cbxHorarioActionPerformed
+
+    private void txtFechaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtFechaMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtFechaMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -12,35 +12,39 @@ import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import misInterfaces.ClaseInterface;
 import modelo.ClaseDTO;
+import modelo.Horario;
 
 public class ClaseDAO implements ClaseInterface {
-    
+
     Connection conn;
     Conexion con = new Conexion();
     ClaseDTO objCLase;
     Statement st;
     PreparedStatement ps;
     ResultSet rs;
-    ArrayList<ClaseDTO> lista = new ArrayList<>(); 
+    ArrayList<ClaseDTO> lista = new ArrayList<>();
+
+    Horario h;
+    HorarioDAO hDao = new HorarioDAO();
 
     @Override
-    public boolean agregar(ClaseDAO c) {
+    public boolean agregar(ClaseDTO c) {
         try {
             String sql = "insert into registro_clases ( aula_ambiente, id_hora, "
                     + "tema_id_tema, persona_dni, estado, fecha)"
                     + " values (?,?,?,?,?,?)";
             conn = con.getConexion();
             ps = conn.prepareStatement(sql);
-            ps.setString(1, objCLase.getCod_aula());
-            ps.setInt(2, objCLase.getHorario().getId_hora());
-            ps.setInt(3, objCLase.getTema().getId_tema());
-            ps.setString(4, objCLase.getPersona().getDni());
-            
-            ps.setString(5, objCLase.getEstado());
-            ps.setString(6, objCLase.getFecha());
-            
+            ps.setString(1, c.getAula().getAmbiente());
+            ps.setInt(2, c.getHorario().getId_hora());
+            ps.setInt(3, c.getTema().getId_tema());
+            ps.setString(4, c.getPersona().getDni());
+
+            ps.setString(5, c.getEstado());
+            ps.setString(6, c.getFecha());
+
             ps.executeUpdate();
-            
+
         } catch (SQLException ex) {
             if (ex.getSQLState().equals("45000")) {
                 // Se ha alcanzado el límite máximo de registros en la tabla
@@ -61,18 +65,19 @@ public class ClaseDAO implements ClaseInterface {
     }
 
     @Override
-    public boolean modificar(ClaseDAO c) {
+    public boolean modificar(ClaseDTO c) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
-    public ArrayList<ClaseDAO> listarTodos() {
+    public ArrayList<ClaseDTO> listarTodos() {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
-    public ClaseDAO listarUno(String codigo) {
+    public ClaseDTO listarUno(String codigo) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
+
 
 }

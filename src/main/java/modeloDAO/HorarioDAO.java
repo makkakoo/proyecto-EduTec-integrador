@@ -13,18 +13,19 @@ import javax.swing.JOptionPane;
 import misInterfaces.HorarioInterface;
 import modelo.Horario;
 
-public class HorarioDAO implements  HorarioInterface{
+public class HorarioDAO implements HorarioInterface {
+
     Connection conn;
     Conexion con = new Conexion();
     Horario h;
     Statement st;
     PreparedStatement ps;
     ResultSet rs;
-    ArrayList<Horario> lista = new ArrayList<>(); 
+    ArrayList<Horario> lista = new ArrayList<>();
 
     @Override
     public boolean agregar(Horario h) {
-         try {
+        try {
             String sql = "insert into horario (id_hora, inicio, final)"
                     + " values (?, ?,?)";
             conn = con.getConexion();
@@ -49,7 +50,7 @@ public class HorarioDAO implements  HorarioInterface{
     @Override
     public boolean eliminar(String codigo) {
         try {
-            String sql = "delete from horario where id_hora = '"+codigo+"'";
+            String sql = "delete from horario where id_hora = '" + codigo + "'";
             conn = con.getConexion();
             ps = conn.prepareStatement(sql);
             ps.executeUpdate();
@@ -63,26 +64,27 @@ public class HorarioDAO implements  HorarioInterface{
     public boolean modificar(Horario h) {
         try {
             String sql = "update horario set id_hora=?, inicio=?, final=?"
-                    + " where id_hora = '"+h.getId_hora()+"'";
+                    + " where id_hora = '" + h.getId_hora() + "'";
             conn = con.getConexion();
             ps = conn.prepareStatement(sql);
-            ps.setInt(1,h.getId_hora());
+            ps.setInt(1, h.getId_hora());
             ps.setString(2, h.getInicio());
             ps.setString(3, h.getFinale());
             ps.executeUpdate();
         } catch (SQLException ex) {
             Logger.getLogger(AulaDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return false;    }
+        return false;
+    }
 
     @Override
     public ArrayList<Horario> listarTodos() {
         try {
-            String sql = "select * from horario";            
+            String sql = "select * from horario";
             conn = con.getConexion();
             ps = conn.prepareStatement(sql);
             rs = ps.executeQuery();
-            while(rs.next()){
+            while (rs.next()) {
                 h = new Horario();
                 h.setId_hora(rs.getInt("id_hora"));
                 h.setInicio(rs.getString("inicio"));
@@ -99,21 +101,44 @@ public class HorarioDAO implements  HorarioInterface{
     @Override
     public Horario listarUno(String codigo) {
         try {
-            String sql = "select * from horario where id_hora = '"+codigo+"'";            
+            String sql = "select * from horario where id_hora = '" + codigo + "'";
             conn = con.getConexion();
             ps = conn.prepareStatement(sql);
             rs = ps.executeQuery();
-            while(rs.next()){
+            while (rs.next()) {
                 h = new Horario();
                 h.setId_hora(rs.getInt("id_hora"));
                 h.setInicio(rs.getString("inicio"));
                 h.setFinale(rs.getString("final"));
-             }
+            }
             conn.close();
         } catch (SQLException ex) {
             Logger.getLogger(AulaDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         return h;
-        
+
+    }
+
+    @Override
+    public ArrayList<Horario> listarHorarioPorFecha(String fecha) {
+
+        try {
+            String sql = "SELECT h.id_hora, h.inicio, h.final FROM horario h \n"
+                    + "WHERE h.id_hora NOT IN (SELECT r.id_hora FROM registro_clases r WHERE r.fecha = '" + fecha + "');   ";
+            conn = con.getConexion();
+            ps = conn.prepareStatement(sql);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                h = new Horario();
+                h.setId_hora(rs.getInt("id_hora"));
+                h.setInicio(rs.getString("inicio"));
+                h.setFinale(rs.getString("final"));
+                lista.add(h);
+            }
+            conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(AulaDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return lista;
     }
 }

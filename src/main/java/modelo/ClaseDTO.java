@@ -4,7 +4,7 @@ public class ClaseDTO {
 
     private String estado;
     private String fecha;
-    private String cod_aula;
+    private Aula aula;
     private Tema tema;
     private Horario horario;
     private Persona persona;
@@ -32,15 +32,6 @@ public class ClaseDTO {
     public void setFecha(String fecha) {
         this.fecha = fecha;
     }
-
-    public String getCod_aula() {
-        return cod_aula;
-    }
-
-    public void setCod_aula(String cod_aula) {
-        this.cod_aula = cod_aula;
-    }
-
     public Tema getTema() {
         return tema;
     }
@@ -55,5 +46,13 @@ public class ClaseDTO {
 
     public void setHorario(Horario horario) {
         this.horario = horario;
+    }
+
+    public Aula getAula() {
+        return aula;
+    }
+
+    public void setAula(Aula aula) {
+        this.aula = aula;
     }
 }
