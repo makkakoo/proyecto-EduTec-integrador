@@ -27,8 +27,9 @@ public class PersonaDao implements PersonaInterface {
     Statement s;
     ResultSet rs;
 
-    Persona objPersona;
-     ArrayList<Persona> lista = new ArrayList<>(); 
+    Persona objPersona;   
+    ArrayList<Persona> lista = new ArrayList<>(); 
+    
     @Override
     public Persona validarLogueo(String dni, String contraseña) {
 
@@ -180,6 +181,7 @@ public class PersonaDao implements PersonaInterface {
         return false; 
     }
 
+
     public BufferedImage obtenerImagen(String codigo) {
         BufferedImage imagen = null;
         Connection conn = null;
@@ -229,7 +231,4 @@ public class PersonaDao implements PersonaInterface {
         bis.close();
         return imagen;
     }
-
-
-
 }
