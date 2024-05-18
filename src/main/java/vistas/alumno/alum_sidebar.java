@@ -4,6 +4,7 @@ import com.formdev.flatlaf.intellijthemes.FlatLightFlatIJTheme;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import javax.swing.JPanel;
+import vistas.general.welcome;
 
 public class alum_sidebar extends javax.swing.JFrame {
 
@@ -45,6 +46,7 @@ public class alum_sidebar extends javax.swing.JFrame {
         btn_clases = new javax.swing.JPanel();
         jLabel14 = new javax.swing.JLabel();
         jLabel15 = new javax.swing.JLabel();
+        btnLogOutAlu = new javax.swing.JButton();
         banner = new javax.swing.JLabel();
         content = new javax.swing.JPanel();
 
@@ -137,6 +139,19 @@ public class alum_sidebar extends javax.swing.JFrame {
 
         sidebar.add(btn_clases, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 390, 240, 60));
 
+        btnLogOutAlu.setBackground(new java.awt.Color(198, 223, 255));
+        btnLogOutAlu.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
+        btnLogOutAlu.setForeground(new java.awt.Color(102, 102, 102));
+        btnLogOutAlu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/img_sidebar/logOut.png"))); // NOI18N
+        btnLogOutAlu.setText("   Cerrar sesión");
+        btnLogOutAlu.setBorderPainted(false);
+        btnLogOutAlu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLogOutAluActionPerformed(evt);
+            }
+        });
+        sidebar.add(btnLogOutAlu, new org.netbeans.lib.awtextra.AbsoluteConstraints(-10, 550, 230, 60));
+
         getContentPane().add(sidebar, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 240, 720));
 
         banner.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/img_sidebar/banner1.png"))); // NOI18N
@@ -224,6 +239,12 @@ public class alum_sidebar extends javax.swing.JFrame {
         mostrarPanel(r);
     }//GEN-LAST:event_btn_programarMousePressed
 
+    private void btnLogOutAluActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogOutAluActionPerformed
+        welcome w = new welcome();
+        w.setVisible(true);
+        dispose();
+    }//GEN-LAST:event_btnLogOutAluActionPerformed
+
     void setColor(JPanel panel) {
         panel.setBackground(new Color(184, 218, 255));
     }
@@ -269,6 +290,7 @@ public class alum_sidebar extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel banner;
     private javax.swing.JLabel banner2;
+    private javax.swing.JButton btnLogOutAlu;
     private javax.swing.JPanel btn_clases;
     private javax.swing.JPanel btn_cuenta;
     private javax.swing.JPanel btn_dashboard;

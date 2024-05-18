@@ -1,12 +1,33 @@
 package vistas.admin;
 
 import java.awt.BorderLayout;
+import java.time.LocalDate;
 import javax.swing.JPanel;
+import modeloDAO.PersonaDao;
 import static vistas.admin.admin_sidebar.content;
 
 public class admin_dashboard extends javax.swing.JPanel {
+    PersonaDao pd;
     public admin_dashboard() {
         initComponents();
+        
+        //Para mostrar la fecha actual
+         LocalDate now = LocalDate.now();
+        int year = now.getYear();
+        int dia = now.getDayOfMonth();
+        int month = now.getMonthValue();
+        String[] meses = {"enero","febrero","marzo","abril","mayo","junio","julio","agosto"," ;septiembre"
+            ,"octubre","noviembre","diciembre"};
+        lblFecha.setText("Hoy es "+dia+" de "+meses[month - 1]+" de "+year);
+        
+        
+        pd = new PersonaDao();
+        //Contar profesores
+        int cant_profes = pd.contarPersonasPorCodigo(1003);
+        lblCantProfes.setText(cant_profes+"");
+        //Contar alumnos
+        int cant_alumnos = pd.contarPersonasPorCodigo(1002);
+        lblCantAlumnos.setText(cant_alumnos+"");
     }
     
     admin_detalles dt;
@@ -16,20 +37,20 @@ public class admin_dashboard extends javax.swing.JPanel {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
+        lblFecha = new javax.swing.JLabel();
         btnDetalles = new javax.swing.JButton();
         btnAlumnos = new javax.swing.JButton();
         btnProfes = new javax.swing.JButton();
         jLabel33 = new javax.swing.JLabel();
         jLabel34 = new javax.swing.JLabel();
         jLabel35 = new javax.swing.JLabel();
-        jLabel30 = new javax.swing.JLabel();
-        jLabel31 = new javax.swing.JLabel();
-        jLabel32 = new javax.swing.JLabel();
+        lblHorarios = new javax.swing.JLabel();
+        lblTemas = new javax.swing.JLabel();
+        lblAulas = new javax.swing.JLabel();
         jLabel29 = new javax.swing.JLabel();
         jLabel27 = new javax.swing.JLabel();
-        jLabel26 = new javax.swing.JLabel();
-        jLabel24 = new javax.swing.JLabel();
+        lblCantProfes = new javax.swing.JLabel();
+        lblCantAlumnos = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
@@ -65,10 +86,10 @@ public class admin_dashboard extends javax.swing.JPanel {
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel1.setFont(new java.awt.Font("Century Gothic", 1, 36)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(17, 49, 194));
-        jLabel1.setText(" Hoy es 17 de mayo del 2024");
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 20, -1, -1));
+        lblFecha.setFont(new java.awt.Font("Century Gothic", 1, 36)); // NOI18N
+        lblFecha.setForeground(new java.awt.Color(17, 49, 194));
+        lblFecha.setBorder(new javax.swing.border.MatteBorder(null));
+        jPanel1.add(lblFecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 20, 500, 60));
 
         btnDetalles.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
         btnDetalles.setText("Más detalles");
@@ -107,17 +128,17 @@ public class admin_dashboard extends javax.swing.JPanel {
         jLabel35.setText("Aulas");
         jPanel1.add(jLabel35, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 500, -1, -1));
 
-        jLabel30.setFont(new java.awt.Font("Century Gothic", 1, 24)); // NOI18N
-        jLabel30.setText("4");
-        jPanel1.add(jLabel30, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 470, 20, -1));
+        lblHorarios.setFont(new java.awt.Font("Century Gothic", 1, 24)); // NOI18N
+        lblHorarios.setText("0");
+        jPanel1.add(lblHorarios, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 470, 20, -1));
 
-        jLabel31.setFont(new java.awt.Font("Century Gothic", 1, 24)); // NOI18N
-        jLabel31.setText("4");
-        jPanel1.add(jLabel31, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 470, 20, -1));
+        lblTemas.setFont(new java.awt.Font("Century Gothic", 1, 24)); // NOI18N
+        lblTemas.setText("0");
+        jPanel1.add(lblTemas, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 470, 20, -1));
 
-        jLabel32.setFont(new java.awt.Font("Century Gothic", 1, 24)); // NOI18N
-        jLabel32.setText("4");
-        jPanel1.add(jLabel32, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 470, 20, -1));
+        lblAulas.setFont(new java.awt.Font("Century Gothic", 1, 24)); // NOI18N
+        lblAulas.setText("0");
+        jPanel1.add(lblAulas, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 470, 20, -1));
 
         jLabel29.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
         jLabel29.setForeground(new java.awt.Color(255, 255, 255));
@@ -129,15 +150,15 @@ public class admin_dashboard extends javax.swing.JPanel {
         jLabel27.setText("alumnos");
         jPanel1.add(jLabel27, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 310, -1, -1));
 
-        jLabel26.setFont(new java.awt.Font("Century Gothic", 1, 48)); // NOI18N
-        jLabel26.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel26.setText("20");
-        jPanel1.add(jLabel26, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 250, -1, -1));
+        lblCantProfes.setFont(new java.awt.Font("Century Gothic", 1, 48)); // NOI18N
+        lblCantProfes.setForeground(new java.awt.Color(255, 255, 255));
+        lblCantProfes.setText("0");
+        jPanel1.add(lblCantProfes, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 250, -1, -1));
 
-        jLabel24.setFont(new java.awt.Font("Century Gothic", 1, 48)); // NOI18N
-        jLabel24.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel24.setText("20");
-        jPanel1.add(jLabel24, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 250, -1, -1));
+        lblCantAlumnos.setFont(new java.awt.Font("Century Gothic", 1, 48)); // NOI18N
+        lblCantAlumnos.setForeground(new java.awt.Color(255, 255, 255));
+        lblCantAlumnos.setText("0");
+        jPanel1.add(lblCantAlumnos, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 250, -1, -1));
 
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/admin_dash/profe.png"))); // NOI18N
         jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 250, -1, -1));
@@ -288,7 +309,6 @@ public class admin_dashboard extends javax.swing.JPanel {
     private javax.swing.JButton btnAlumnos;
     private javax.swing.JButton btnDetalles;
     private javax.swing.JButton btnProfes;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
@@ -298,14 +318,9 @@ public class admin_dashboard extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel23;
-    private javax.swing.JLabel jLabel24;
-    private javax.swing.JLabel jLabel26;
     private javax.swing.JLabel jLabel27;
     private javax.swing.JLabel jLabel29;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel30;
-    private javax.swing.JLabel jLabel31;
-    private javax.swing.JLabel jLabel32;
     private javax.swing.JLabel jLabel33;
     private javax.swing.JLabel jLabel34;
     private javax.swing.JLabel jLabel35;
@@ -331,5 +346,11 @@ public class admin_dashboard extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JLabel lblAulas;
+    private javax.swing.JLabel lblCantAlumnos;
+    private javax.swing.JLabel lblCantProfes;
+    private javax.swing.JLabel lblFecha;
+    private javax.swing.JLabel lblHorarios;
+    private javax.swing.JLabel lblTemas;
     // End of variables declaration//GEN-END:variables
 }
