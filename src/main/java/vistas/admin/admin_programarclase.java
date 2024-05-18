@@ -6,6 +6,7 @@ import java.beans.PropertyChangeListener;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import javax.swing.JOptionPane;
 import modelo.Alumno;
 import modelo.Aula;
 import modelo.ClaseDTO;
@@ -32,7 +33,6 @@ public class admin_programarclase extends javax.swing.JPanel {
     ArrayList<Horario> listaHorario = new ArrayList<>();
     HorarioDAO objHorarioDao = new HorarioDAO();
 
-
     public admin_programarclase() {
         initComponents();
         listener();
@@ -53,11 +53,10 @@ public class admin_programarclase extends javax.swing.JPanel {
         });
     }
 
-    
-
     private void mostrarTema() {
 
         cbxTema.removeAllItems();
+        listaTema.clear();
         listaTema = objTemaDAO.listarTodos();
 
         for (int i = 0; i < listaTema.size(); i++) {
@@ -67,18 +66,24 @@ public class admin_programarclase extends javax.swing.JPanel {
 
     private void mostrarAula() {
 
-        cbxAula.removeAllItems();
-        listaAula.clear();
-        listaAula = objAulaDAO.listarAulaPorFecha(obtenerFecha());
+        String fecha = obtenerFecha();
 
-        for (int i = 0; i < listaAula.size(); i++) {
-            cbxAula.addItem(listaAula.get(i).getAmbiente());
+        if (fecha != null) {
+            cbxAula.removeAllItems();
+            listaAula.clear();
+            listaAula = objAulaDAO.listarAulaPorFecha(fecha);
+
+            for (int i = 0; i < listaAula.size(); i++) {
+                cbxAula.addItem(listaAula.get(i).getAmbiente());
+            }
         }
+
     }
 
     private void mostrarProfesor() {
 
         cbxTutor.removeAllItems();
+        listaPersona.clear();
         listaPersona = objPersonaDao.listarTodos(1003);
 
         for (int i = 0; i < listaPersona.size(); i++) {
@@ -89,30 +94,45 @@ public class admin_programarclase extends javax.swing.JPanel {
 
     private void mostrarHorario() {
 
+        String fecha = obtenerFecha();
+        if (fecha != null) {
+            
+            cbxHorario.setEnabled(true);
 
-        cbxHorario.removeAllItems();
-        listaHorario.clear();
-        System.out.println("fecha: " +obtenerFecha() );
-        listaHorario = objHorarioDao.listarHorarioPorFecha(obtenerFecha());
+            cbxHorario.removeAllItems();
+            listaHorario.clear();
 
-        for (int i = 0; i < listaHorario.size(); i++) {
-            cbxHorario.addItem(listaHorario.get(i).getInicio() + " - " + listaHorario.get(i).getFinale());
+            listaHorario = objHorarioDao.listarHorarioPorFecha(fecha);
+
+            for (int i = 0; i < listaHorario.size(); i++) {
+                cbxHorario.addItem(listaHorario.get(i).getInicio() + " - " + listaHorario.get(i).getFinale());
+
+            }
+
+            if (listaHorario.size() == 0) {
+                JOptionPane.showMessageDialog(null, "No hay horarios disponible para esa fecha", "Alerta", JOptionPane.WARNING_MESSAGE);
+                limpiar();
+            }
+
+            cbxHorario.addActionListener((ActionEvent e1) -> {
+                mostrarDatos();
+                
+
+            });
 
         }
-        
-        
-        cbxHorario.addActionListener((ActionEvent e1) -> {
-            mostrarDatos();
 
-        });
     }
-    
+
     public void mostrarDatos() {
+        
+        cbxTema.setEnabled(true);
+        cbxAula.setEnabled(true);
+        cbxTutor.setEnabled(true);
         mostrarAula();
         mostrarTema();
-        
+
         mostrarProfesor();
-        
 
     }
 
@@ -143,18 +163,22 @@ public class admin_programarclase extends javax.swing.JPanel {
         cbxTema.setFont(new java.awt.Font("Century Gothic", 2, 14)); // NOI18N
         cbxTema.setForeground(new java.awt.Color(153, 153, 153));
         cbxTema.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccionar", " " }));
+        cbxTema.setEnabled(false);
 
         cbxAula.setFont(new java.awt.Font("Century Gothic", 2, 14)); // NOI18N
         cbxAula.setForeground(new java.awt.Color(153, 153, 153));
         cbxAula.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccionar" }));
+        cbxAula.setEnabled(false);
 
         cbxTutor.setFont(new java.awt.Font("Century Gothic", 2, 14)); // NOI18N
         cbxTutor.setForeground(new java.awt.Color(153, 153, 153));
         cbxTutor.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccionar", " " }));
+        cbxTutor.setEnabled(false);
 
         cbxHorario.setFont(new java.awt.Font("Century Gothic", 2, 14)); // NOI18N
         cbxHorario.setForeground(new java.awt.Color(153, 153, 153));
         cbxHorario.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccionar", " " }));
+        cbxHorario.setEnabled(false);
         cbxHorario.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cbxHorarioActionPerformed(evt);
@@ -340,7 +364,6 @@ public class admin_programarclase extends javax.swing.JPanel {
         ObjClase.setEstado(estado);
 
         //agregando fecha
-        
         ObjClase.setFecha(obtenerFecha());
 
         objClaseDao.agregar(ObjClase);
@@ -350,14 +373,22 @@ public class admin_programarclase extends javax.swing.JPanel {
 
     }//GEN-LAST:event_btnReservarActionPerformed
 
-    
-    public String obtenerFecha(){
+    public String obtenerFecha() {
         Date date = txtFecha.getDate();
+        if (date == null) {
+            return null; // o puedes retornar una cadena vacía o un mensaje de error
+        }
+
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         String formattedDate = dateFormat.format(date);
         return formattedDate;
     }
+
     public void limpiar() {
+
+        // Método recomendado para establecer la fecha como nula
+        txtFecha.setDate(null);
+        txtFecha.getDateEditor().setDate(null);
 
         cbxAula.removeAllItems();
         cbxAula.addItem("Seleccionar fecha");
@@ -370,6 +401,14 @@ public class admin_programarclase extends javax.swing.JPanel {
 
         cbxHorario.removeAllItems();
         cbxHorario.addItem("Seleccionar fecha");
+        
+        cbxAula.setEnabled(false);
+        cbxHorario.setEnabled(false);
+        cbxTema.setEnabled(false);
+        cbxTutor.setEnabled(false);
+        
+        
+        
     }
 
 
