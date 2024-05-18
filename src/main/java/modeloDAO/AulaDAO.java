@@ -13,18 +13,19 @@ import javax.swing.JOptionPane;
 import misInterfaces.AulaInterface;
 import modelo.Aula;
 
-public class AulaDAO implements  AulaInterface{
+public class AulaDAO implements AulaInterface {
+
     Connection conn;
     Conexion con = new Conexion();
     Aula au;
     Statement st;
     PreparedStatement ps;
     ResultSet rs;
-    ArrayList<Aula> lista = new ArrayList<>(); 
+    ArrayList<Aula> lista = new ArrayList<>();
 
     @Override
     public boolean agregar(Aula au) {
-         try {
+        try {
             String sql = "insert into aula (ambiente, aforo)"
                     + " values (?, ?)";
             conn = con.getConexion();
@@ -48,7 +49,7 @@ public class AulaDAO implements  AulaInterface{
     @Override
     public boolean eliminar(String codigo) {
         try {
-            String sql = "delete from aula where ambiente = '"+codigo+"'";
+            String sql = "delete from aula where ambiente = '" + codigo + "'";
             conn = con.getConexion();
             ps = conn.prepareStatement(sql);
             ps.executeUpdate();
@@ -62,7 +63,7 @@ public class AulaDAO implements  AulaInterface{
     public boolean modificar(Aula au) {
         try {
             String sql = "update aula set ambiente=?, aforo=?"
-                    + " where ambiente = '"+au.getAmbiente()+"'";
+                    + " where ambiente = '" + au.getAmbiente() + "'";
             conn = con.getConexion();
             ps = conn.prepareStatement(sql);
             ps.setString(1, au.getAmbiente());
@@ -71,16 +72,17 @@ public class AulaDAO implements  AulaInterface{
         } catch (SQLException ex) {
             Logger.getLogger(AulaDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return false;    }
+        return false;
+    }
 
     @Override
     public ArrayList<Aula> listarTodos() {
         try {
-            String sql = "select * from aula";            
+            String sql = "select * from aula";
             conn = con.getConexion();
             ps = conn.prepareStatement(sql);
             rs = ps.executeQuery();
-            while(rs.next()){
+            while (rs.next()) {
                 au = new Aula();
                 au.setAmbiente(rs.getString("ambiente"));
                 au.setAforo(rs.getInt("aforo"));
@@ -96,20 +98,44 @@ public class AulaDAO implements  AulaInterface{
     @Override
     public Aula listarUno(String codigo) {
         try {
-            String sql = "select * from aula where ambiente = '"+codigo+"'";            
+            String sql = "select * from aula where ambiente = '" + codigo + "'";
             conn = con.getConexion();
             ps = conn.prepareStatement(sql);
             rs = ps.executeQuery();
-            while(rs.next()){
+            while (rs.next()) {
                 au = new Aula();
                 au.setAmbiente(rs.getString("ambiente"));
                 au.setAforo(rs.getInt("aforo"));
-             }
+            }
             conn.close();
         } catch (SQLException ex) {
             Logger.getLogger(AulaDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         return au;
-        
+
     }
+
+    @Override
+    public ArrayList<Aula> listarAulaPorFecha(String fecha) {
+
+        try {
+            String sql = "SELECT * FROM aula a where a.ambiente not in "
+                    + "(SELECT r.aula_ambiente from registro_clases r where r.fecha = '" + fecha + "' ); ";
+            conn = con.getConexion();
+            ps = conn.prepareStatement(sql);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                au = new Aula();
+                au.setAmbiente(rs.getString("ambiente"));
+                au.setAforo(rs.getInt("aforo"));
+                lista.add(au);
+            }
+            conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(AulaDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return lista;
+    }
+
 }
+
