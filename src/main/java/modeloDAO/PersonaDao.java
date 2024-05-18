@@ -103,6 +103,19 @@ public class PersonaDao implements PersonaInterface {
         }
         return false; 
     }
+    public boolean modificarContra(Persona p) {
+        try {
+            String sql = "update persona set password=?"
+                    + " where dni = '"+p.getDni()+"'";
+            conn = con.getConexion();
+            ps = conn.prepareStatement(sql);
+            ps.setString(1, p.getPassword());
+            ps.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(AulaDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return false; 
+    }
 
     @Override
     public ArrayList<Persona> listarTodos(int tipo) {
