@@ -7,11 +7,13 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.sql.Types;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -230,5 +232,37 @@ public class PersonaDao implements PersonaInterface {
         // Cerrar el flujo de entrada de bytes
         bis.close();
         return imagen;
+    }
+    
+    public int contarPersonasPorCodigo(int codigo) {
+        int totalPersonas = 0;
+        try {
+            // Llamada a la función almacenada
+            String sql = "{? = call contar_personas(?)}";
+            conn = con.getConexion();
+            ps = conn.prepareStatement(sql);
+            CallableStatement st = conn.prepareCall(sql);
+            
+            // Registrar el parámetro de salida
+            st.registerOutParameter(1, Types.INTEGER);
+            // Establecer el valor del parámetro de entrada
+            st.setInt(2, codigo);
+            st.execute();
+            
+            // Obtener el resultado del parámetro de salida
+            totalPersonas = st.getInt(1);
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(PersonaDao.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            try {
+                if (conn != null) {
+                    conn.close();
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(PersonaDao.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        return totalPersonas;
     }
 }
