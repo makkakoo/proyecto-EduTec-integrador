@@ -4,6 +4,7 @@
  */
 package vistas.admin;
 
+import java.awt.Color;
 import javax.swing.JOptionPane;
 import modelo.Persona;
 import modeloDAO.PersonaDao;
@@ -65,12 +66,12 @@ public class admin_cuenta extends javax.swing.JPanel {
         txtApellido = new javax.swing.JTextField();
         pnlContraseña = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
-        txtContraNueva = new javax.swing.JTextField();
-        txtRepetirContra = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        btnActContra = new javax.swing.JButton();
         btnCancelar = new javax.swing.JButton();
+        txtContraNueva = new javax.swing.JPasswordField();
+        txtRepetirContra = new javax.swing.JPasswordField();
 
         jButton2.setText("jButton2");
 
@@ -82,7 +83,7 @@ public class admin_cuenta extends javax.swing.JPanel {
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/cuenta/Perfil.png"))); // NOI18N
 
-        pnlModificar.setBackground(new java.awt.Color(252, 252, 252));
+        pnlModificar.setBackground(new java.awt.Color(255, 255, 255));
 
         jLabel7.setFont(new java.awt.Font("Century Gothic", 1, 24)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(102, 102, 102));
@@ -142,11 +143,15 @@ public class admin_cuenta extends javax.swing.JPanel {
                 .addGroup(pnlModificarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlModificarLayout.createSequentialGroup()
                         .addGroup(pnlModificarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel7)
-                            .addComponent(txtDNI, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel9))
-                        .addGap(168, 168, 168)
+                            .addGroup(pnlModificarLayout.createSequentialGroup()
+                                .addGroup(pnlModificarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel7)
+                                    .addComponent(txtDNI, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(168, 168, 168))
+                            .addGroup(pnlModificarLayout.createSequentialGroup()
+                                .addComponent(jLabel9)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
                         .addGroup(pnlModificarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jLabel8)
                             .addComponent(jLabel10)
@@ -191,10 +196,6 @@ public class admin_cuenta extends javax.swing.JPanel {
         jLabel3.setForeground(new java.awt.Color(17, 49, 194));
         jLabel3.setText("Cambio de contraseña");
 
-        txtContraNueva.setFont(new java.awt.Font("Century Gothic", 2, 14)); // NOI18N
-
-        txtRepetirContra.setFont(new java.awt.Font("Century Gothic", 2, 14)); // NOI18N
-
         jLabel4.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(102, 102, 102));
         jLabel4.setText("Contraseña nueva");
@@ -203,10 +204,15 @@ public class admin_cuenta extends javax.swing.JPanel {
         jLabel5.setForeground(new java.awt.Color(102, 102, 102));
         jLabel5.setText("Repetir contraseña");
 
-        jButton1.setBackground(new java.awt.Color(27, 68, 255));
-        jButton1.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(255, 255, 255));
-        jButton1.setText("Actualizar");
+        btnActContra.setBackground(new java.awt.Color(27, 68, 255));
+        btnActContra.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
+        btnActContra.setForeground(new java.awt.Color(255, 255, 255));
+        btnActContra.setText("Actualizar");
+        btnActContra.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnActContraActionPerformed(evt);
+            }
+        });
 
         btnCancelar.setBackground(new java.awt.Color(27, 68, 255));
         btnCancelar.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
@@ -218,30 +224,44 @@ public class admin_cuenta extends javax.swing.JPanel {
             }
         });
 
+        txtContraNueva.setForeground(new java.awt.Color(153, 153, 153));
+        txtContraNueva.setText("**********");
+        txtContraNueva.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                txtContraNuevaMousePressed(evt);
+            }
+        });
+
+        txtRepetirContra.setForeground(new java.awt.Color(153, 153, 153));
+        txtRepetirContra.setText("**********");
+        txtRepetirContra.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                txtRepetirContraMousePressed(evt);
+            }
+        });
+
         javax.swing.GroupLayout pnlContraseñaLayout = new javax.swing.GroupLayout(pnlContraseña);
         pnlContraseña.setLayout(pnlContraseñaLayout);
         pnlContraseñaLayout.setHorizontalGroup(
             pnlContraseñaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnlContraseñaLayout.createSequentialGroup()
-                .addGroup(pnlContraseñaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(txtRepetirContra, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(pnlContraseñaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(pnlContraseñaLayout.createSequentialGroup()
-                            .addGap(174, 174, 174)
-                            .addComponent(txtContraNueva, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(pnlContraseñaLayout.createSequentialGroup()
-                            .addGap(124, 124, 124)
-                            .addGroup(pnlContraseñaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jLabel5)
-                                .addComponent(jLabel4))))
-                    .addComponent(jLabel3))
-                .addContainerGap(170, Short.MAX_VALUE))
-            .addGroup(pnlContraseñaLayout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlContraseñaLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton1)
+                .addComponent(btnActContra)
                 .addGap(94, 94, 94)
                 .addComponent(btnCancelar)
                 .addGap(133, 133, 133))
+            .addGroup(pnlContraseñaLayout.createSequentialGroup()
+                .addGap(124, 124, 124)
+                .addGroup(pnlContraseñaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(txtRepetirContra, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel3)
+                    .addGroup(pnlContraseñaLayout.createSequentialGroup()
+                        .addGroup(pnlContraseñaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel5)
+                            .addComponent(jLabel4))
+                        .addGap(184, 184, 184))
+                    .addComponent(txtContraNueva, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(170, Short.MAX_VALUE))
         );
         pnlContraseñaLayout.setVerticalGroup(
             pnlContraseñaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -251,14 +271,14 @@ public class admin_cuenta extends javax.swing.JPanel {
                 .addGap(40, 40, 40)
                 .addComponent(jLabel4)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtContraNueva, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(13, 13, 13)
+                .addComponent(txtContraNueva, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel5)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(txtRepetirContra, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 56, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 50, Short.MAX_VALUE)
                 .addGroup(pnlContraseñaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
+                    .addComponent(btnActContra)
                     .addComponent(btnCancelar))
                 .addGap(42, 42, 42))
         );
@@ -343,17 +363,86 @@ public class admin_cuenta extends javax.swing.JPanel {
         pnlContraseña.setVisible(true);
         pnlModificar.setVisible(false);
     }//GEN-LAST:event_btnModificarContraActionPerformed
- 
+
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
         pnlContraseña.setVisible(false);
         pnlModificar.setVisible(true);    }//GEN-LAST:event_btnCancelarActionPerformed
 
+    private void btnActContraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActContraActionPerformed
+        verificacionDeCampos();
+//        Persona objPersona = new Persona();
+//        PersonaDao objPersonaDao = new PersonaDao();
+//        objPersona.setDni(dni);
+//        objPersona.setPassword(String.valueOf(txtContraNueva.getPassword()));
+//        objPersonaDao.modificarContra(objPersona);
+    }//GEN-LAST:event_btnActContraActionPerformed
 
+    public void verificacionDeCampos() {
+        int a = 0;
+        if (String.valueOf(txtRepetirContra.getPassword()).isEmpty() || String.valueOf(txtRepetirContra.getPassword()).equals("**********")) {
+            a = -1;
+        }
+        if (String.valueOf(txtContraNueva.getPassword()).isEmpty() || String.valueOf(txtContraNueva.getPassword()).equals("**********")) {
+            a = -1;
+        }
+        if (a == 0) {
+            verificacionContra();
+        }
+    }
+
+    public void verificacionContra() {
+
+        if (String.valueOf(txtRepetirContra.getPassword()).equals(String.valueOf(txtContraNueva.getPassword()))) {
+            registroAccion();
+        } else {
+            JOptionPane.showMessageDialog(null, "La contraseña no coinciden", "Alerta", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
+    public void registroAccion() {
+        Persona objPersona = new Persona();
+        PersonaDao objPersonaDao = new PersonaDao();
+        objPersona.setDni(dni);
+        objPersona.setPassword(String.valueOf(txtContraNueva.getPassword()));
+
+        objPersonaDao.modificarContra(objPersona);
+
+        JOptionPane.showMessageDialog(null, "La contraseña se ha modificado correctamente.", "Confirmación", JOptionPane.INFORMATION_MESSAGE);
+        pnlModificar.setVisible(true);
+
+    }
+    private void txtContraNuevaMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtContraNuevaMousePressed
+        if (String.valueOf(txtContraNueva.getPassword()).equals("**********")) {
+            txtContraNueva.setText(null);
+            txtContraNueva.setForeground(Color.black);
+        }
+
+        if (String.valueOf(txtRepetirContra.getPassword()).isEmpty()) {
+            txtRepetirContra.setText("**********");
+            txtRepetirContra.setForeground(new Color(204, 204, 204));
+        }
+
+
+    }//GEN-LAST:event_txtContraNuevaMousePressed
+
+    private void txtRepetirContraMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtRepetirContraMousePressed
+        if (String.valueOf(txtRepetirContra.getPassword()).equals("**********")) {
+            txtRepetirContra.setText(null);
+            txtRepetirContra.setForeground(Color.black);
+        }
+
+        if (String.valueOf(txtContraNueva.getPassword()).isEmpty()) {
+            txtContraNueva.setText("**********");
+            txtContraNueva.setForeground(new Color(204, 204, 204));
+        }
+
+    }//GEN-LAST:event_txtRepetirContraMousePressed
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnActContra;
     private javax.swing.JButton btnCancelar;
     private javax.swing.JButton btnModificar;
     private javax.swing.JButton btnModificarContra;
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
@@ -368,10 +457,10 @@ public class admin_cuenta extends javax.swing.JPanel {
     private javax.swing.JPanel pnlContraseña;
     private javax.swing.JPanel pnlModificar;
     private javax.swing.JTextField txtApellido;
-    private javax.swing.JTextField txtContraNueva;
+    private javax.swing.JPasswordField txtContraNueva;
     private javax.swing.JTextField txtCorreo;
     private javax.swing.JTextField txtDNI;
     private javax.swing.JTextField txtNombre;
-    private javax.swing.JTextField txtRepetirContra;
+    private javax.swing.JPasswordField txtRepetirContra;
     // End of variables declaration//GEN-END:variables
 }
