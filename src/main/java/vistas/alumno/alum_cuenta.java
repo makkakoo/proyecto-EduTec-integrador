@@ -186,7 +186,11 @@ public class alum_cuenta extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    public void confirmacionAgregar(String a) {
+    private void reiniciarPanel() {
+        mostrarDatos();
+    }
+
+    private void confirmacionAgregar(String a) {
         JOptionPane.showMessageDialog(null, "" + a + " al alumno ");
     }
 
@@ -204,6 +208,7 @@ public class alum_cuenta extends javax.swing.JPanel {
 
         if (!validarCorreo(correo)) {
             JOptionPane.showMessageDialog(null, "El correo ingresado no es válido");
+            reiniciarPanel();
             return; // Sale del método si el correo no es válido
         }
 
