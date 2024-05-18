@@ -1,12 +1,22 @@
 package vistas.admin;
 
 import java.awt.BorderLayout;
+import java.time.LocalDate;
 import javax.swing.JPanel;
 import static vistas.admin.admin_sidebar.content;
 
 public class admin_dashboard extends javax.swing.JPanel {
     public admin_dashboard() {
         initComponents();
+        
+        //Para mostrar la fecha actual
+         LocalDate now = LocalDate.now();
+        int year = now.getYear();
+        int dia = now.getDayOfMonth();
+        int month = now.getMonthValue();
+        String[] meses = {"enero","febrero","marzo","abril","mayo","junio","julio","agosto"," ;septiembre"
+            ,"octubre","noviembre","diciembre"};
+        lblFecha.setText("Hoy es "+dia+" de "+meses[month - 1]+" de "+year);
     }
     
     admin_detalles dt;
@@ -16,7 +26,7 @@ public class admin_dashboard extends javax.swing.JPanel {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
+        lblFecha = new javax.swing.JLabel();
         btnDetalles = new javax.swing.JButton();
         btnAlumnos = new javax.swing.JButton();
         btnProfes = new javax.swing.JButton();
@@ -65,10 +75,10 @@ public class admin_dashboard extends javax.swing.JPanel {
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel1.setFont(new java.awt.Font("Century Gothic", 1, 36)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(17, 49, 194));
-        jLabel1.setText(" Hoy es 17 de mayo del 2024");
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 20, -1, -1));
+        lblFecha.setFont(new java.awt.Font("Century Gothic", 1, 36)); // NOI18N
+        lblFecha.setForeground(new java.awt.Color(17, 49, 194));
+        lblFecha.setBorder(new javax.swing.border.MatteBorder(null));
+        jPanel1.add(lblFecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 20, 500, 60));
 
         btnDetalles.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
         btnDetalles.setText("Más detalles");
@@ -288,7 +298,6 @@ public class admin_dashboard extends javax.swing.JPanel {
     private javax.swing.JButton btnAlumnos;
     private javax.swing.JButton btnDetalles;
     private javax.swing.JButton btnProfes;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
@@ -331,5 +340,6 @@ public class admin_dashboard extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JLabel lblFecha;
     // End of variables declaration//GEN-END:variables
 }
