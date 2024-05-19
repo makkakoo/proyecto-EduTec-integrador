@@ -33,6 +33,9 @@ public class admin_cuenta extends javax.swing.JPanel {
         dni = dniObtenido;
         mostrarDatos();
         OcultarCampos();
+        OcultarOrig.setVisible(false);
+        OcultarNueva.setVisible(false);
+        OcultarRep.setVisible(false);
         pnlContraseña.setVisible(false);
 
     }
@@ -490,7 +493,20 @@ public class admin_cuenta extends javax.swing.JPanel {
         txtRepetirContra.setText("**********");
         txtRepetirContra.setForeground(new Color(153, 153, 153));
         OcultarCampos();
+        
+        
+        mostrarOrig.setVisible(true);
+        mostrarNueva.setVisible(true);
+        mostrarRep.setVisible(true);
+        OcultarOrig.setVisible(false);
+        OcultarNueva.setVisible(false);
+        OcultarRep.setVisible(false);
+        
+        txtContraOriginal.setEchoChar('*');
+        txtContraNueva.setEchoChar('*');
+        txtRepetirContra.setEchoChar('*');
 
+        
     }
 
     public void registroAccion() {
