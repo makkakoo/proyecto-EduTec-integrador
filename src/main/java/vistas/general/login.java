@@ -24,6 +24,7 @@ public class login extends javax.swing.JFrame {
      */
     public login() {
         initComponents();
+        ocultarContra.setVisible(false);
     }
 
     /**
@@ -46,6 +47,8 @@ public class login extends javax.swing.JFrame {
         btnIngresar = new javax.swing.JButton();
         btn_regresar = new javax.swing.JButton();
         txtContraseña = new javax.swing.JPasswordField();
+        mostrarContra = new javax.swing.JLabel();
+        ocultarContra = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
 
@@ -61,22 +64,27 @@ public class login extends javax.swing.JFrame {
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
         jPanel2.setBorder(javax.swing.BorderFactory.createEtchedBorder(new java.awt.Color(0, 102, 204), null));
         jPanel2.setForeground(new java.awt.Color(255, 255, 255));
+        jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel4.setFont(new java.awt.Font("Century Gothic", 1, 24)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(17, 49, 194));
         jLabel4.setText("Iniciar sesión");
+        jPanel2.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(49, 38, -1, -1));
 
         jLabel5.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(102, 102, 102));
         jLabel5.setText("Contraseña");
+        jPanel2.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(49, 204, -1, -1));
 
         jLabel6.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(153, 153, 153));
         jLabel6.setText("Ingrese sus datos para continuar");
+        jPanel2.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(49, 87, -1, -1));
 
         jLabel7.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(102, 102, 102));
         jLabel7.setText("Usuario");
+        jPanel2.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(49, 124, -1, 20));
 
         txtUsuario.setForeground(new java.awt.Color(204, 204, 204));
         txtUsuario.setText("Ingrese su dni");
@@ -86,6 +94,7 @@ public class login extends javax.swing.JFrame {
                 txtUsuarioMousePressed(evt);
             }
         });
+        jPanel2.add(txtUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(49, 156, 310, 30));
 
         btnIngresar.setBackground(new java.awt.Color(27, 68, 255));
         btnIngresar.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
@@ -96,6 +105,7 @@ public class login extends javax.swing.JFrame {
                 btnIngresarActionPerformed(evt);
             }
         });
+        jPanel2.add(btnIngresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(49, 293, 310, 43));
 
         btn_regresar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/img_login/flechita1.png"))); // NOI18N
         btn_regresar.setBorderPainted(false);
@@ -105,6 +115,7 @@ public class login extends javax.swing.JFrame {
                 btn_regresarActionPerformed(evt);
             }
         });
+        jPanel2.add(btn_regresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(357, 22, -1, -1));
 
         txtContraseña.setForeground(new java.awt.Color(204, 204, 204));
         txtContraseña.setText("**********");
@@ -113,52 +124,23 @@ public class login extends javax.swing.JFrame {
                 txtContraseñaMousePressed(evt);
             }
         });
+        jPanel2.add(txtContraseña, new org.netbeans.lib.awtextra.AbsoluteConstraints(49, 235, 310, 32));
 
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(47, 47, 47)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(txtContraseña, javax.swing.GroupLayout.PREFERRED_SIZE, 310, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 64, Short.MAX_VALUE))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jLabel4)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btn_regresar)
-                        .addGap(20, 20, 20))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jLabel6)
-                            .addComponent(jLabel7)
-                            .addComponent(txtUsuario)
-                            .addComponent(jLabel5)
-                            .addComponent(btnIngresar, javax.swing.GroupLayout.DEFAULT_SIZE, 310, Short.MAX_VALUE))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-        );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addGap(20, 20, 20)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel4)
-                    .addComponent(btn_regresar))
-                .addGap(18, 18, 18)
-                .addComponent(jLabel6)
-                .addGap(18, 18, 18)
-                .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(txtUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jLabel5)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(txtContraseña, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(26, 26, 26)
-                .addComponent(btnIngresar, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(53, 53, 53))
-        );
+        mostrarContra.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/img_login/mostrar contra.png"))); // NOI18N
+        mostrarContra.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                mostrarContraMouseClicked(evt);
+            }
+        });
+        jPanel2.add(mostrarContra, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 240, -1, -1));
+
+        ocultarContra.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/img_login/hide-password.png"))); // NOI18N
+        ocultarContra.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                ocultarContraMouseClicked(evt);
+            }
+        });
+        jPanel2.add(ocultarContra, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 220, -1, 60));
 
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 150, 425, 400));
 
@@ -226,7 +208,7 @@ public class login extends javax.swing.JFrame {
         if (objPersona == null) {
             JOptionPane.showMessageDialog(this, "Código o Contraseña incorrectos");
         } else {
-            
+
             if (objPersona.getId_rol() == 1001) {
                 admin_sidebar adSide = new admin_sidebar(dni);
                 System.out.println("ENTRANDO A ADMIN");
@@ -237,7 +219,7 @@ public class login extends javax.swing.JFrame {
 
             } else {
                 System.out.println("ENTRANDO A ALUM");
-                 alum_sidebar al = new alum_sidebar(dni);
+                alum_sidebar al = new alum_sidebar(dni);
 //                alum_sidebar al = new alum_sidebar();
                 dispose();
                 al.setVisible(true);
@@ -246,6 +228,19 @@ public class login extends javax.swing.JFrame {
 
         }
     }//GEN-LAST:event_btnIngresarActionPerformed
+
+    private void mostrarContraMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mostrarContraMouseClicked
+       txtContraseña.setEchoChar((char) 0);
+        ocultarContra.setVisible(true);
+        mostrarContra.setVisible(false);
+    }//GEN-LAST:event_mostrarContraMouseClicked
+
+    private void ocultarContraMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ocultarContraMouseClicked
+        txtContraseña.setEchoChar('*');
+        mostrarContra.setVisible(true);
+        ocultarContra.setVisible(false);
+
+    }//GEN-LAST:event_ocultarContraMouseClicked
 
     /**
      * @param args the command line arguments
@@ -285,6 +280,8 @@ public class login extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JLabel mostrarContra;
+    private javax.swing.JLabel ocultarContra;
     private javax.swing.JPasswordField txtContraseña;
     private javax.swing.JTextField txtUsuario;
     // End of variables declaration//GEN-END:variables
