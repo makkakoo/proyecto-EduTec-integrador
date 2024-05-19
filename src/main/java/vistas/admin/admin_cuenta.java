@@ -4,8 +4,10 @@
  */
 package vistas.admin;
 
+import com.formdev.flatlaf.intellijthemes.FlatLightFlatIJTheme;
 import java.awt.Color;
 import javax.swing.JOptionPane;
+import javax.swing.UIManager;
 import modelo.Persona;
 import modeloDAO.PersonaDao;
 
@@ -18,13 +20,19 @@ public class admin_cuenta extends javax.swing.JPanel {
     public admin_cuenta() {
         initComponents();
         mostrarDatos();
+        OcultarCampos();
+        OcultarOrig.setVisible(false);
+        OcultarNueva.setVisible(false);
+        OcultarRep.setVisible(false);
         pnlContraseña.setVisible(false);
+
     }
 
     public admin_cuenta(String dniObtenido) {
         initComponents();
         dni = dniObtenido;
         mostrarDatos();
+        OcultarCampos();
         pnlContraseña.setVisible(false);
 
     }
@@ -38,6 +46,12 @@ public class admin_cuenta extends javax.swing.JPanel {
         txtNombre.setText(objPersona.getNombre());
         txtApellido.setText(objPersona.getApellido());
         txtCorreo.setText(objPersona.getEmail());
+    }
+
+    public void OcultarCampos() {
+        lblContOrig.setVisible(false);
+        lblContNueva.setVisible(false);
+        lblContRep.setVisible(false);
     }
 
     /**
@@ -70,8 +84,19 @@ public class admin_cuenta extends javax.swing.JPanel {
         jLabel5 = new javax.swing.JLabel();
         btnActContra = new javax.swing.JButton();
         btnCancelar = new javax.swing.JButton();
-        txtContraNueva = new javax.swing.JPasswordField();
         txtRepetirContra = new javax.swing.JPasswordField();
+        txtContraOriginal = new javax.swing.JPasswordField();
+        jLabel6 = new javax.swing.JLabel();
+        txtContraNueva = new javax.swing.JPasswordField();
+        lblContOrig = new javax.swing.JLabel();
+        lblContNueva = new javax.swing.JLabel();
+        lblContRep = new javax.swing.JLabel();
+        mostrarOrig = new javax.swing.JLabel();
+        mostrarNueva = new javax.swing.JLabel();
+        mostrarRep = new javax.swing.JLabel();
+        OcultarNueva = new javax.swing.JLabel();
+        OcultarRep = new javax.swing.JLabel();
+        OcultarOrig = new javax.swing.JLabel();
 
         jButton2.setText("jButton2");
 
@@ -142,15 +167,16 @@ public class admin_cuenta extends javax.swing.JPanel {
                 .addContainerGap()
                 .addGroup(pnlModificarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlModificarLayout.createSequentialGroup()
-                        .addGroup(pnlModificarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(pnlModificarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(pnlModificarLayout.createSequentialGroup()
                                 .addGroup(pnlModificarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel7)
-                                    .addComponent(txtDNI, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(txtDNI, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(168, 168, 168))
-                            .addGroup(pnlModificarLayout.createSequentialGroup()
-                                .addComponent(jLabel9)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, pnlModificarLayout.createSequentialGroup()
+                                .addGroup(pnlModificarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jLabel9, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(txtNombre, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
                         .addGroup(pnlModificarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jLabel8)
@@ -159,9 +185,9 @@ public class admin_cuenta extends javax.swing.JPanel {
                             .addComponent(txtApellido)))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlModificarLayout.createSequentialGroup()
                         .addComponent(btnModificar, javax.swing.GroupLayout.PREFERRED_SIZE, 219, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(50, 50, 50)
+                        .addGap(60, 60, 60)
                         .addComponent(btnModificarContra)
-                        .addGap(91, 91, 91)))
+                        .addGap(86, 86, 86)))
                 .addContainerGap(28, Short.MAX_VALUE))
         );
         pnlModificarLayout.setVerticalGroup(
@@ -171,38 +197,46 @@ public class admin_cuenta extends javax.swing.JPanel {
                 .addGroup(pnlModificarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
                     .addComponent(jLabel8))
-                .addGap(26, 26, 26)
-                .addGroup(pnlModificarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtCorreo, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtDNI, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(56, 56, 56)
-                .addGroup(pnlModificarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel9)
-                    .addComponent(jLabel10))
-                .addGap(26, 26, 26)
-                .addGroup(pnlModificarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtApellido, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 36, Short.MAX_VALUE)
-                .addGroup(pnlModificarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(btnModificar, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
-                    .addComponent(btnModificarContra, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE))
-                .addContainerGap(36, Short.MAX_VALUE))
+                .addGroup(pnlModificarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(pnlModificarLayout.createSequentialGroup()
+                        .addGap(26, 26, 26)
+                        .addGroup(pnlModificarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txtCorreo, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtDNI, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(40, 40, 40)
+                        .addGroup(pnlModificarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel9)
+                            .addComponent(jLabel10))
+                        .addGap(18, 18, 18)
+                        .addGroup(pnlModificarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txtApellido, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addContainerGap(112, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlModificarLayout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(pnlModificarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(btnModificar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnModificarContra, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(16, 16, 16))))
         );
 
         pnlContraseña.setBackground(new java.awt.Color(255, 255, 255));
+        pnlContraseña.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel3.setFont(new java.awt.Font("Century Gothic", 1, 24)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(17, 49, 194));
         jLabel3.setText("Cambio de contraseña");
+        pnlContraseña.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 0, 310, -1));
 
         jLabel4.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(102, 102, 102));
         jLabel4.setText("Contraseña nueva");
+        pnlContraseña.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 140, -1, -1));
 
         jLabel5.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(102, 102, 102));
         jLabel5.setText("Repetir contraseña");
+        pnlContraseña.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 220, -1, -1));
 
         btnActContra.setBackground(new java.awt.Color(27, 68, 255));
         btnActContra.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
@@ -213,6 +247,7 @@ public class admin_cuenta extends javax.swing.JPanel {
                 btnActContraActionPerformed(evt);
             }
         });
+        pnlContraseña.add(btnActContra, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 330, -1, -1));
 
         btnCancelar.setBackground(new java.awt.Color(27, 68, 255));
         btnCancelar.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
@@ -223,14 +258,7 @@ public class admin_cuenta extends javax.swing.JPanel {
                 btnCancelarActionPerformed(evt);
             }
         });
-
-        txtContraNueva.setForeground(new java.awt.Color(153, 153, 153));
-        txtContraNueva.setText("**********");
-        txtContraNueva.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                txtContraNuevaMousePressed(evt);
-            }
-        });
+        pnlContraseña.add(btnCancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 330, -1, -1));
 
         txtRepetirContra.setForeground(new java.awt.Color(153, 153, 153));
         txtRepetirContra.setText("**********");
@@ -239,56 +267,97 @@ public class admin_cuenta extends javax.swing.JPanel {
                 txtRepetirContraMousePressed(evt);
             }
         });
+        pnlContraseña.add(txtRepetirContra, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 250, 260, 40));
 
-        javax.swing.GroupLayout pnlContraseñaLayout = new javax.swing.GroupLayout(pnlContraseña);
-        pnlContraseña.setLayout(pnlContraseñaLayout);
-        pnlContraseñaLayout.setHorizontalGroup(
-            pnlContraseñaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlContraseñaLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnActContra)
-                .addGap(94, 94, 94)
-                .addComponent(btnCancelar)
-                .addGap(133, 133, 133))
-            .addGroup(pnlContraseñaLayout.createSequentialGroup()
-                .addGap(124, 124, 124)
-                .addGroup(pnlContraseñaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(txtRepetirContra, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel3)
-                    .addGroup(pnlContraseñaLayout.createSequentialGroup()
-                        .addGroup(pnlContraseñaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel5)
-                            .addComponent(jLabel4))
-                        .addGap(184, 184, 184))
-                    .addComponent(txtContraNueva, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(170, Short.MAX_VALUE))
-        );
-        pnlContraseñaLayout.setVerticalGroup(
-            pnlContraseñaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnlContraseñaLayout.createSequentialGroup()
-                .addGap(21, 21, 21)
-                .addComponent(jLabel3)
-                .addGap(40, 40, 40)
-                .addComponent(jLabel4)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtContraNueva, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel5)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(txtRepetirContra, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 50, Short.MAX_VALUE)
-                .addGroup(pnlContraseñaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnActContra)
-                    .addComponent(btnCancelar))
-                .addGap(42, 42, 42))
-        );
+        txtContraOriginal.setForeground(new java.awt.Color(153, 153, 153));
+        txtContraOriginal.setText("**********");
+        txtContraOriginal.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                txtContraOriginalMousePressed(evt);
+            }
+        });
+        pnlContraseña.add(txtContraOriginal, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 70, 260, 40));
+
+        jLabel6.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(102, 102, 102));
+        jLabel6.setText("Contraseña original");
+        pnlContraseña.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 40, -1, -1));
+
+        txtContraNueva.setForeground(new java.awt.Color(153, 153, 153));
+        txtContraNueva.setText("**********");
+        txtContraNueva.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                txtContraNuevaMousePressed(evt);
+            }
+        });
+        pnlContraseña.add(txtContraNueva, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 160, 260, 41));
+
+        lblContOrig.setForeground(new java.awt.Color(255, 0, 0));
+        lblContOrig.setText("Campo obligatorio");
+        pnlContraseña.add(lblContOrig, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 110, -1, -1));
+
+        lblContNueva.setForeground(new java.awt.Color(255, 0, 0));
+        lblContNueva.setText("Campo obligatorio");
+        pnlContraseña.add(lblContNueva, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 200, -1, -1));
+
+        lblContRep.setForeground(new java.awt.Color(255, 0, 0));
+        lblContRep.setText("Campo obligatorio");
+        pnlContraseña.add(lblContRep, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 290, -1, -1));
+
+        mostrarOrig.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/img_login/mostrar contra.png"))); // NOI18N
+        mostrarOrig.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                mostrarOrigMouseClicked(evt);
+            }
+        });
+        pnlContraseña.add(mostrarOrig, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 80, -1, -1));
+
+        mostrarNueva.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/img_login/mostrar contra.png"))); // NOI18N
+        mostrarNueva.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                mostrarNuevaMouseClicked(evt);
+            }
+        });
+        pnlContraseña.add(mostrarNueva, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 170, -1, -1));
+
+        mostrarRep.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/img_login/mostrar contra.png"))); // NOI18N
+        mostrarRep.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                mostrarRepMouseClicked(evt);
+            }
+        });
+        pnlContraseña.add(mostrarRep, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 260, -1, -1));
+
+        OcultarNueva.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/img_login/hide-password.png"))); // NOI18N
+        OcultarNueva.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                OcultarNuevaMouseClicked(evt);
+            }
+        });
+        pnlContraseña.add(OcultarNueva, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 160, -1, 40));
+
+        OcultarRep.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/img_login/hide-password.png"))); // NOI18N
+        OcultarRep.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                OcultarRepMouseClicked(evt);
+            }
+        });
+        pnlContraseña.add(OcultarRep, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 260, -1, -1));
+
+        OcultarOrig.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/img_login/hide-password.png"))); // NOI18N
+        OcultarOrig.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                OcultarOrigMouseClicked(evt);
+            }
+        });
+        pnlContraseña.add(OcultarOrig, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 80, 20, -1));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap(212, Short.MAX_VALUE)
+                .addContainerGap(112, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel2)
@@ -300,8 +369,8 @@ public class admin_cuenta extends javax.swing.JPanel {
                         .addComponent(pnlModificar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(106, 106, 106))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(pnlContraseña, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(168, 168, 168))))
+                        .addComponent(pnlContraseña, javax.swing.GroupLayout.PREFERRED_SIZE, 483, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(216, 216, 216))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -313,7 +382,8 @@ public class admin_cuenta extends javax.swing.JPanel {
                 .addGap(26, 26, 26)
                 .addComponent(pnlModificar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(pnlContraseña, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(pnlContraseña, javax.swing.GroupLayout.DEFAULT_SIZE, 372, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -360,6 +430,7 @@ public class admin_cuenta extends javax.swing.JPanel {
     }//GEN-LAST:event_btnModificarActionPerformed
 
     private void btnModificarContraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarContraActionPerformed
+        reiniciarpanelcontra();
         pnlContraseña.setVisible(true);
         pnlModificar.setVisible(false);
     }//GEN-LAST:event_btnModificarContraActionPerformed
@@ -378,11 +449,22 @@ public class admin_cuenta extends javax.swing.JPanel {
     }//GEN-LAST:event_btnActContraActionPerformed
 
     public void verificacionDeCampos() {
+        OcultarCampos();
         int a = 0;
         if (String.valueOf(txtRepetirContra.getPassword()).isEmpty() || String.valueOf(txtRepetirContra.getPassword()).equals("**********")) {
+            lblContRep.setVisible(true);
             a = -1;
         }
         if (String.valueOf(txtContraNueva.getPassword()).isEmpty() || String.valueOf(txtContraNueva.getPassword()).equals("**********")) {
+            lblContNueva.setVisible(true);
+            a = -1;
+        }
+        if (String.valueOf(txtContraOriginal.getPassword()).isEmpty() || String.valueOf(txtContraOriginal.getPassword()).equals("**********")) {
+            lblContOrig.setVisible(true);
+            a = -1;
+        }
+        if (String.valueOf(txtContraOriginal.getPassword()).equals("**********") && String.valueOf(txtContraNueva.getPassword()).equals("**********") && String.valueOf(txtRepetirContra.getPassword()).equals("**********")) {
+            JOptionPane.showMessageDialog(null, "Debe completar todos los campos", "Error", JOptionPane.ERROR_MESSAGE);
             a = -1;
         }
         if (a == 0) {
@@ -399,9 +481,32 @@ public class admin_cuenta extends javax.swing.JPanel {
         }
     }
 
+    public void reiniciarpanelcontra() {
+
+        txtContraOriginal.setText("**********");
+        txtContraOriginal.setForeground(new Color(153, 153, 153));
+        txtContraNueva.setText("**********");
+        txtContraNueva.setForeground(new Color(153, 153, 153));
+        txtRepetirContra.setText("**********");
+        txtRepetirContra.setForeground(new Color(153, 153, 153));
+        OcultarCampos();
+
+    }
+
     public void registroAccion() {
         Persona objPersona = new Persona();
         PersonaDao objPersonaDao = new PersonaDao();
+
+        // Verificar la contraseña antigua
+        objPersona = objPersonaDao.listarUno(dni); // Obtener los datos de la persona usando el dni
+        String ContraOriginal = String.valueOf(txtContraOriginal.getPassword());
+        if (!objPersona.getPassword().equals(ContraOriginal)) {
+            JOptionPane.showMessageDialog(null, "La contraseña original no es correcta.", "Error", JOptionPane.ERROR_MESSAGE);
+            reiniciarpanelcontra();
+            return;
+
+        }
+        //Actualizar la contraseña
         objPersona.setDni(dni);
         objPersona.setPassword(String.valueOf(txtContraNueva.getPassword()));
 
@@ -409,7 +514,17 @@ public class admin_cuenta extends javax.swing.JPanel {
 
         JOptionPane.showMessageDialog(null, "La contraseña se ha modificado correctamente.", "Confirmación", JOptionPane.INFORMATION_MESSAGE);
         pnlModificar.setVisible(true);
+        pnlContraseña.setVisible(false);
 
+//    boolean actualizado = objPersonaDao.modificarContra(objPersona);
+//
+//    if (actualizado) {
+//        JOptionPane.showMessageDialog(null, "La contraseña se ha modificado correctamente.", "Confirmación", JOptionPane.INFORMATION_MESSAGE);
+//        pnlModificar.setVisible(true);
+//        pnlContraseña.setVisible(false);
+//    } else {
+//        JOptionPane.showMessageDialog(null, "Error al actualizar la contraseña.", "Error", JOptionPane.ERROR_MESSAGE);
+//    }
     }
     private void txtContraNuevaMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtContraNuevaMousePressed
         if (String.valueOf(txtContraNueva.getPassword()).equals("**********")) {
@@ -420,6 +535,10 @@ public class admin_cuenta extends javax.swing.JPanel {
         if (String.valueOf(txtRepetirContra.getPassword()).isEmpty()) {
             txtRepetirContra.setText("**********");
             txtRepetirContra.setForeground(new Color(204, 204, 204));
+        }
+        if (String.valueOf(txtContraOriginal.getPassword()).isEmpty()) {
+            txtContraOriginal.setText("**********");
+            txtContraOriginal.setForeground(new Color(204, 204, 204));
         }
 
 
@@ -435,10 +554,67 @@ public class admin_cuenta extends javax.swing.JPanel {
             txtContraNueva.setText("**********");
             txtContraNueva.setForeground(new Color(204, 204, 204));
         }
+        if (String.valueOf(txtContraOriginal.getPassword()).isEmpty()) {
+            txtContraOriginal.setText("**********");
+            txtContraOriginal.setForeground(new Color(204, 204, 204));
+        }
 
     }//GEN-LAST:event_txtRepetirContraMousePressed
-    
+
+    private void txtContraOriginalMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtContraOriginalMousePressed
+        if (String.valueOf(txtContraOriginal.getPassword()).equals("**********")) {
+            txtContraOriginal.setText(null);
+            txtContraOriginal.setForeground(Color.black);
+        }
+        if (String.valueOf(txtContraNueva.getPassword()).isEmpty()) {
+            txtContraNueva.setText("**********");
+            txtContraNueva.setForeground(new Color(204, 204, 204));
+        }
+        if (String.valueOf(txtRepetirContra.getPassword()).isEmpty()) {
+            txtRepetirContra.setText("**********");
+            txtRepetirContra.setForeground(new Color(204, 204, 204));
+        }
+
+    }//GEN-LAST:event_txtContraOriginalMousePressed
+
+    private void mostrarOrigMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mostrarOrigMouseClicked
+        txtContraOriginal.setEchoChar((char) 0);
+        OcultarOrig.setVisible(true);
+        mostrarOrig.setVisible(false);    }//GEN-LAST:event_mostrarOrigMouseClicked
+
+    private void OcultarOrigMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_OcultarOrigMouseClicked
+        txtContraOriginal.setEchoChar('*');
+        mostrarOrig.setVisible(true);
+        OcultarOrig.setVisible(false);    }//GEN-LAST:event_OcultarOrigMouseClicked
+
+    private void mostrarNuevaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mostrarNuevaMouseClicked
+        txtContraNueva.setEchoChar((char) 0);
+        OcultarNueva.setVisible(true);
+        mostrarNueva.setVisible(false);       
+    }//GEN-LAST:event_mostrarNuevaMouseClicked
+
+    private void OcultarNuevaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_OcultarNuevaMouseClicked
+        txtContraNueva.setEchoChar('*');
+        mostrarNueva.setVisible(true);
+        OcultarNueva.setVisible(false);
+    }//GEN-LAST:event_OcultarNuevaMouseClicked
+
+    private void mostrarRepMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mostrarRepMouseClicked
+        txtRepetirContra.setEchoChar((char) 0);
+        OcultarRep.setVisible(true);
+        mostrarRep.setVisible(false);
+    }//GEN-LAST:event_mostrarRepMouseClicked
+
+    private void OcultarRepMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_OcultarRepMouseClicked
+        txtRepetirContra.setEchoChar('*');
+        mostrarRep.setVisible(true);
+        OcultarRep.setVisible(false);
+    }//GEN-LAST:event_OcultarRepMouseClicked
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel OcultarNueva;
+    private javax.swing.JLabel OcultarOrig;
+    private javax.swing.JLabel OcultarRep;
     private javax.swing.JButton btnActContra;
     private javax.swing.JButton btnCancelar;
     private javax.swing.JButton btnModificar;
@@ -450,14 +626,22 @@ public class admin_cuenta extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JLabel lblContNueva;
+    private javax.swing.JLabel lblContOrig;
+    private javax.swing.JLabel lblContRep;
+    private javax.swing.JLabel mostrarNueva;
+    private javax.swing.JLabel mostrarOrig;
+    private javax.swing.JLabel mostrarRep;
     private javax.swing.JPanel pnlContraseña;
     private javax.swing.JPanel pnlModificar;
     private javax.swing.JTextField txtApellido;
     private javax.swing.JPasswordField txtContraNueva;
+    private javax.swing.JPasswordField txtContraOriginal;
     private javax.swing.JTextField txtCorreo;
     private javax.swing.JTextField txtDNI;
     private javax.swing.JTextField txtNombre;

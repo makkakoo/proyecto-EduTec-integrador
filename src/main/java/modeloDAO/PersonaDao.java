@@ -116,6 +116,7 @@ public class PersonaDao implements PersonaInterface {
         }
         return false; 
     }
+    
 
     @Override
     public ArrayList<Persona> listarTodos(int tipo) {
@@ -151,6 +152,7 @@ public class PersonaDao implements PersonaInterface {
                 objPersona.setNombre(rs.getString("nombre"));
                 objPersona.setApellido(rs.getString("apellido"));
                 objPersona.setEmail(rs.getString("email"));
+                objPersona.setPassword(rs.getString("password"));
              }
             conn.close();
         } catch (SQLException ex) {
