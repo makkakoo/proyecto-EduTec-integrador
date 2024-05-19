@@ -1,11 +1,13 @@
 package modeloDAO;
 
 import Conexion.Conexion;
+import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.sql.Types;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -112,4 +114,34 @@ public class TemaDAO implements  TemaInterface{
         return t;
         
     }
+    public int contarTemas() {
+        int totalTemas = 0;
+        try {
+            // Llamada a la función almacenada
+            String sql = "{? = call contar_temas()}";
+            conn = con.getConexion();
+            ps = conn.prepareStatement(sql);
+            CallableStatement st = conn.prepareCall(sql);
+            
+            // Registrar el parámetro de salida
+            st.registerOutParameter(1, Types.INTEGER);
+            st.execute();
+            
+            // Obtener el resultado del parámetro de salida
+            totalTemas = st.getInt(1);
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(PersonaDao.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            try {
+                if (conn != null) {
+                    conn.close();
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(TemaDAO.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        return totalTemas;
+    }
+
 }

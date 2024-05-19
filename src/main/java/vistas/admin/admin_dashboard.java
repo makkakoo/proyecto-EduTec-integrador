@@ -3,11 +3,17 @@ package vistas.admin;
 import java.awt.BorderLayout;
 import java.time.LocalDate;
 import javax.swing.JPanel;
+import modeloDAO.AulaDAO;
+import modeloDAO.HorarioDAO;
 import modeloDAO.PersonaDao;
+import modeloDAO.TemaDAO;
 import static vistas.admin.admin_sidebar.content;
 
 public class admin_dashboard extends javax.swing.JPanel {
     PersonaDao pd;
+    TemaDAO td;
+    HorarioDAO hd;
+    AulaDAO ad;
     public admin_dashboard() {
         initComponents();
         
@@ -28,6 +34,24 @@ public class admin_dashboard extends javax.swing.JPanel {
         //Contar alumnos
         int cant_alumnos = pd.contarPersonasPorCodigo(1002);
         lblCantAlumnos.setText(cant_alumnos+"");
+        
+        //TEMAS
+        td = new TemaDAO();
+        //contar temas
+        int cant_temas= td.contarTemas();
+        lblTemas.setText(cant_temas+"");
+        
+        //HORARIOS
+        hd = new HorarioDAO();
+        //contar horarios
+        int cant_horarios= hd.contarHorarios();
+        lblHorarios.setText(cant_horarios+"");
+        
+        //AULAS
+        ad=new AulaDAO();
+        //contar aulas
+        int cant_aulas=ad.contarAulas();
+        lblAulas.setText(cant_aulas+"");
     }
     
     admin_detalles dt;
