@@ -21,17 +21,17 @@ public class admin_sidebar extends javax.swing.JFrame {
      * Creates new form admin_sidebar
      */
     public admin_sidebar() {
-        initComponents();
-
-        //Para mostrar por defecto el panel del dashboard
-        d = new admin_dashboard();
-        d.setSize(1040, 620);
-        d.setLocation(0, 0);
-
-        content.removeAll();
-        content.add(d, BorderLayout.CENTER);
-        content.revalidate();
-        content.repaint();
+//        initComponents();
+//
+//        //Para mostrar por defecto el panel del dashboard
+//        d = new admin_dashboard();
+//        d.setSize(1040, 620);
+//        d.setLocation(0, 0);
+//
+//        content.removeAll();
+//        content.add(d, BorderLayout.CENTER);
+//        content.revalidate();
+//        content.repaint();
     }
 
     admin_dashboard d;
@@ -192,7 +192,7 @@ public class admin_sidebar extends javax.swing.JFrame {
         initComponents();
         dni = dniObtenido;//se reserva el dni
         //Para mostrar por defecto el panel del dashboard
-        d = new admin_dashboard();
+        d = new admin_dashboard(dni);
         d.setSize(1040, 620);
         d.setLocation(0, 0);
 
@@ -215,7 +215,7 @@ public class admin_sidebar extends javax.swing.JFrame {
         resetColor(btn_clases);
 
         // Abrir sección
-        d = new admin_dashboard();
+        d = new admin_dashboard(dni);
         mostrarPanel(d);
     }//GEN-LAST:event_btn_dashboardMousePressed
 
@@ -236,7 +236,7 @@ public class admin_sidebar extends javax.swing.JFrame {
         resetColor(btn_cuenta);
 
         // Abrir sección
-        c = new admin_clases();
+        c = new admin_clases(dni);
         mostrarPanel(c);
     }//GEN-LAST:event_btn_clasesMousePressed
 

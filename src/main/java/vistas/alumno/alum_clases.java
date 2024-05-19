@@ -18,6 +18,12 @@ public class alum_clases extends javax.swing.JPanel {
         initComponents();
         establecerColumnas();
     }
+    public alum_clases(String dniObtenido) {
+        initComponents();
+         dni = dniObtenido;
+        establecerColumnas();
+    }
+    String dni;
 
     
     private void establecerColumnas(){

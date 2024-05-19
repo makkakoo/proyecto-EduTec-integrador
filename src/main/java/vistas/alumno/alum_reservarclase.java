@@ -12,9 +12,14 @@ public class alum_reservarclase extends javax.swing.JPanel {
      * Creates new form admin_programarclase
      */
     public alum_reservarclase() {
-        initComponents();
+//        initComponents();
     }
 
+    public alum_reservarclase(String dniObtenido) {
+        initComponents();
+        dni = dniObtenido;
+    }
+    String dni;
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always

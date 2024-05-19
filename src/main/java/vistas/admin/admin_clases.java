@@ -13,21 +13,29 @@ import javax.swing.table.DefaultTableModel;
 public class admin_clases extends javax.swing.JPanel {
 
     DefaultTableModel modelo = new DefaultTableModel();
-    
+
     public admin_clases() {
-        initComponents();
-        establecerColumnas();
+//        initComponents();
+//        establecerColumnas();
     }
 
-    
-    private void establecerColumnas(){
+    public admin_clases(String dniObtenido) {
+        initComponents();
+        dni = dniObtenido;
+        establecerColumnas();
+
+    }
+    String dni;
+
+    private void establecerColumnas() {
         modelo.addColumn("Aula");
         modelo.addColumn("Fecha");
         modelo.addColumn("Tema");
         modelo.addColumn("");
-        tblClases.setModel(modelo);   
-        
+        tblClases.setModel(modelo);
+
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always

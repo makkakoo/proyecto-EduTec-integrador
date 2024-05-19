@@ -10,52 +10,96 @@ import modeloDAO.TemaDAO;
 import static vistas.admin.admin_sidebar.content;
 
 public class admin_dashboard extends javax.swing.JPanel {
+
     PersonaDao pd;
     TemaDAO td;
     HorarioDAO hd;
     AulaDAO ad;
+
     public admin_dashboard() {
+//        initComponents();
+//
+//        //Para mostrar la fecha actual
+//        LocalDate now = LocalDate.now();
+//        int year = now.getYear();
+//        int dia = now.getDayOfMonth();
+//        int month = now.getMonthValue();
+//        String[] meses = {"enero", "febrero", "marzo", "abril", "mayo", "junio", "julio", "agosto", " ;septiembre",
+//             "octubre", "noviembre", "diciembre"};
+//        lblFecha.setText("Hoy es " + dia + " de " + meses[month - 1] + " de " + year);
+//
+//        pd = new PersonaDao();
+//        //Contar profesores
+//        int cant_profes = pd.contarPersonasPorCodigo(1003);
+//        lblCantProfes.setText(cant_profes + "");
+//        //Contar alumnos
+//        int cant_alumnos = pd.contarPersonasPorCodigo(1002);
+//        lblCantAlumnos.setText(cant_alumnos + "");
+//
+//        //TEMAS
+//        td = new TemaDAO();
+//        //contar temas
+//        int cant_temas = td.contarTemas();
+//        lblTemas.setText(cant_temas + "");
+//
+//        //HORARIOS
+//        hd = new HorarioDAO();
+//        //contar horarios
+//        int cant_horarios = hd.contarHorarios();
+//        lblHorarios.setText(cant_horarios + "");
+//
+//        //AULAS
+//        ad = new AulaDAO();
+//        //contar aulas
+//        int cant_aulas = ad.contarAulas();
+//        lblAulas.setText(cant_aulas + "");
+    }
+
+    public admin_dashboard(String dniObtenido) {
         initComponents();
-        
-        //Para mostrar la fecha actual
-         LocalDate now = LocalDate.now();
+        dni = dniObtenido;
+
+//Para mostrar la fecha actual
+        LocalDate now = LocalDate.now();
         int year = now.getYear();
         int dia = now.getDayOfMonth();
         int month = now.getMonthValue();
-        String[] meses = {"enero","febrero","marzo","abril","mayo","junio","julio","agosto"," ;septiembre"
-            ,"octubre","noviembre","diciembre"};
-        lblFecha.setText("Hoy es "+dia+" de "+meses[month - 1]+" de "+year);
-        
-        
+        String[] meses = {"enero", "febrero", "marzo", "abril", "mayo", "junio", "julio", "agosto", " ;septiembre",
+             "octubre", "noviembre", "diciembre"};
+        lblFecha.setText("Hoy es " + dia + " de " + meses[month - 1] + " de " + year);
+
         pd = new PersonaDao();
         //Contar profesores
         int cant_profes = pd.contarPersonasPorCodigo(1003);
-        lblCantProfes.setText(cant_profes+"");
+        lblCantProfes.setText(cant_profes + "");
         //Contar alumnos
         int cant_alumnos = pd.contarPersonasPorCodigo(1002);
-        lblCantAlumnos.setText(cant_alumnos+"");
-        
+        lblCantAlumnos.setText(cant_alumnos + "");
+
         //TEMAS
         td = new TemaDAO();
         //contar temas
-        int cant_temas= td.contarTemas();
-        lblTemas.setText(cant_temas+"");
-        
+        int cant_temas = td.contarTemas();
+        lblTemas.setText(cant_temas + "");
+
         //HORARIOS
         hd = new HorarioDAO();
         //contar horarios
-        int cant_horarios= hd.contarHorarios();
-        lblHorarios.setText(cant_horarios+"");
-        
+        int cant_horarios = hd.contarHorarios();
+        lblHorarios.setText(cant_horarios + "");
+
         //AULAS
-        ad=new AulaDAO();
+        ad = new AulaDAO();
         //contar aulas
-        int cant_aulas=ad.contarAulas();
-        lblAulas.setText(cant_aulas+"");
+        int cant_aulas = ad.contarAulas();
+        lblAulas.setText(cant_aulas + "");
+
     }
-    
+    String dni;
+
     admin_detalles dt;
     admin_profes pf;
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -319,11 +363,11 @@ public class admin_dashboard extends javax.swing.JPanel {
         pf = new admin_profes();
         mostrarPanel(pf);
     }//GEN-LAST:event_btnProfesActionPerformed
-    private void mostrarPanel(JPanel p){
+    private void mostrarPanel(JPanel p) {
         p.setSize(1040, 620);
-        p.setLocation(0,0);
+        p.setLocation(0, 0);
 
-        content.removeAll();  
+        content.removeAll();
         content.add(p, BorderLayout.CENTER);
         content.revalidate();
         content.repaint();

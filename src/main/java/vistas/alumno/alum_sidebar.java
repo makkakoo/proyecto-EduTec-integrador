@@ -9,17 +9,17 @@ import vistas.general.welcome;
 public class alum_sidebar extends javax.swing.JFrame {
 
     public alum_sidebar() {
-        initComponents();
-
-        //Para mostrar por defecto el panel del dashboard
-        d = new alum_dashboard();
-        d.setSize(1040, 620);
-        d.setLocation(0, 0);
-
-        content.removeAll();
-        content.add(d, BorderLayout.CENTER);
-        content.revalidate();
-        content.repaint();
+//        initComponents();
+//
+//        //Para mostrar por defecto el panel del dashboard
+//        d = new alum_dashboard();
+//        d.setSize(1040, 620);
+//        d.setLocation(0, 0);
+//
+//        content.removeAll();
+//        content.add(d, BorderLayout.CENTER);
+//        content.revalidate();
+//        content.repaint();
     }
 
     alum_dashboard d;
@@ -179,7 +179,7 @@ public class alum_sidebar extends javax.swing.JFrame {
         initComponents();
         dni = dniObtenido;//se reserva el dni
         //Para mostrar por defecto el panel del dashboard
-        d = new alum_dashboard();
+        d = new alum_dashboard(dni);
         d.setSize(1040, 620);
         d.setLocation(0, 0);
 
@@ -203,7 +203,7 @@ public class alum_sidebar extends javax.swing.JFrame {
         resetColor(btn_clases);
 
         // Abrir sección
-        d = new alum_dashboard();
+        d = new alum_dashboard(dni);
         mostrarPanel(d);
     }//GEN-LAST:event_btn_dashboardMousePressed
 
@@ -224,7 +224,7 @@ public class alum_sidebar extends javax.swing.JFrame {
         resetColor(btn_cuenta);
 
         // Abrir sección
-        c = new alum_clases();
+        c = new alum_clases(dni);
         mostrarPanel(c);
     }//GEN-LAST:event_btn_clasesMousePressed
 
@@ -235,7 +235,7 @@ public class alum_sidebar extends javax.swing.JFrame {
         resetColor(btn_cuenta);
 
         // Abrir sección
-        r = new alum_reservarclase();
+        r = new alum_reservarclase(dni);
         mostrarPanel(r);
     }//GEN-LAST:event_btn_programarMousePressed
 

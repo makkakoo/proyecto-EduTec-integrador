@@ -2,13 +2,28 @@ package vistas.alumno;
 
 import java.awt.BorderLayout;
 import javax.swing.JPanel;
+import modelo.Persona;
+import modeloDAO.PersonaDao;
 
 
 
 public class alum_dashboard extends javax.swing.JPanel {
+    Persona objPersona = new Persona();
+        PersonaDao objPersonaDao = new PersonaDao();
+        
     public alum_dashboard() {
+//        initComponents();
+//        
+//        lblNombre.setText(objPersona.getNombre());
+   }
+    
+    public alum_dashboard(String dniObtenido) {
         initComponents();
+        dni = dniObtenido;
+        objPersona = objPersonaDao.listarUno(dni);
+        lblNombre.setText(objPersona.getNombre());
     }
+    String dni;
     
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -31,6 +46,7 @@ public class alum_dashboard extends javax.swing.JPanel {
         jLabel12 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
+        lblNombre = new javax.swing.JLabel();
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -94,6 +110,7 @@ public class alum_dashboard extends javax.swing.JPanel {
         jPanel2.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 350, -1, -1));
 
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 0, 250, 560));
+        jPanel1.add(lblNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 60, 160, 60));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -126,5 +143,6 @@ public class alum_dashboard extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JLabel lblNombre;
     // End of variables declaration//GEN-END:variables
 }

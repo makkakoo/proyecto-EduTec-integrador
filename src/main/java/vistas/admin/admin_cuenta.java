@@ -18,13 +18,13 @@ import modeloDAO.PersonaDao;
 public class admin_cuenta extends javax.swing.JPanel {
 
     public admin_cuenta() {
-        initComponents();
-        mostrarDatos();
-        OcultarCampos();
-        OcultarOrig.setVisible(false);
-        OcultarNueva.setVisible(false);
-        OcultarRep.setVisible(false);
-        pnlContraseña.setVisible(false);
+//        initComponents();
+//        mostrarDatos();
+//        OcultarCampos();
+//        OcultarOrig.setVisible(false);
+//        OcultarNueva.setVisible(false);
+//        OcultarRep.setVisible(false);
+//        pnlContraseña.setVisible(false);
 
     }
 
