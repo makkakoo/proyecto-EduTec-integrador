@@ -22,7 +22,7 @@ public class alum_dashboard extends javax.swing.JPanel {
         dni = dniObtenido;
         objPersona = objPersonaDao.listarUno(dni);
         String nombre = objPersona.getNombre();
-        String mensajeB = "¡Bienvenido de vuelta, "+ nombre + "!";
+        String mensajeB = nombre + "!";
         lblNombre.setText(mensajeB);
     }
     String dni;
@@ -50,6 +50,7 @@ public class alum_dashboard extends javax.swing.JPanel {
         jLabel13 = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
         lblNombre = new javax.swing.JLabel();
+        lblBienvenida = new javax.swing.JLabel();
         jLabel15 = new javax.swing.JLabel();
         jLabel16 = new javax.swing.JLabel();
 
@@ -118,9 +119,15 @@ public class alum_dashboard extends javax.swing.JPanel {
 
         lblNombre.setFont(new java.awt.Font("Century Gothic", 1, 30)); // NOI18N
         lblNombre.setForeground(new java.awt.Color(242, 242, 242));
-        jPanel1.add(lblNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 60, 440, 60));
+        lblNombre.setText("nombre del alumno");
+        jPanel1.add(lblNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 90, 290, 60));
 
-        jLabel15.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/alum_dash/BienvenidaAlum.png"))); // NOI18N
+        lblBienvenida.setFont(new java.awt.Font("Century Gothic", 1, 30)); // NOI18N
+        lblBienvenida.setForeground(new java.awt.Color(242, 242, 242));
+        lblBienvenida.setText("!Bienvenido de vuelta,");
+        jPanel1.add(lblBienvenida, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 50, 350, 60));
+
+        jLabel15.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/alum_dash/bienvenida.png"))); // NOI18N
         jPanel1.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 30, -1, -1));
 
         jLabel16.setFont(new java.awt.Font("Century Gothic", 1, 24)); // NOI18N
@@ -161,6 +168,7 @@ public class alum_dashboard extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JLabel lblBienvenida;
     private javax.swing.JLabel lblNombre;
     // End of variables declaration//GEN-END:variables
 }
