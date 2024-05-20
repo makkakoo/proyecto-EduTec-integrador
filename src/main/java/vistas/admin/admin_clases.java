@@ -351,16 +351,33 @@ public class admin_clases extends javax.swing.JPanel {
 
     private void btnCancelarClaseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarClaseActionPerformed
        int fila = tblClases.getSelectedRow();
-          
+       
        if (fila==-1){
             // Mostrar un mensaje de error para notificar al usuario que debe seleccionar una fila.
-            JOptionPane.showMessageDialog(this, "Por favor, seleccione una clase de la tabla.", "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, 
+                    "Por favor, seleccione una clase de la tabla.", 
+                    "Error", JOptionPane.ERROR_MESSAGE);
         }else{
+           // Muestra el cuadro de diálogo con el mensaje de advertencia
+        int response = JOptionPane.showOptionDialog(null,
+                "¿Está seguro de cancelar la clase? Esta opción no puede desahacerse",
+                "Advertencia",
+                JOptionPane.DEFAULT_OPTION,
+                JOptionPane.WARNING_MESSAGE,
+                null,
+                new Object[]{"OK"},
+                "OK");
+
+        // Verifica si el botón presionado fue "OK"
+        if (response == JOptionPane.OK_OPTION) {
+            // Acción a realizar si el usuario presiona "OK"
             codigo = tblClases.getValueAt(fila, 0).toString();
             clasedao = new ClaseDAO();
             clase = clasedao.listarUno(codigo);
             clasedao.modificarEstado(clase);
             mostrarClases();
+        }
+            
        }
     }//GEN-LAST:event_btnCancelarClaseActionPerformed
     public String obtenerFechaActual() {
