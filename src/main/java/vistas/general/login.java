@@ -212,14 +212,14 @@ public class login extends javax.swing.JFrame {
 
             if (objPersona.getId_rol() == 1001) {
                 admin_sidebar adSide = new admin_sidebar(dni);
-                System.out.println("ENTRANDO A ADMIN");
+//                System.out.println("ENTRANDO A ADMIN");
 //                admin_sidebar adSide = new admin_sidebar();
 //                admin_dashboard ad = new admin_dashboard();
                 dispose();
                 adSide.setVisible(true);
 
             } else {
-                System.out.println("ENTRANDO A ALUM");
+//                System.out.println("ENTRANDO A ALUM");
                 alum_sidebar al = new alum_sidebar(dni);
 //                alum_sidebar al = new alum_sidebar();
                 dispose();

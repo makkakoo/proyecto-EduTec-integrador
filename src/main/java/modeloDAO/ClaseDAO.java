@@ -253,7 +253,6 @@ public class ClaseDAO implements ClaseInterface {
                 sentencia += coma + " rc.estado = 'En curso'";
             }
             
-            System.out.println("texto: " + sentencia);
 
 //            
             String sql = "SELECT\n"
