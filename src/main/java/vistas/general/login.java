@@ -25,6 +25,7 @@ public class login extends javax.swing.JFrame {
     public login() {
         initComponents();
         ocultarContra.setVisible(false);
+        this.setLocationRelativeTo(null);
     }
 
     /**

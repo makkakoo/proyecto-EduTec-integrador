@@ -196,17 +196,27 @@ public class ClaseDAO implements ClaseInterface {
         return lista;
     }
     @Override
-    public ArrayList<ClaseDTO> listarporFiltros(String aula_amnbiente, String fecha, int id_hora, int tema_id_tema, String persona_dni) {
+    public ArrayList<ClaseDTO> listarporFiltros(String aula_ambiente, String fecha, int id_hora, int tema_id_tema, String persona_dni) {
         try {
 
             String sentencia = "";
 
             String coma = "";
+            if(!"Seleccionar".equals(aula_ambiente)){
+                if (coma.equals("")) {
+                    sentencia += " rc.aula_ambiente = '" + aula_ambiente + "' \n ";
+                    coma = "and ";
+                }else{
+                    sentencia += coma + " rc.aula_ambiente = '" + aula_ambiente + "' \n ";
+                }
+            }
             
             if (fecha != null) {
                 if (coma.equals("")) {
                     sentencia += " rc.fecha = '" + fecha + "' \n ";
                     coma = "and ";
+                }else{
+                    sentencia += coma + " rc.fecha = '" + fecha + "' \n ";
                 }
             }
             System.out.println("coma: " + coma);
@@ -280,6 +290,9 @@ public class ClaseDAO implements ClaseInterface {
                 objCLase = new ClaseDTO();
 
                 // Obtener el objeto Especialidad
+                String cod = rs.getString("id_registro_clase");
+                objCLase.setCod_clase(cod);
+                
                 String ambiente = rs.getString("aula_ambiente");
                 System.out.println("ambiente = " + ambiente);
                 a = ad.listarUno(ambiente);

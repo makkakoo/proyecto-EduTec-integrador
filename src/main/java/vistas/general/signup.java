@@ -15,6 +15,7 @@ public class signup extends javax.swing.JFrame {
         ocultarRepetir.setVisible(false);
         lblCampoRepe.setVisible(false);
         ocultarCamposObligatorios();
+        this.setLocationRelativeTo(null);
     }
 
     @SuppressWarnings("unchecked")

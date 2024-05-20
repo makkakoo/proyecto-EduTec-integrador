@@ -189,6 +189,7 @@ public class alum_sidebar extends javax.swing.JFrame {
         content.repaint();
         System.out.println(dniObtenido + " es el dni obtenido");
         prueba();
+        this.setLocationRelativeTo(null);
     }
     String dni;
 

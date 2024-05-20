@@ -1,3 +1,4 @@
+
 package vistas.alumno;
 
 import java.awt.event.ActionEvent;
@@ -8,13 +9,16 @@ import java.util.ArrayList;
 import java.util.Date;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import modelo.Alumno;
 import modelo.ClaseDTO;
 import modelo.Horario;
 import modelo.Persona;
+import modelo.ReservaDTO;
 import modelo.Tema;
 import modeloDAO.ClaseDAO;
 import modeloDAO.HorarioDAO;
 import modeloDAO.PersonaDao;
+import modeloDAO.ReservaDAO;
 import modeloDAO.TemaDAO;
 
 /**
@@ -75,6 +79,7 @@ public class alum_reservarclase extends javax.swing.JPanel {
             }
         });
     }
+
     private void mostrarProfesor() {
 
         cbxTutor.removeAllItems();
@@ -128,16 +133,6 @@ public class alum_reservarclase extends javax.swing.JPanel {
 
     }
 
-    private void mostrarNombreColumnas() {
-        x.addColumn("Tema");
-        x.addColumn("Tutor");
-        x.addColumn("Aula");
-        x.addColumn("Horario");
-        x.addColumn("Fecha");
-
-        tblDatos.setModel(x);
-    }
-
     public void mostrarDatos() {
         limpiarTabla();
         listaClase.clear();
@@ -169,14 +164,34 @@ public class alum_reservarclase extends javax.swing.JPanel {
 
         listaClase = objClaseDao.listarporFiltros(aula_ambiente, obtenerFecha(), id_hora, tema_id_tema, persona_dni);
 
-        for (int i = 0; i < listaClase.size(); i++) {
-            //AGREGANDO LOS DATOS A LA TABLA
-            Object[] data = {listaClase.get(i).getTema().getNombre(), listaClase.get(i).getPersona().getApellido() + " " + listaClase.get(i).getPersona().getNombre(),
-                listaClase.get(i).getAula().getAmbiente(), listaClase.get(i).getHorario().getInicio() + " - " + listaClase.get(i).getHorario().getFinale(),
-                listaClase.get(i).getFecha()};
-            x.addRow(data);
-        }
+        if (listaClase.size() == 0) {
+            JOptionPane.showMessageDialog(null, "No hay clases disponibles", "Alerta", JOptionPane.ERROR_MESSAGE);
+            //Método recomendado para establecer la fecha como nula
+//            txtFecha.setDate(null);
+//            txtFecha.getDateEditor().setDate(null);
 
+        } else {
+
+            for (int i = 0; i < listaClase.size(); i++) {
+                System.out.println("i: " + i);
+                //AGREGANDO LOS DATOS A LA TABLA
+                Object[] data = {listaClase.get(i).getTema().getNombre(), listaClase.get(i).getPersona().getApellido() + " " + listaClase.get(i).getPersona().getNombre(),
+                    listaClase.get(i).getAula().getAmbiente(), listaClase.get(i).getHorario().getInicio() + " - " + listaClase.get(i).getHorario().getFinale(),
+                    listaClase.get(i).getFecha()};
+                x.addRow(data);
+            }
+
+        }
+    }
+
+    private void mostrarNombreColumnas() {
+        x.addColumn("Tema");
+        x.addColumn("Tutor");
+        x.addColumn("Aula");
+        x.addColumn("Horario");
+        x.addColumn("Fecha");
+
+        tblDatos.setModel(x);
     }
 
     public void limpiarTabla() {
@@ -191,7 +206,7 @@ public class alum_reservarclase extends javax.swing.JPanel {
         jLabel1 = new javax.swing.JLabel();
         cbxTema = new javax.swing.JComboBox<>();
         cbxHorario = new javax.swing.JComboBox<>();
-        jButton1 = new javax.swing.JButton();
+        btnReservar = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
@@ -225,16 +240,16 @@ public class alum_reservarclase extends javax.swing.JPanel {
         });
         jPanel1.add(cbxHorario, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 120, 200, 40));
 
-        jButton1.setBackground(new java.awt.Color(27, 68, 255));
-        jButton1.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(255, 255, 255));
-        jButton1.setText("Reservar");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnReservar.setBackground(new java.awt.Color(27, 68, 255));
+        btnReservar.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
+        btnReservar.setForeground(new java.awt.Color(255, 255, 255));
+        btnReservar.setText("Reservar");
+        btnReservar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnReservarActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 580, 261, 40));
+        jPanel1.add(btnReservar, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 540, 261, 40));
 
         jLabel2.setFont(new java.awt.Font("Century Gothic", 1, 24)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(102, 102, 102));
@@ -268,7 +283,7 @@ public class alum_reservarclase extends javax.swing.JPanel {
         ));
         jScrollPane1.setViewportView(tblDatos);
 
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 230, -1, 300));
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 200, 790, 300));
 
         lblFecha.setForeground(new java.awt.Color(153, 153, 153));
         lblFecha.setText("Limpiar fecha");
@@ -302,13 +317,50 @@ public class alum_reservarclase extends javax.swing.JPanel {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 663, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 687, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+    private void btnReservarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReservarActionPerformed
+
+        ReservaDTO objReservaDTO = new ReservaDTO();
+        ReservaDAO objRdao = new ReservaDAO();
+        
+        Persona objP = new Alumno();
+        PersonaDao objPdao = new PersonaDao();
+        
+        ClaseDTO objClase = new ClaseDTO();
+        ClaseDAO objClaseDAO = new ClaseDAO();
+        
+        // Obtener el índice de la fila seleccionada en la tabla
+        int ind = tblDatos.getSelectedRow();
+        
+        if (ind != -1) {
+            
+
+
+            // Listar la información del alumno usando el DNI
+            objP = objPdao.listarUno(dni);
+            objReservaDTO.setPersona(objP);
+            
+            
+            objClase = objClaseDAO.listarUno(listaClase.get(ind).getCod_clase());
+            
+            
+            // Configurar la clase en el objeto reserva
+            objReservaDTO.setClase(objClase);
+
+            // Agregar la reserva usando el DAO
+            objRdao.agregar(objReservaDTO);
+
+            JOptionPane.showMessageDialog(null, "Se reservó la clase", "Confirmacion", JOptionPane.INFORMATION_MESSAGE);
+            limpiarTabla();
+        } else {
+            System.out.println("No hay ninguna fila seleccionada.");
+        }
+
+
+    }//GEN-LAST:event_btnReservarActionPerformed
 
     private void cbxHorarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxHorarioActionPerformed
         // TODO add your handling code here:
@@ -329,10 +381,10 @@ public class alum_reservarclase extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnReservar;
     private javax.swing.JComboBox<String> cbxHorario;
     private javax.swing.JComboBox<String> cbxTema;
     private javax.swing.JComboBox<String> cbxTutor;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
