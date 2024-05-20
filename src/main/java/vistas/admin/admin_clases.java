@@ -1,18 +1,19 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
- */
 package vistas.admin;
-
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.Date;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import modelo.ClaseDTO;
+import modeloDAO.ClaseDAO;
 
-/**
- *
- * @author lesly
- */
 public class admin_clases extends javax.swing.JPanel {
-
+    ClaseDTO clase;
+    ClaseDAO clasedao;
     DefaultTableModel modelo = new DefaultTableModel();
+    String codigo;
 
     public admin_clases() {
 //        initComponents();
@@ -23,15 +24,22 @@ public class admin_clases extends javax.swing.JPanel {
         initComponents();
         dni = dniObtenido;
         establecerColumnas();
+        pnlDetalleClases.setVisible(false);
+        mostrarClases();
+        pnlBuscarPorFecha.setVisible(false);
 
     }
     String dni;
 
     private void establecerColumnas() {
-        modelo.addColumn("Aula");
+        modelo.addColumn("Código");
         modelo.addColumn("Fecha");
+        modelo.addColumn("Aula");
+        modelo.addColumn("Hora inicio");
+        modelo.addColumn("Hora fin");
         modelo.addColumn("Tema");
-        modelo.addColumn("");
+//        modelo.addColumn("Profesor");
+        modelo.addColumn("Estado");
         tblClases.setModel(modelo);
 
     }
@@ -45,16 +53,48 @@ public class admin_clases extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        buttonGroup1 = new javax.swing.ButtonGroup();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblClases = new javax.swing.JTable();
+        btnDetalleClase = new javax.swing.JButton();
+        pnlDetalleClases = new javax.swing.JPanel();
+        jLabel15 = new javax.swing.JLabel();
+        lblAforo = new javax.swing.JLabel();
+        jLabel19 = new javax.swing.JLabel();
+        jLabel20 = new javax.swing.JLabel();
+        lblFecha = new javax.swing.JLabel();
+        jLabel16 = new javax.swing.JLabel();
+        jLabel17 = new javax.swing.JLabel();
+        lblHorario = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
+        lblProfe = new javax.swing.JLabel();
+        jLabel13 = new javax.swing.JLabel();
+        jLabel14 = new javax.swing.JLabel();
+        lblAula = new javax.swing.JLabel();
+        lblTema = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        rbtnRango = new javax.swing.JRadioButton();
+        rbtnHoy = new javax.swing.JRadioButton();
+        pnlBuscarPorFecha = new javax.swing.JPanel();
+        jdateInicio = new com.toedter.calendar.JDateChooser();
+        jdateFinal = new com.toedter.calendar.JDateChooser();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        btnFiltrar = new javax.swing.JButton();
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setFont(new java.awt.Font("Century Gothic", 1, 48)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(17, 49, 194));
-        jLabel1.setText("Listar clases ");
+        jLabel1.setText("Listar clases programadas ");
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 10, -1, -1));
 
         tblClases.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -69,29 +109,178 @@ public class admin_clases extends javax.swing.JPanel {
         ));
         jScrollPane1.setViewportView(tblClases);
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap(211, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addGap(369, 369, 369))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 662, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(167, 167, 167))))
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(22, 22, 22)
-                .addComponent(jLabel1)
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 160, 550, 380));
+
+        btnDetalleClase.setBackground(new java.awt.Color(27, 68, 255));
+        btnDetalleClase.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
+        btnDetalleClase.setForeground(new java.awt.Color(255, 255, 255));
+        btnDetalleClase.setText("Ver detalle");
+        btnDetalleClase.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDetalleClaseActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnDetalleClase, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 120, -1, 30));
+
+        pnlDetalleClases.setBackground(new java.awt.Color(255, 255, 255));
+        pnlDetalleClases.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel15.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
+        jLabel15.setForeground(new java.awt.Color(153, 153, 153));
+        jLabel15.setText("Aforo");
+        pnlDetalleClases.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 360, -1, -1));
+
+        lblAforo.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
+        lblAforo.setText("20");
+        lblAforo.setBorder(new javax.swing.border.MatteBorder(null));
+        pnlDetalleClases.add(lblAforo, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 380, 50, 30));
+
+        jLabel19.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
+        jLabel19.setForeground(new java.awt.Color(153, 153, 153));
+        jLabel19.setText("Fecha");
+        pnlDetalleClases.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 270, -1, -1));
+
+        jLabel20.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/admin_clases/calendar-event.png"))); // NOI18N
+        pnlDetalleClases.add(jLabel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 300, -1, -1));
+
+        lblFecha.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
+        lblFecha.setText("2024-05-20");
+        lblFecha.setBorder(new javax.swing.border.MatteBorder(null));
+        pnlDetalleClases.add(lblFecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 300, 80, 30));
+
+        jLabel16.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
+        jLabel16.setForeground(new java.awt.Color(153, 153, 153));
+        jLabel16.setText(" Horario");
+        pnlDetalleClases.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 270, -1, -1));
+
+        jLabel17.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/admin_clases/update.png"))); // NOI18N
+        pnlDetalleClases.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 300, -1, -1));
+
+        lblHorario.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
+        lblHorario.setText("12:00:00 - 13:00:00");
+        lblHorario.setBorder(new javax.swing.border.MatteBorder(null));
+        pnlDetalleClases.add(lblHorario, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 300, 130, 30));
+
+        jLabel10.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
+        jLabel10.setForeground(new java.awt.Color(153, 153, 153));
+        jLabel10.setText("Profesor");
+        pnlDetalleClases.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 180, -1, -1));
+
+        jLabel11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/admin_clases/user.png"))); // NOI18N
+        pnlDetalleClases.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 210, -1, -1));
+
+        lblProfe.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
+        lblProfe.setText("Adrian Cisneros");
+        lblProfe.setBorder(new javax.swing.border.MatteBorder(null));
+        pnlDetalleClases.add(lblProfe, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 210, 240, 30));
+
+        jLabel13.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
+        jLabel13.setForeground(new java.awt.Color(153, 153, 153));
+        jLabel13.setText("Aula");
+        pnlDetalleClases.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 360, -1, -1));
+
+        jLabel14.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/admin_clases/location.png"))); // NOI18N
+        pnlDetalleClases.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 380, -1, -1));
+
+        lblAula.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
+        lblAula.setText("A001");
+        lblAula.setBorder(new javax.swing.border.MatteBorder(null));
+        pnlDetalleClases.add(lblAula, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 380, 50, 30));
+
+        lblTema.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
+        lblTema.setText("Programacion Orientada a Objetos");
+        lblTema.setBorder(new javax.swing.border.MatteBorder(null));
+        pnlDetalleClases.add(lblTema, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 130, 240, 30));
+
+        jLabel5.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(153, 153, 153));
+        jLabel5.setText("Tema");
+        pnlDetalleClases.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 100, -1, -1));
+
+        jLabel3.setFont(new java.awt.Font("Century Gothic", 1, 24)); // NOI18N
+        jLabel3.setText("Resumen de la clase");
+        pnlDetalleClases.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 60, -1, -1));
+
+        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/admin_clases/icon_tema.png"))); // NOI18N
+        pnlDetalleClases.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 130, -1, -1));
+
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/admin_clases/Rectangle.png"))); // NOI18N
+        pnlDetalleClases.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(25, 25, 360, 430));
+
+        jPanel1.add(pnlDetalleClases, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 80, 403, 470));
+
+        buttonGroup1.add(rbtnRango);
+        rbtnRango.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
+        rbtnRango.setText("Por rango de fechas ");
+        rbtnRango.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rbtnRangoActionPerformed(evt);
+            }
+        });
+        jPanel1.add(rbtnRango, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 80, -1, -1));
+
+        buttonGroup1.add(rbtnHoy);
+        rbtnHoy.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
+        rbtnHoy.setText("Hoy");
+        rbtnHoy.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rbtnHoyActionPerformed(evt);
+            }
+        });
+        jPanel1.add(rbtnHoy, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 80, -1, -1));
+
+        jdateInicio.setForeground(new java.awt.Color(153, 153, 153));
+        jdateInicio.setFont(new java.awt.Font("Century Gothic", 2, 18)); // NOI18N
+
+        jdateFinal.setForeground(new java.awt.Color(153, 153, 153));
+        jdateFinal.setFont(new java.awt.Font("Century Gothic", 2, 18)); // NOI18N
+
+        jLabel6.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+        jLabel6.setText("Desde");
+
+        jLabel7.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+        jLabel7.setText("Hasta");
+
+        btnFiltrar.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+        btnFiltrar.setText("Buscar");
+        btnFiltrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnFiltrarActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout pnlBuscarPorFechaLayout = new javax.swing.GroupLayout(pnlBuscarPorFecha);
+        pnlBuscarPorFecha.setLayout(pnlBuscarPorFechaLayout);
+        pnlBuscarPorFechaLayout.setHorizontalGroup(
+            pnlBuscarPorFechaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlBuscarPorFechaLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel6)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jdateInicio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(120, Short.MAX_VALUE))
+                .addComponent(jLabel7)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jdateFinal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(btnFiltrar, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(19, Short.MAX_VALUE))
         );
+        pnlBuscarPorFechaLayout.setVerticalGroup(
+            pnlBuscarPorFechaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlBuscarPorFechaLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(pnlBuscarPorFechaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnFiltrar)
+                    .addGroup(pnlBuscarPorFechaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(jdateInicio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel6)
+                        .addComponent(jdateFinal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel7)))
+                .addContainerGap(11, Short.MAX_VALUE))
+        );
+
+        jPanel1.add(pnlBuscarPorFecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 110, 400, 40));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -105,11 +294,149 @@ public class admin_clases extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btnDetalleClaseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDetalleClaseActionPerformed
+        int fila = tblClases.getSelectedRow();
+          
+       if (fila==-1){
+            // Mostrar un mensaje de error para notificar al usuario que debe seleccionar una fila.
+            JOptionPane.showMessageDialog(this, "Por favor, seleccione una clase de la tabla.", "Error", JOptionPane.ERROR_MESSAGE);
+        }else{
+            codigo = tblClases.getValueAt(fila, 0).toString();
+            clasedao = new ClaseDAO();
+            clase = clasedao.listarUno(codigo);
 
+            lblTema.setText(clase.getTema().getNombre());
+            lblProfe.setText(clase.getPersona().getApellido()+" , "+clase.getPersona().getNombre());
+            lblFecha.setText(clase.getFecha());
+            lblHorario.setText(clase.getHorario().getInicio()+" - "+clase.getHorario().getFinale());
+            lblAula.setText(clase.getAula().getAmbiente());
+            lblAforo.setText(clase.getAula().getAforo()+"");
+
+            pnlDetalleClases.setVisible(true);
+       }
+        
+    }//GEN-LAST:event_btnDetalleClaseActionPerformed
+
+    private void btnFiltrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFiltrarActionPerformed
+        String fechaInicio = obtenerFechaInicio();
+        String fechaFinal = obtenerFechaFin();
+        //Mostrando tabla con resultados filtrados
+        filtrarClases(fechaInicio, fechaFinal);
+
+    }//GEN-LAST:event_btnFiltrarActionPerformed
+
+    private void rbtnRangoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbtnRangoActionPerformed
+        pnlBuscarPorFecha.setVisible(true);
+    }//GEN-LAST:event_rbtnRangoActionPerformed
+
+    private void rbtnHoyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbtnHoyActionPerformed
+        pnlBuscarPorFecha.setVisible(false);
+        String fechaActual = obtenerFechaActual();
+        filtrarClases(fechaActual, fechaActual);
+    }//GEN-LAST:event_rbtnHoyActionPerformed
+    public String obtenerFechaActual() {
+         // Obtener la fecha actual
+        LocalDate fechaActual = LocalDate.now();
+        // Crear un formateador con el patrón deseado
+        DateTimeFormatter formateador = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        // Formatear la fecha actual
+        String fechaString = fechaActual.format(formateador);
+        // Imprimir la fecha formateada (sin hora)
+        return fechaString;
+    }
+    
+    
+    public String obtenerFechaInicio() {
+        Date date = jdateInicio.getDate();
+        if (date == null) {
+            return null; // o puedes retornar una cadena vacía o un mensaje de error
+        }
+
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        String formattedDate = dateFormat.format(date);
+        return formattedDate;
+    }
+    public String obtenerFechaFin() {
+        Date date = jdateFinal.getDate();
+        if (date == null) {
+            return null; // o puedes retornar una cadena vacía o un mensaje de error
+        }
+
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        String formattedDate = dateFormat.format(date);
+        return formattedDate;
+    }
+    public void mostrarClases(){
+        modelo.setRowCount(0);
+        clasedao = new ClaseDAO();
+        ArrayList<ClaseDTO> lista = new ArrayList<>();
+        lista = clasedao.listarTodos();
+        for(int i=0; i<lista.size(); i++){
+            Object[] data = {
+                lista.get(i).getCod_clase(),
+                lista.get(i).getFecha(), 
+                lista.get(i).getAula().getAmbiente(),
+                lista.get(i).getHorario().getInicio(),
+                lista.get(i).getHorario().getFinale(),
+                lista.get(i).getTema().getNombre(),
+                lista.get(i).getEstado(),
+                };
+            modelo.addRow(data);
+        }
+    }
+    
+    public void filtrarClases(String f1, String f2){
+        modelo.setRowCount(0);
+        clasedao = new ClaseDAO();
+        ArrayList<ClaseDTO> lista = new ArrayList<>();
+        lista = clasedao.listarPorIntervalo(f1, f2);
+        for(int i=0; i<lista.size(); i++){
+            Object[] data = {
+                lista.get(i).getCod_clase(),
+                lista.get(i).getFecha(), 
+                lista.get(i).getAula().getAmbiente(),
+                lista.get(i).getHorario().getInicio(),
+                lista.get(i).getHorario().getFinale(),
+                lista.get(i).getTema().getNombre(),
+                lista.get(i).getEstado(),
+                };
+            modelo.addRow(data);
+        }
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnDetalleClase;
+    private javax.swing.JButton btnFiltrar;
+    private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel17;
+    private javax.swing.JLabel jLabel19;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel20;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
+    private com.toedter.calendar.JDateChooser jdateFinal;
+    private com.toedter.calendar.JDateChooser jdateInicio;
+    private javax.swing.JLabel lblAforo;
+    private javax.swing.JLabel lblAula;
+    private javax.swing.JLabel lblFecha;
+    private javax.swing.JLabel lblHorario;
+    private javax.swing.JLabel lblProfe;
+    private javax.swing.JLabel lblTema;
+    private javax.swing.JPanel pnlBuscarPorFecha;
+    private javax.swing.JPanel pnlDetalleClases;
+    private javax.swing.JRadioButton rbtnHoy;
+    private javax.swing.JRadioButton rbtnRango;
     private javax.swing.JTable tblClases;
     // End of variables declaration//GEN-END:variables
 }
