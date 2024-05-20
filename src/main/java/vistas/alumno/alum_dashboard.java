@@ -21,9 +21,12 @@ public class alum_dashboard extends javax.swing.JPanel {
         initComponents();
         dni = dniObtenido;
         objPersona = objPersonaDao.listarUno(dni);
-        lblNombre.setText(objPersona.getNombre());
+        String nombre = objPersona.getNombre();
+        String mensajeB = "¡Bienvenido de vuelta, "+ nombre + "!";
+        lblNombre.setText(mensajeB);
     }
     String dni;
+    
     
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -47,6 +50,8 @@ public class alum_dashboard extends javax.swing.JPanel {
         jLabel13 = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
         lblNombre = new javax.swing.JLabel();
+        jLabel15 = new javax.swing.JLabel();
+        jLabel16 = new javax.swing.JLabel();
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -110,7 +115,18 @@ public class alum_dashboard extends javax.swing.JPanel {
         jPanel2.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 350, -1, -1));
 
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 0, 250, 560));
-        jPanel1.add(lblNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 60, 160, 60));
+
+        lblNombre.setFont(new java.awt.Font("Century Gothic", 1, 30)); // NOI18N
+        lblNombre.setForeground(new java.awt.Color(242, 242, 242));
+        jPanel1.add(lblNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 60, 440, 60));
+
+        jLabel15.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/alum_dash/BienvenidaAlum.png"))); // NOI18N
+        jPanel1.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 30, -1, -1));
+
+        jLabel16.setFont(new java.awt.Font("Century Gothic", 1, 24)); // NOI18N
+        jLabel16.setForeground(new java.awt.Color(102, 102, 102));
+        jLabel16.setText("Mis clases reservadas");
+        jPanel1.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 290, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -132,6 +148,8 @@ public class alum_dashboard extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
