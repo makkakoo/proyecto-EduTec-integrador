@@ -249,7 +249,7 @@ public class alum_reservarclase extends javax.swing.JPanel {
                 btnReservarActionPerformed(evt);
             }
         });
-        jPanel1.add(btnReservar, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 540, 261, 40));
+        jPanel1.add(btnReservar, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 460, 261, 40));
 
         jLabel2.setFont(new java.awt.Font("Century Gothic", 1, 24)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(102, 102, 102));
@@ -283,7 +283,7 @@ public class alum_reservarclase extends javax.swing.JPanel {
         ));
         jScrollPane1.setViewportView(tblDatos);
 
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 200, 790, 300));
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 200, 790, 250));
 
         lblFecha.setForeground(new java.awt.Color(153, 153, 153));
         lblFecha.setText("Limpiar fecha");
