@@ -1,14 +1,14 @@
 package modelo;
 
 public class ClaseDTO {
-
+    private String cod_clase;
     private String estado;
     private String fecha;
     private Aula aula;
     private Tema tema;
     private Horario horario;
     private Persona persona;
-
+    
     public Persona getPersona() {
         return persona;
     }
@@ -54,5 +54,13 @@ public class ClaseDTO {
 
     public void setAula(Aula aula) {
         this.aula = aula;
+    }
+
+    public String getCod_clase() {
+        return cod_clase;
+    }
+
+    public void setCod_clase(String cod_clase) {
+        this.cod_clase = cod_clase;
     }
 }
