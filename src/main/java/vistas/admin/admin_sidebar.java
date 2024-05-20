@@ -257,6 +257,10 @@ public class admin_sidebar extends javax.swing.JFrame {
         dispose();
     }//GEN-LAST:event_btnLogOutAdmActionPerformed
 
+//    public void CerrarAdmin(){
+//        dispose();
+//    }
+    
     void setColor(JPanel panel) {
         panel.setBackground(new Color(184, 218, 255));
     }

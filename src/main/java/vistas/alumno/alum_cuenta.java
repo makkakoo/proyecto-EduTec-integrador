@@ -244,7 +244,7 @@ public class alum_cuenta extends javax.swing.JPanel {
                 btnActContraActionPerformed(evt);
             }
         });
-        pnlContraseña.add(btnActContra, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 330, -1, -1));
+        pnlContraseña.add(btnActContra, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 120, -1, -1));
 
         btnCancelar.setBackground(new java.awt.Color(27, 68, 255));
         btnCancelar.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
@@ -255,7 +255,7 @@ public class alum_cuenta extends javax.swing.JPanel {
                 btnCancelarActionPerformed(evt);
             }
         });
-        pnlContraseña.add(btnCancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 330, -1, -1));
+        pnlContraseña.add(btnCancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 210, -1, -1));
 
         txtRepetirContra.setForeground(new java.awt.Color(153, 153, 153));
         txtRepetirContra.setText("**********");
@@ -366,8 +366,8 @@ public class alum_cuenta extends javax.swing.JPanel {
                         .addComponent(pnlDatos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(113, 113, 113))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(pnlContraseña, javax.swing.GroupLayout.PREFERRED_SIZE, 437, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(263, 263, 263))))
+                        .addComponent(pnlContraseña, javax.swing.GroupLayout.PREFERRED_SIZE, 615, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(85, 85, 85))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

@@ -10,6 +10,7 @@ import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 import modelo.Persona;
 import modeloDAO.PersonaDao;
+import vistas.general.login;
 
 /**
  *
@@ -234,12 +235,12 @@ public class admin_cuenta extends javax.swing.JPanel {
         jLabel4.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(102, 102, 102));
         jLabel4.setText("Contraseña nueva");
-        pnlContraseña.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 140, -1, -1));
+        pnlContraseña.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 120, -1, -1));
 
         jLabel5.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(102, 102, 102));
         jLabel5.setText("Repetir contraseña");
-        pnlContraseña.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 220, -1, -1));
+        pnlContraseña.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 200, -1, -1));
 
         btnActContra.setBackground(new java.awt.Color(27, 68, 255));
         btnActContra.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
@@ -250,7 +251,7 @@ public class admin_cuenta extends javax.swing.JPanel {
                 btnActContraActionPerformed(evt);
             }
         });
-        pnlContraseña.add(btnActContra, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 330, -1, -1));
+        pnlContraseña.add(btnActContra, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 290, -1, -1));
 
         btnCancelar.setBackground(new java.awt.Color(27, 68, 255));
         btnCancelar.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
@@ -261,7 +262,7 @@ public class admin_cuenta extends javax.swing.JPanel {
                 btnCancelarActionPerformed(evt);
             }
         });
-        pnlContraseña.add(btnCancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 330, -1, -1));
+        pnlContraseña.add(btnCancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 290, -1, -1));
 
         txtRepetirContra.setForeground(new java.awt.Color(153, 153, 153));
         txtRepetirContra.setText("**********");
@@ -270,7 +271,7 @@ public class admin_cuenta extends javax.swing.JPanel {
                 txtRepetirContraMousePressed(evt);
             }
         });
-        pnlContraseña.add(txtRepetirContra, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 250, 260, 40));
+        pnlContraseña.add(txtRepetirContra, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 220, 260, 40));
 
         txtContraOriginal.setForeground(new java.awt.Color(153, 153, 153));
         txtContraOriginal.setText("**********");
@@ -279,7 +280,7 @@ public class admin_cuenta extends javax.swing.JPanel {
                 txtContraOriginalMousePressed(evt);
             }
         });
-        pnlContraseña.add(txtContraOriginal, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 70, 260, 40));
+        pnlContraseña.add(txtContraOriginal, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 60, 260, 40));
 
         jLabel6.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(102, 102, 102));
@@ -293,19 +294,19 @@ public class admin_cuenta extends javax.swing.JPanel {
                 txtContraNuevaMousePressed(evt);
             }
         });
-        pnlContraseña.add(txtContraNueva, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 160, 260, 41));
+        pnlContraseña.add(txtContraNueva, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 140, 260, 41));
 
         lblContOrig.setForeground(new java.awt.Color(255, 0, 0));
         lblContOrig.setText("Campo obligatorio");
-        pnlContraseña.add(lblContOrig, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 110, -1, -1));
+        pnlContraseña.add(lblContOrig, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 100, -1, -1));
 
         lblContNueva.setForeground(new java.awt.Color(255, 0, 0));
         lblContNueva.setText("Campo obligatorio");
-        pnlContraseña.add(lblContNueva, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 200, -1, -1));
+        pnlContraseña.add(lblContNueva, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 180, -1, -1));
 
         lblContRep.setForeground(new java.awt.Color(255, 0, 0));
         lblContRep.setText("Campo obligatorio");
-        pnlContraseña.add(lblContRep, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 290, -1, -1));
+        pnlContraseña.add(lblContRep, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 260, -1, -1));
 
         mostrarOrig.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/img_login/mostrar contra.png"))); // NOI18N
         mostrarOrig.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -313,7 +314,7 @@ public class admin_cuenta extends javax.swing.JPanel {
                 mostrarOrigMouseClicked(evt);
             }
         });
-        pnlContraseña.add(mostrarOrig, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 80, -1, -1));
+        pnlContraseña.add(mostrarOrig, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 70, -1, -1));
 
         mostrarNueva.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/img_login/mostrar contra.png"))); // NOI18N
         mostrarNueva.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -321,7 +322,7 @@ public class admin_cuenta extends javax.swing.JPanel {
                 mostrarNuevaMouseClicked(evt);
             }
         });
-        pnlContraseña.add(mostrarNueva, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 170, -1, -1));
+        pnlContraseña.add(mostrarNueva, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 150, -1, -1));
 
         mostrarRep.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/img_login/mostrar contra.png"))); // NOI18N
         mostrarRep.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -329,7 +330,7 @@ public class admin_cuenta extends javax.swing.JPanel {
                 mostrarRepMouseClicked(evt);
             }
         });
-        pnlContraseña.add(mostrarRep, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 260, -1, -1));
+        pnlContraseña.add(mostrarRep, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 240, -1, -1));
 
         OcultarNueva.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/img_login/hide-password.png"))); // NOI18N
         OcultarNueva.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -337,7 +338,7 @@ public class admin_cuenta extends javax.swing.JPanel {
                 OcultarNuevaMouseClicked(evt);
             }
         });
-        pnlContraseña.add(OcultarNueva, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 160, -1, 40));
+        pnlContraseña.add(OcultarNueva, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 140, -1, 40));
 
         OcultarRep.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/img_login/hide-password.png"))); // NOI18N
         OcultarRep.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -345,7 +346,7 @@ public class admin_cuenta extends javax.swing.JPanel {
                 OcultarRepMouseClicked(evt);
             }
         });
-        pnlContraseña.add(OcultarRep, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 260, -1, -1));
+        pnlContraseña.add(OcultarRep, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 240, -1, -1));
 
         OcultarOrig.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/img_login/hide-password.png"))); // NOI18N
         OcultarOrig.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -353,7 +354,7 @@ public class admin_cuenta extends javax.swing.JPanel {
                 OcultarOrigMouseClicked(evt);
             }
         });
-        pnlContraseña.add(OcultarOrig, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 80, 20, -1));
+        pnlContraseña.add(OcultarOrig, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 70, 20, -1));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -493,20 +494,18 @@ public class admin_cuenta extends javax.swing.JPanel {
         txtRepetirContra.setText("**********");
         txtRepetirContra.setForeground(new Color(153, 153, 153));
         OcultarCampos();
-        
-        
+
         mostrarOrig.setVisible(true);
         mostrarNueva.setVisible(true);
         mostrarRep.setVisible(true);
         OcultarOrig.setVisible(false);
         OcultarNueva.setVisible(false);
         OcultarRep.setVisible(false);
-        
+
         txtContraOriginal.setEchoChar('*');
         txtContraNueva.setEchoChar('*');
         txtRepetirContra.setEchoChar('*');
 
-        
     }
 
     public void registroAccion() {
@@ -531,7 +530,12 @@ public class admin_cuenta extends javax.swing.JPanel {
         JOptionPane.showMessageDialog(null, "La contraseña se ha modificado correctamente.", "Confirmación", JOptionPane.INFORMATION_MESSAGE);
         pnlModificar.setVisible(true);
         pnlContraseña.setVisible(false);
+//        JOptionPane.showMessageDialog(null, "Volviendo al login", "Confirmación", JOptionPane.INFORMATION_MESSAGE);
 
+//        login lg = new login();
+//        lg.setVisible(true);
+//        admin_sidebar as = new admin_sidebar();
+//        adminSidebar.CerrarAdmin();
 //    boolean actualizado = objPersonaDao.modificarContra(objPersona);
 //
 //    if (actualizado) {
@@ -542,6 +546,15 @@ public class admin_cuenta extends javax.swing.JPanel {
 //        JOptionPane.showMessageDialog(null, "Error al actualizar la contraseña.", "Error", JOptionPane.ERROR_MESSAGE);
 //    }
     }
+
+//     admin_sidebar adminSidebar;
+//
+//    // Constructor que acepta una referencia de admin_sidebar
+//    public admin_cuenta(admin_sidebar adminSidebar) {
+//        this.adminSidebar = adminSidebar;
+// 
+//    }
+
     private void txtContraNuevaMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtContraNuevaMousePressed
         if (String.valueOf(txtContraNueva.getPassword()).equals("**********")) {
             txtContraNueva.setText(null);
@@ -606,7 +619,7 @@ public class admin_cuenta extends javax.swing.JPanel {
     private void mostrarNuevaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mostrarNuevaMouseClicked
         txtContraNueva.setEchoChar((char) 0);
         OcultarNueva.setVisible(true);
-        mostrarNueva.setVisible(false);       
+        mostrarNueva.setVisible(false);
     }//GEN-LAST:event_mostrarNuevaMouseClicked
 
     private void OcultarNuevaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_OcultarNuevaMouseClicked
