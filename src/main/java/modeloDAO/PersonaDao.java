@@ -280,4 +280,27 @@ public class PersonaDao implements PersonaInterface {
         }
         return totalPersonas;
     }
+
+    @Override
+    //ESTA SOLO MUESTRA PROFESORES QUE TIENES CLASES PROGRAMADAS
+    public ArrayList<Persona> listarSinRepetir() {
+        try {
+            String sql = "SELECT DISTINCT p.dni, p.nombre, p.apellido FROM registro_clases r join persona p on r.persona_dni = p.dni";            
+            conn = con.getConexion();
+            ps = conn.prepareStatement(sql);
+            rs = ps.executeQuery();
+            while(rs.next()){
+                objPersona = new Persona();
+                objPersona.setDni(rs.getString("dni"));
+                objPersona.setNombre(rs.getString("nombre"));
+                objPersona.setApellido(rs.getString("apellido"));
+                lista.add(objPersona);
+            }
+            conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(PersonaDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return lista;
+
+    }
 }

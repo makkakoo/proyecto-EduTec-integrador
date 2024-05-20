@@ -173,4 +173,27 @@ public class HorarioDAO implements HorarioInterface {
         }
         return totalHorarios;
     }
+
+    @Override
+    public ArrayList<Horario> listarSinRepetir() {
+           try {
+            String sql = "SELECT DISTINCT r.id_hora, h.inicio, h.final FROM registro_clases r join horario h on r.id_hora = h.id_hora;";            
+            conn = con.getConexion();
+            ps = conn.prepareStatement(sql);
+            rs = ps.executeQuery();
+            while(rs.next()){
+                h = new Horario();
+                h.setId_hora(rs.getInt("id_hora"));
+                h.setInicio(rs.getString("inicio"));
+                h.setFinale(rs.getString("final"));
+                lista.add(h);
+            }
+            conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(AulaDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return lista;
+
+
+    }
 }

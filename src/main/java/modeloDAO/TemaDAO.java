@@ -144,4 +144,24 @@ public class TemaDAO implements  TemaInterface{
         return totalTemas;
     }
 
+    @Override
+    public ArrayList<Tema> listarSinRepetir() {
+        try {
+            String sql = "SELECT DISTINCT r.tema_id_tema, t.nombre_tema FROM registro_clases r JOIN tema t ON r.tema_id_tema = t.id_tema;";            
+            conn = con.getConexion();
+            ps = conn.prepareStatement(sql);
+            rs = ps.executeQuery();
+            while(rs.next()){
+                t = new Tema();
+                t.setId_tema(rs.getInt("tema_id_tema"));
+                t.setNombre(rs.getString("nombre_tema"));
+                lista.add(t);
+            }
+            conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(AulaDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return lista;
+    }
+
 }

@@ -11,5 +11,6 @@ public interface PersonaInterface{
     public boolean modificar(Persona p);
     public ArrayList<Persona> listarTodos(int tipo);
     public Persona listarUno(String codigo);
+    public ArrayList<Persona> listarSinRepetir();
     
 }
