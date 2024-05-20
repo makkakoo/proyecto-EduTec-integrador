@@ -87,6 +87,7 @@ public class admin_clases extends javax.swing.JPanel {
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         btnFiltrar = new javax.swing.JButton();
+        btnCancelarClase = new javax.swing.JButton();
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -282,6 +283,17 @@ public class admin_clases extends javax.swing.JPanel {
 
         jPanel1.add(pnlBuscarPorFecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 110, 400, 40));
 
+        btnCancelarClase.setBackground(new java.awt.Color(153, 0, 0));
+        btnCancelarClase.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
+        btnCancelarClase.setForeground(new java.awt.Color(255, 255, 255));
+        btnCancelarClase.setText("Cancelar");
+        btnCancelarClase.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCancelarClaseActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnCancelarClase, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 80, 90, 30));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -336,6 +348,21 @@ public class admin_clases extends javax.swing.JPanel {
         filtrarClases(fechaActual, fechaActual);
         pnlDetalleClases.setVisible(false);
     }//GEN-LAST:event_rbtnHoyActionPerformed
+
+    private void btnCancelarClaseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarClaseActionPerformed
+       int fila = tblClases.getSelectedRow();
+          
+       if (fila==-1){
+            // Mostrar un mensaje de error para notificar al usuario que debe seleccionar una fila.
+            JOptionPane.showMessageDialog(this, "Por favor, seleccione una clase de la tabla.", "Error", JOptionPane.ERROR_MESSAGE);
+        }else{
+            codigo = tblClases.getValueAt(fila, 0).toString();
+            clasedao = new ClaseDAO();
+            clase = clasedao.listarUno(codigo);
+            clasedao.modificarEstado(clase);
+            mostrarClases();
+       }
+    }//GEN-LAST:event_btnCancelarClaseActionPerformed
     public String obtenerFechaActual() {
          // Obtener la fecha actual
         LocalDate fechaActual = LocalDate.now();
@@ -406,6 +433,7 @@ public class admin_clases extends javax.swing.JPanel {
         }
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnCancelarClase;
     private javax.swing.JButton btnDetalleClase;
     private javax.swing.JButton btnFiltrar;
     private javax.swing.ButtonGroup buttonGroup1;

@@ -319,4 +319,17 @@ public class ClaseDAO implements ClaseInterface {
         return lista;
 
     }
+
+    public boolean modificarEstado(ClaseDTO c) {
+        try {
+            String sql = "update registro_clases set estado='Cancelada'"
+                    + " where id_registro_clase = '"+c.getCod_clase()+"'";
+            conn = con.getConexion();
+            ps = conn.prepareStatement(sql);
+            ps.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(ClaseDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return false; 
+    }
 }
