@@ -1,6 +1,7 @@
 package vistas.admin;
 
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import modelo.Aula;
 import modelo.Horario;
@@ -521,6 +522,7 @@ public class admin_detalles extends javax.swing.JPanel {
         //System.out.println("Aula agregada exitosamente a la BD");
 
         mostrarAulas();
+        limpiarCampos();
     }//GEN-LAST:event_btnIngresarAulaActionPerformed
 
     private void btnEliminarAulaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarAulaActionPerformed
@@ -533,13 +535,19 @@ public class admin_detalles extends javax.swing.JPanel {
 
     private void btnModificarAulaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarAulaActionPerformed
         int fila = tblAulas.getSelectedRow();
-        codigo = tblAulas.getValueAt(fila, 0).toString();
-        aud = new AulaDAO();
-        au = aud.listarUno(codigo);
+        if (fila==-1){
+            // Mostrar un mensaje de error para notificar al usuario que debe seleccionar una fila.
+            JOptionPane.showMessageDialog(this, "Por favor, seleccione un aula de la tabla.", "Error", JOptionPane.ERROR_MESSAGE);
+        }else{
+            codigo = tblAulas.getValueAt(fila, 0).toString();
+            aud = new AulaDAO();
+            au = aud.listarUno(codigo);
+
+            txtModAmb.setText(au.getAmbiente());
+            txtModAfo.setText(au.getAforo()+"");
+            pnlModificarAula.setVisible(true);
+        }
         
-        txtModAmb.setText(au.getAmbiente());
-        txtModAfo.setText(au.getAforo()+"");
-        pnlModificarAula.setVisible(true);
         
     }//GEN-LAST:event_btnModificarAulaActionPerformed
 
@@ -569,13 +577,20 @@ public class admin_detalles extends javax.swing.JPanel {
 
     private void btnModificarTemaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarTemaActionPerformed
         int fila = tblTemas.getSelectedRow();
-        codigo = tblTemas.getValueAt(fila, 0).toString();
-        td = new TemaDAO();
-        t = td.listarUno(codigo);
         
-        txtModCodTem.setText(t.getId_tema()+"");
-        txtModNomTem.setText(t.getNombre());
-        pnlModificarTema.setVisible(true);
+        if (fila==-1){
+            // Mostrar un mensaje de error para notificar al usuario que debe seleccionar una fila.
+            JOptionPane.showMessageDialog(this, "Por favor, seleccione una clase de la tabla.", "Error", JOptionPane.ERROR_MESSAGE);
+        }else{
+            codigo = tblTemas.getValueAt(fila, 0).toString();
+            td = new TemaDAO();
+            t = td.listarUno(codigo);
+
+            txtModCodTem.setText(t.getId_tema()+"");
+            txtModNomTem.setText(t.getNombre());
+            pnlModificarTema.setVisible(true);
+        }
+        
     }//GEN-LAST:event_btnModificarTemaActionPerformed
 
     private void btnEliminarTemaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarTemaActionPerformed
@@ -596,6 +611,7 @@ public class admin_detalles extends javax.swing.JPanel {
         //System.out.println("Tema agregado exitosamente a la BD");
 
         mostrarTemas();
+        limpiarCampos();
     }//GEN-LAST:event_btnIngresarTemaActionPerformed
 
     private void btnIngresarHorarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIngresarHorarioActionPerformed
@@ -609,6 +625,7 @@ public class admin_detalles extends javax.swing.JPanel {
         System.out.println("Horario agregado exitosamente a la BD");
 
         mostrarHorarios();
+        limpiarCampos();
     }//GEN-LAST:event_btnIngresarHorarioActionPerformed
 
     private void btnEliminarHorarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarHorarioActionPerformed
@@ -621,17 +638,30 @@ public class admin_detalles extends javax.swing.JPanel {
 
     private void btnModificarHorarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarHorarioActionPerformed
         int fila = tblHorarios.getSelectedRow();
-        codigo = tblHorarios.getValueAt(fila, 0).toString();
-        hd = new HorarioDAO();
-        h = hd.listarUno(codigo);
+        if (fila==-1){
+            // Mostrar un mensaje de error para notificar al usuario que debe seleccionar una fila.
+            JOptionPane.showMessageDialog(this, "Por favor, seleccione un horario de la tabla.", "Error", JOptionPane.ERROR_MESSAGE);
+        }else{
+            codigo = tblHorarios.getValueAt(fila, 0).toString();
+            hd = new HorarioDAO();
+            h = hd.listarUno(codigo);
+
+            txtModCodHor.setText(h.getId_hora()+"");
+            pnlModificarHorario.setVisible(true);
+        }
         
-        //txtMod.setText(t.getId_tema()+"");
-        //txtModNomTem.setText(t.getNombre());
-        pnlModificarTema.setVisible(true);
     }//GEN-LAST:event_btnModificarHorarioActionPerformed
 
     private void btnGuardarHorarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarHorarioActionPerformed
-        // TODO add your handling code here:
+        hd = new HorarioDAO();
+        h = hd.listarUno(codigo);
+        
+        h.setInicio(mhi1.getValue().toString()+":"+mhi2.getValue().toString());
+        h.setFinale(mhf1.getValue().toString()+":"+mhf2.getValue().toString());
+        
+        hd.modificar(h);
+        mostrarHorarios();
+        pnlModificarHorario.setVisible(false);
     }//GEN-LAST:event_btnGuardarHorarioActionPerformed
 
     public void mostrarAulas(){
@@ -675,6 +705,23 @@ public class admin_detalles extends javax.swing.JPanel {
                 };
             modelo3.addRow(data);
         }
+    }
+    
+    public void limpiarCampos(){
+        //Para la seccion de aulas
+        txtAmbiente.setText(null);
+        txtAforo.setText(null);
+        
+        //Para la seccion de temas
+        txtCodTema.setText(null);
+        txtNomTema.setText(null);
+        
+        //Para la seccion de horarios
+        txtCodHorario.setText(null);
+        hi1.setValue(0);
+        hi2.setValue(0);
+        hf1.setValue(0);
+        hf2.setValue(0);
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnEliminarAula;
