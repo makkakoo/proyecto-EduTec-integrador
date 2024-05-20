@@ -327,12 +327,14 @@ public class admin_clases extends javax.swing.JPanel {
 
     private void rbtnRangoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbtnRangoActionPerformed
         pnlBuscarPorFecha.setVisible(true);
+        pnlDetalleClases.setVisible(false);
     }//GEN-LAST:event_rbtnRangoActionPerformed
 
     private void rbtnHoyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbtnHoyActionPerformed
         pnlBuscarPorFecha.setVisible(false);
         String fechaActual = obtenerFechaActual();
         filtrarClases(fechaActual, fechaActual);
+        pnlDetalleClases.setVisible(false);
     }//GEN-LAST:event_rbtnHoyActionPerformed
     public String obtenerFechaActual() {
          // Obtener la fecha actual
