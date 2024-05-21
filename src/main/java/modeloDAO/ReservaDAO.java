@@ -2,6 +2,7 @@
 package modeloDAO;
 
 import Conexion.Conexion;
+import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -106,6 +107,29 @@ public class ReservaDAO implements ReservaInterface{
             Logger.getLogger(ReservaDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         return lista;
+    }
+    
+    public ReservaDTO obtenerReservaProxima(String dniAlumno) {
+    CallableStatement cs = null;
+    ResultSet rs = null;
+        try {
+            conn = con.getConexion();
+            cs = conn.prepareCall("{call sp_ObtenerClaseProxima(?)}");
+            cs.setString(1, dniAlumno);
+            rs = cs.executeQuery();
+
+            if (rs.next()) {
+                objReservaDTO = new ReservaDTO();
+                objReservaDTO.setCodigo(rs.getInt("id_reserva"));
+                //Para la clase
+                String cc = rs.getString("id_registro_clase");
+                c= cd.listarUno(cc);
+                objReservaDTO.setClase(c); 
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(ReservaDAO.class.getName()).log(Level.SEVERE, "Error al obtener la reserva más próxima para el alumno", ex);
+        } 
+        return objReservaDTO;
     }
     
 }

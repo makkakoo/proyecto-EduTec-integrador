@@ -107,7 +107,6 @@ public class admin_dashboard extends javax.swing.JPanel {
         jPanel1 = new javax.swing.JPanel();
         lblFecha = new javax.swing.JLabel();
         btnDetalles = new javax.swing.JButton();
-        btnAlumnos = new javax.swing.JButton();
         btnProfes = new javax.swing.JButton();
         jLabel33 = new javax.swing.JLabel();
         jLabel34 = new javax.swing.JLabel();
@@ -167,10 +166,6 @@ public class admin_dashboard extends javax.swing.JPanel {
             }
         });
         jPanel1.add(btnDetalles, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 420, -1, -1));
-
-        btnAlumnos.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
-        btnAlumnos.setText("Ver más");
-        jPanel1.add(btnAlumnos, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 350, -1, -1));
 
         btnProfes.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
         btnProfes.setText("Ver más");
@@ -283,7 +278,7 @@ public class admin_dashboard extends javax.swing.JPanel {
 
         jLabel38.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
         jLabel38.setForeground(new java.awt.Color(153, 153, 153));
-        jLabel38.setText("Clases reservadas");
+        jLabel38.setText("Clases en curso");
         jPanel1.add(jLabel38, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 100, -1, -1));
 
         jLabel36.setBackground(new java.awt.Color(17, 49, 194));
@@ -374,7 +369,6 @@ public class admin_dashboard extends javax.swing.JPanel {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnAlumnos;
     private javax.swing.JButton btnDetalles;
     private javax.swing.JButton btnProfes;
     private javax.swing.JLabel jLabel10;
