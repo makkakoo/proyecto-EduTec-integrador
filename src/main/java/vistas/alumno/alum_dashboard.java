@@ -35,13 +35,19 @@ public class alum_dashboard extends javax.swing.JPanel {
     public void mostrarClaseProxima(){
         rd = new ReservaDAO();
         r = rd.obtenerReservaProxima(dni);
-        System.out.println("codigo de reserva prox"+r.getCodigo());
-        lblTema.setText(r.getClase().getTema().getNombre());
-        lblAula.setText(r.getClase().getAula().getAmbiente());
-        lblFecha.setText(r.getClase().getFecha());
-        lblHorario.setText(r.getClase().getHorario().getInicio()+" - "+r.getClase().getHorario().getFinale());
-        lblApellidos.setText(r.getClase().getPersona().getApellido()+",");
-        lblNombres.setText(r.getClase().getPersona().getNombre());
+        
+        if(r==null){
+            System.out.println("No pasa nada");
+        }else{
+            lblTema.setText(r.getClase().getTema().getNombre());
+            lblAula.setText(r.getClase().getAula().getAmbiente());
+            lblFecha.setText(r.getClase().getFecha());
+            lblHorario.setText(r.getClase().getHorario().getInicio()+" - "+r.getClase().getHorario().getFinale());
+            lblApellidos.setText(r.getClase().getPersona().getApellido()+",");
+            lblNombres.setText(r.getClase().getPersona().getNombre());
+        }
+        
+        
        
     }
     
@@ -150,7 +156,7 @@ public class alum_dashboard extends javax.swing.JPanel {
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 0, 250, 560));
 
         lblNombres.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
-        lblNombres.setText("Adrian Alexander");
+        lblNombres.setText(" ");
         jPanel1.add(lblNombres, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 480, 200, 30));
 
         jLabel27.setBackground(new java.awt.Color(204, 204, 204));
@@ -163,7 +169,7 @@ public class alum_dashboard extends javax.swing.JPanel {
         jPanel1.add(jLabel28, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 450, -1, -1));
 
         lblApellidos.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
-        lblApellidos.setText("Cisneros Camiloaga,");
+        lblApellidos.setText("-");
         jPanel1.add(lblApellidos, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 450, 200, 30));
 
         jLabel24.setBackground(new java.awt.Color(204, 204, 204));
@@ -176,11 +182,11 @@ public class alum_dashboard extends javax.swing.JPanel {
         jPanel1.add(jLabel25, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 450, -1, -1));
 
         lblAula.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
-        lblAula.setText("0000");
+        lblAula.setText("-");
         jPanel1.add(lblAula, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 450, 60, 30));
 
         lblFecha.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
-        lblFecha.setText("YYYY-MM-dd");
+        lblFecha.setText("-");
         jPanel1.add(lblFecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 450, 130, 30));
 
         jLabel22.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/admin_clases/calendar-event.png"))); // NOI18N
@@ -193,11 +199,11 @@ public class alum_dashboard extends javax.swing.JPanel {
         jPanel1.add(jLabel21, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 420, -1, -1));
 
         lblTema.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
-        lblTema.setText("Ejemplo de nombre de clase");
+        lblTema.setText("No tiene clases programadas");
         jPanel1.add(lblTema, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 350, -1, -1));
 
         lblHorario.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
-        lblHorario.setText("13:00:00 - 14:00:00");
+        lblHorario.setText("Sin definir ");
         jPanel1.add(lblHorario, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 380, -1, -1));
 
         jLabel18.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/alum_dash/lapicito.png"))); // NOI18N
