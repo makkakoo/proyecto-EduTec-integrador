@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import java.time.LocalDate;
 import javax.swing.JPanel;
 import modeloDAO.AulaDAO;
+import modeloDAO.ClaseDAO;
 import modeloDAO.HorarioDAO;
 import modeloDAO.PersonaDao;
 import modeloDAO.TemaDAO;
@@ -15,6 +16,7 @@ public class admin_dashboard extends javax.swing.JPanel {
     TemaDAO td;
     HorarioDAO hd;
     AulaDAO ad;
+    ClaseDAO cd;
 
     public admin_dashboard() {
 //        initComponents();
@@ -93,6 +95,19 @@ public class admin_dashboard extends javax.swing.JPanel {
         //contar aulas
         int cant_aulas = ad.contarAulas();
         lblAulas.setText(cant_aulas + "");
+        
+        cd = new ClaseDAO();
+        //Contar clases en curso
+        String clases_en_curso= cd.contarClasesPorEstado("En curso");
+        lblClasesEnCurso.setText(clases_en_curso + "");
+        
+         //Contar clases terminadas
+        String clases_terminadas= cd.contarClasesPorEstado("Terminada");
+        lblClasesTerminadas.setText(clases_terminadas + "");
+        
+        //Contar clases canceladas
+        String clases_canceladas= cd.contarClasesPorEstado("Cancelada");
+        lblClasesCanceladas.setText(clases_canceladas + "");
 
     }
     String dni;
@@ -136,7 +151,6 @@ public class admin_dashboard extends javax.swing.JPanel {
         jLabel21 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
         jLabel38 = new javax.swing.JLabel();
-        jLabel36 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jLabel40 = new javax.swing.JLabel();
         jLabel41 = new javax.swing.JLabel();
@@ -149,6 +163,11 @@ public class admin_dashboard extends javax.swing.JPanel {
         jLabel48 = new javax.swing.JLabel();
         jLabel39 = new javax.swing.JLabel();
         jLabel49 = new javax.swing.JLabel();
+        lblClasesTerminadas = new javax.swing.JLabel();
+        lblClasesEnCurso = new javax.swing.JLabel();
+        lblClasesCanceladas = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel15 = new javax.swing.JLabel();
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -281,12 +300,6 @@ public class admin_dashboard extends javax.swing.JPanel {
         jLabel38.setText("Clases en curso");
         jPanel1.add(jLabel38, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 100, -1, -1));
 
-        jLabel36.setBackground(new java.awt.Color(17, 49, 194));
-        jLabel36.setFont(new java.awt.Font("Century Gothic", 1, 48)); // NOI18N
-        jLabel36.setForeground(new java.awt.Color(17, 49, 194));
-        jLabel36.setText("02");
-        jPanel1.add(jLabel36, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 140, 60, -1));
-
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -335,6 +348,29 @@ public class admin_dashboard extends javax.swing.JPanel {
 
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 90, 670, 140));
 
+        lblClasesTerminadas.setBackground(new java.awt.Color(17, 49, 194));
+        lblClasesTerminadas.setFont(new java.awt.Font("Century Gothic", 1, 48)); // NOI18N
+        lblClasesTerminadas.setForeground(new java.awt.Color(17, 49, 194));
+        jPanel1.add(lblClasesTerminadas, new org.netbeans.lib.awtextra.AbsoluteConstraints(840, 280, 60, 60));
+
+        lblClasesEnCurso.setFont(new java.awt.Font("Century Gothic", 1, 48)); // NOI18N
+        lblClasesEnCurso.setForeground(new java.awt.Color(17, 49, 194));
+        jPanel1.add(lblClasesEnCurso, new org.netbeans.lib.awtextra.AbsoluteConstraints(840, 140, 60, 50));
+
+        lblClasesCanceladas.setFont(new java.awt.Font("Century Gothic", 1, 48)); // NOI18N
+        lblClasesCanceladas.setForeground(new java.awt.Color(17, 49, 194));
+        jPanel1.add(lblClasesCanceladas, new org.netbeans.lib.awtextra.AbsoluteConstraints(840, 430, 60, 60));
+
+        jLabel1.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(153, 153, 153));
+        jLabel1.setText("Clases terminadas");
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 250, -1, -1));
+
+        jLabel15.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
+        jLabel15.setForeground(new java.awt.Color(153, 153, 153));
+        jLabel15.setText("Clases canceladas");
+        jPanel1.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 400, -1, -1));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -371,11 +407,13 @@ public class admin_dashboard extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnDetalles;
     private javax.swing.JButton btnProfes;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel21;
@@ -386,7 +424,6 @@ public class admin_dashboard extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel33;
     private javax.swing.JLabel jLabel34;
     private javax.swing.JLabel jLabel35;
-    private javax.swing.JLabel jLabel36;
     private javax.swing.JLabel jLabel38;
     private javax.swing.JLabel jLabel39;
     private javax.swing.JLabel jLabel4;
@@ -411,6 +448,9 @@ public class admin_dashboard extends javax.swing.JPanel {
     private javax.swing.JLabel lblAulas;
     private javax.swing.JLabel lblCantAlumnos;
     private javax.swing.JLabel lblCantProfes;
+    private javax.swing.JLabel lblClasesCanceladas;
+    private javax.swing.JLabel lblClasesEnCurso;
+    private javax.swing.JLabel lblClasesTerminadas;
     private javax.swing.JLabel lblFecha;
     private javax.swing.JLabel lblHorarios;
     private javax.swing.JLabel lblTemas;
