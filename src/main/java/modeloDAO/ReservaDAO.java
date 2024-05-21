@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import misInterfaces.ReservaInterface;
+import modelo.ClaseDTO;
 import modelo.ReservaDTO;
 
 public class ReservaDAO implements ReservaInterface{
@@ -20,8 +21,9 @@ public class ReservaDAO implements ReservaInterface{
     PreparedStatement ps;
     Statement s;
     ResultSet rs;
-
-    ReservaDTO objReservaDTO;   
+    ReservaDTO objReservaDTO;
+    ClaseDTO c;
+    ClaseDAO cd = new ClaseDAO();
     ArrayList<ReservaDTO> lista = new ArrayList<>(); 
 
     @Override
@@ -59,12 +61,34 @@ public class ReservaDAO implements ReservaInterface{
 
     @Override
     public ArrayList<ReservaDTO> listarTodos() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
     public ReservaDTO listarUno(String codigo) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+    
+    public ArrayList<ReservaDTO> listarReservasPorAlu(String codigo) {
+        try {
+            String sql = "select * from registro_reserva where dni_alumno = '"+codigo+"'";
+            conn = con.getConexion();
+            ps = conn.prepareStatement(sql);
+            rs = ps.executeQuery();
+            while(rs.next()){
+                objReservaDTO = new ReservaDTO();
+                objReservaDTO.setCodigo(rs.getInt("id_reserva"));
+                //Para la clase
+                String cc = rs.getString("id_registro_clase");
+                c= cd.listarUno(cc);
+                objReservaDTO.setClase(c);
+                lista.add(objReservaDTO);
+            }
+            conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(ReservaDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return lista;
     }
     
 }

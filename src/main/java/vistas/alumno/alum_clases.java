@@ -1,17 +1,14 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
- */
 package vistas.alumno;
 
+import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
+import modelo.ReservaDTO;
+import modeloDAO.ReservaDAO;
 
-/**
- *
- * @author lesly
- */
 public class alum_clases extends javax.swing.JPanel {
-
+    String dni;
+    ReservaDTO r;
+    ReservaDAO rd;
     DefaultTableModel modelo = new DefaultTableModel();
     
     public alum_clases() {
@@ -23,15 +20,15 @@ public class alum_clases extends javax.swing.JPanel {
          dni = dniObtenido;
         establecerColumnas();
     }
-    String dni;
 
-    
     private void establecerColumnas(){
-        modelo.addColumn("Aula");
+        modelo.addColumn("Código");
         modelo.addColumn("Fecha");
-        modelo.addColumn("Hora");
+        modelo.addColumn("Aula");
+        modelo.addColumn("Hora inicio");
+        modelo.addColumn("Hora fin");
         modelo.addColumn("Tema");
-        modelo.addColumn("");
+        modelo.addColumn("Estado");
         tblClases.setModel(modelo);   
         
     }
@@ -48,12 +45,13 @@ public class alum_clases extends javax.swing.JPanel {
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblClases = new javax.swing.JTable();
+        btnVerClases = new javax.swing.JButton();
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
         jLabel1.setFont(new java.awt.Font("Century Gothic", 1, 48)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(17, 49, 194));
-        jLabel1.setText("Mis clases ");
+        jLabel1.setText("Mis clases reservadas");
 
         tblClases.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -68,28 +66,39 @@ public class alum_clases extends javax.swing.JPanel {
         ));
         jScrollPane1.setViewportView(tblClases);
 
+        btnVerClases.setText("Ver todo");
+        btnVerClases.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnVerClasesActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap(211, Short.MAX_VALUE)
+                .addGap(51, 51, 51)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                    .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel1)
-                        .addGap(369, 369, 369))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 662, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(167, 167, 167))))
+                        .addContainerGap(484, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 560, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnVerClases)
+                        .addGap(173, 173, 173))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(22, 22, 22)
+                .addGap(14, 14, 14)
                 .addComponent(jLabel1)
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(120, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 449, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnVerClases))
+                .addContainerGap(85, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -104,8 +113,30 @@ public class alum_clases extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btnVerClasesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVerClasesActionPerformed
+        mostrarClases();
+    }//GEN-LAST:event_btnVerClasesActionPerformed
 
+    public void mostrarClases(){
+        modelo.setRowCount(0);
+        rd = new ReservaDAO();
+        ArrayList<ReservaDTO> lista = new ArrayList<>();
+        lista = rd.listarReservasPorAlu(dni);
+        for(int i=0; i<lista.size(); i++){
+            Object[] data = {
+                lista.get(i).getCodigo(),
+                lista.get(i).getClase().getFecha(), 
+                lista.get(i).getClase().getAula().getAmbiente(),
+                lista.get(i).getClase().getHorario().getInicio(),
+                lista.get(i).getClase().getHorario().getFinale(),
+                lista.get(i).getClase().getTema().getNombre(),
+                lista.get(i).getClase().getEstado()
+                };
+            modelo.addRow(data);
+        }
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnVerClases;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;

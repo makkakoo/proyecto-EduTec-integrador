@@ -1,6 +1,7 @@
 package modelo;
 
 public class ReservaDTO {
+    private int codigo;
     private Persona persona; //El tipo de dato es un objeto de la clase Alumno para poder acceder a sus atributos (nombre,apellido,ect)
     private ClaseDTO clase; 
 
@@ -29,5 +30,13 @@ public class ReservaDTO {
      */
     public void setPersona(Persona persona) {
         this.persona = persona;
+    }
+
+    public int getCodigo() {
+        return codigo;
+    }
+
+    public void setCodigo(int codigo) {
+        this.codigo = codigo;
     }
 }
