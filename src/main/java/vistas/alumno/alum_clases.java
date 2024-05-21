@@ -101,7 +101,7 @@ public class alum_clases extends javax.swing.JPanel {
         pnlDetalles.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 90, -1, -1));
 
         lblClaseCod.setFont(new java.awt.Font("Century Gothic", 0, 24)); // NOI18N
-        lblClaseCod.setText("C001");
+        lblClaseCod.setText("C000");
         lblClaseCod.setBorder(new javax.swing.border.MatteBorder(null));
         pnlDetalles.add(lblClaseCod, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 30, 80, 50));
 
@@ -114,12 +114,12 @@ public class alum_clases extends javax.swing.JPanel {
         pnlDetalles.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 210, -1, -1));
 
         lblCodReserva.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
-        lblCodReserva.setText("9001");
+        lblCodReserva.setText("-");
         lblCodReserva.setBorder(new javax.swing.border.MatteBorder(null));
         pnlDetalles.add(lblCodReserva, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 70, 40, 40));
 
         lblTema.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
-        lblTema.setText("Programacion Orientada a Objetos");
+        lblTema.setText("-");
         lblTema.setBorder(new javax.swing.border.MatteBorder(null));
         pnlDetalles.add(lblTema, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 140, 250, 30));
 
@@ -147,7 +147,8 @@ public class alum_clases extends javax.swing.JPanel {
         pnlDetalles.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 110, -1, -1));
 
         lblProfe.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
-        lblProfe.setText("Adrian Cisneros");
+        lblProfe.setText("-");
+        lblProfe.setToolTipText("");
         lblProfe.setBorder(new javax.swing.border.MatteBorder(null));
         pnlDetalles.add(lblProfe, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 210, 250, 30));
 
@@ -183,7 +184,7 @@ public class alum_clases extends javax.swing.JPanel {
         r = rd.listarUno(codigo);
         
         lblTema.setText(r.getClase().getTema().getNombre());
-        lblCodReserva.setText(r.getClase().getPersona().getApellido()+" , "+r.getClase().getPersona().getNombre());
+        lblProfe.setText(r.getClase().getPersona().getApellido()+" , "+r.getClase().getPersona().getNombre());
         lblClaseCod.setText(r.getClase().getCod_clase());
         lblCodReserva.setText(r.getCodigo()+"");
         

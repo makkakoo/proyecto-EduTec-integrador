@@ -81,7 +81,6 @@ public class admin_profes extends javax.swing.JPanel {
         tblProfes = new javax.swing.JTable();
         btnAgregarProfe = new javax.swing.JButton();
         btnModificarProfe = new javax.swing.JButton();
-        btnEliminarProfe = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
@@ -178,9 +177,6 @@ public class admin_profes extends javax.swing.JPanel {
             }
         });
         jPanel1.add(btnModificarProfe, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 150, -1, -1));
-
-        btnEliminarProfe.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/crud_icons/delete.png"))); // NOI18N
-        jPanel1.add(btnEliminarProfe, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 210, 40, -1));
 
         jLabel6.setFont(new java.awt.Font("Century Gothic", 1, 24)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(17, 49, 194));
@@ -353,7 +349,7 @@ public class admin_profes extends javax.swing.JPanel {
         lblTitulo.setText("Modificar datos");
         pnlGuardar.setVisible(true);
         btnAgregarProfe.setVisible(false);
-        btnEliminarProfe.setVisible(false);
+        //btnEliminarProfe.setVisible(false);
         
         int fila = tblProfes.getSelectedRow();
         codigo = tblProfes.getValueAt(fila, 0).toString();
@@ -421,7 +417,7 @@ public class admin_profes extends javax.swing.JPanel {
         limpiarCampos();
         lblTitulo.setText("Registro de profesores");
         btnAgregarProfe.setVisible(true);
-        btnEliminarProfe.setVisible(true);
+        //btnEliminarProfe.setVisible(true);
         mostrarProfes();
         pnlGuardar.setVisible(false);
     }//GEN-LAST:event_btnGuardarCambiosActionPerformed
@@ -645,7 +641,6 @@ public class admin_profes extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAgregarProfe;
-    private javax.swing.JButton btnEliminarProfe;
     private javax.swing.JButton btnGuardarCambios;
     private javax.swing.JButton btnModificarProfe;
     private javax.swing.JButton btnSeleccionar;
