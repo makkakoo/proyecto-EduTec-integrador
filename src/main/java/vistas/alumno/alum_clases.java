@@ -54,6 +54,7 @@ public class alum_clases extends javax.swing.JPanel {
         jScrollPane1 = new javax.swing.JScrollPane();
         tblReservas = new javax.swing.JTable();
         pnlDetalles = new javax.swing.JPanel();
+        jLabel6 = new javax.swing.JLabel();
         lblClaseCod = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
@@ -93,6 +94,11 @@ public class alum_clases extends javax.swing.JPanel {
 
         pnlDetalles.setBackground(new java.awt.Color(255, 255, 255));
         pnlDetalles.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel6.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(102, 102, 102));
+        jLabel6.setText("Pago: s/. 0");
+        pnlDetalles.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 90, -1, -1));
 
         lblClaseCod.setFont(new java.awt.Font("Century Gothic", 0, 24)); // NOI18N
         lblClaseCod.setText("C001");
@@ -230,6 +236,7 @@ public class alum_clases extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
