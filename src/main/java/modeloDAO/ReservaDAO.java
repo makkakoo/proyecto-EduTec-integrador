@@ -66,7 +66,24 @@ public class ReservaDAO implements ReservaInterface{
 
     @Override
     public ReservaDTO listarUno(String codigo) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+         try {
+            String sql = "select * from registro_reserva where id_reserva='"+codigo+"'";
+            conn = con.getConexion();
+            ps = conn.prepareStatement(sql);
+            rs = ps.executeQuery();
+            while(rs.next()){
+                objReservaDTO = new ReservaDTO();
+                objReservaDTO.setCodigo(rs.getInt("id_reserva"));
+                //Para el aula
+                String cc = rs.getString("id_registro_clase");
+                c= cd.listarUno(cc);
+                objReservaDTO.setClase(c);
+            }
+            conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(ReservaDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return objReservaDTO;
     }
     
     public ArrayList<ReservaDTO> listarReservasPorAlu(String codigo) {

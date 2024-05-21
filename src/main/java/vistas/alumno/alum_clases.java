@@ -1,16 +1,22 @@
 package vistas.alumno;
 
+import java.awt.image.BufferedImage;
 import java.util.ArrayList;
+import javax.swing.ImageIcon;
 import javax.swing.table.DefaultTableModel;
 import modelo.ReservaDTO;
+import modeloDAO.PersonaDao;
 import modeloDAO.ReservaDAO;
 
 public class alum_clases extends javax.swing.JPanel {
     String dni;
+    String codigo;
     ReservaDTO r;
     ReservaDAO rd;
+    PersonaDao pd;
+    ImageIcon icono;
     DefaultTableModel modelo = new DefaultTableModel();
-    
+    ImageIcon iconoDefault = new ImageIcon("/img/cuenta/Profe.png");
     public alum_clases() {
         initComponents();
         establecerColumnas();
@@ -19,6 +25,8 @@ public class alum_clases extends javax.swing.JPanel {
         initComponents();
          dni = dniObtenido;
         establecerColumnas();
+        mostrarClases();
+        pnlDetalles.setVisible(false);
     }
 
     private void establecerColumnas(){
@@ -29,7 +37,7 @@ public class alum_clases extends javax.swing.JPanel {
         modelo.addColumn("Hora fin");
         modelo.addColumn("Tema");
         modelo.addColumn("Estado");
-        tblClases.setModel(modelo);   
+        tblReservas.setModel(modelo);   
         
     }
     /**
@@ -44,16 +52,31 @@ public class alum_clases extends javax.swing.JPanel {
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tblClases = new javax.swing.JTable();
-        btnVerClases = new javax.swing.JButton();
+        tblReservas = new javax.swing.JTable();
+        pnlDetalles = new javax.swing.JPanel();
+        lblClaseCod = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        lblCodReserva = new javax.swing.JLabel();
+        lblTema = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        lblFotoProfe = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
+        lblProfe = new javax.swing.JLabel();
+        btnDetalleReserva = new javax.swing.JButton();
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setFont(new java.awt.Font("Century Gothic", 1, 48)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(17, 49, 194));
         jLabel1.setText("Mis clases reservadas");
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(51, 14, -1, -1));
 
-        tblClases.setModel(new javax.swing.table.DefaultTableModel(
+        tblReservas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -64,42 +87,76 @@ public class alum_clases extends javax.swing.JPanel {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane1.setViewportView(tblClases);
+        jScrollPane1.setViewportView(tblReservas);
 
-        btnVerClases.setText("Ver todo");
-        btnVerClases.addActionListener(new java.awt.event.ActionListener() {
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(51, 115, 560, 420));
+
+        pnlDetalles.setBackground(new java.awt.Color(255, 255, 255));
+        pnlDetalles.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        lblClaseCod.setFont(new java.awt.Font("Century Gothic", 0, 24)); // NOI18N
+        lblClaseCod.setText("C001");
+        lblClaseCod.setBorder(new javax.swing.border.MatteBorder(null));
+        pnlDetalles.add(lblClaseCod, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 30, 80, 50));
+
+        jLabel7.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
+        jLabel7.setForeground(new java.awt.Color(153, 153, 153));
+        jLabel7.setText("Profesor");
+        pnlDetalles.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 180, -1, -1));
+
+        jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/admin_clases/user.png"))); // NOI18N
+        pnlDetalles.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 210, -1, -1));
+
+        lblCodReserva.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
+        lblCodReserva.setText("9001");
+        lblCodReserva.setBorder(new javax.swing.border.MatteBorder(null));
+        pnlDetalles.add(lblCodReserva, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 70, 40, 40));
+
+        lblTema.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
+        lblTema.setText("Programacion Orientada a Objetos");
+        lblTema.setBorder(new javax.swing.border.MatteBorder(null));
+        pnlDetalles.add(lblTema, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 140, 250, 30));
+
+        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/admin_clases/icon_tema.png"))); // NOI18N
+        pnlDetalles.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 140, -1, -1));
+
+        jLabel4.setFont(new java.awt.Font("Century Gothic", 3, 14)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(27, 68, 255));
+        jLabel4.setText("Código de reserva: ");
+        pnlDetalles.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 80, -1, -1));
+
+        jLabel3.setFont(new java.awt.Font("Century Gothic", 1, 24)); // NOI18N
+        jLabel3.setText("Detalle de la clase:");
+        pnlDetalles.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 40, -1, -1));
+
+        lblFotoProfe.setBorder(new javax.swing.border.MatteBorder(null));
+        pnlDetalles.add(lblFotoProfe, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 260, 210, 211));
+
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/admin_clases/Rectangle.png"))); // NOI18N
+        pnlDetalles.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, -1, -1));
+
+        jLabel9.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
+        jLabel9.setForeground(new java.awt.Color(153, 153, 153));
+        jLabel9.setText("Tema");
+        pnlDetalles.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 110, -1, -1));
+
+        lblProfe.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
+        lblProfe.setText("Adrian Cisneros");
+        lblProfe.setBorder(new javax.swing.border.MatteBorder(null));
+        pnlDetalles.add(lblProfe, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 210, 250, 30));
+
+        jPanel1.add(pnlDetalles, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 30, 390, 500));
+
+        btnDetalleReserva.setBackground(new java.awt.Color(27, 68, 255));
+        btnDetalleReserva.setFont(new java.awt.Font("Century Gothic", 1, 12)); // NOI18N
+        btnDetalleReserva.setForeground(new java.awt.Color(255, 255, 255));
+        btnDetalleReserva.setText("Detalle");
+        btnDetalleReserva.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnVerClasesActionPerformed(evt);
+                btnDetalleReservaActionPerformed(evt);
             }
         });
-
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(51, 51, 51)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addContainerGap(484, Short.MAX_VALUE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 560, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnVerClases)
-                        .addGap(173, 173, 173))))
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(14, 14, 14)
-                .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 449, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnVerClases))
-                .addContainerGap(85, Short.MAX_VALUE))
-        );
+        jPanel1.add(btnDetalleReserva, new org.netbeans.lib.awtextra.AbsoluteConstraints(539, 80, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -109,13 +166,44 @@ public class alum_clases extends javax.swing.JPanel {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 720, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnVerClasesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVerClasesActionPerformed
-        mostrarClases();
-    }//GEN-LAST:event_btnVerClasesActionPerformed
+    private void btnDetalleReservaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDetalleReservaActionPerformed
+        int fila = tblReservas.getSelectedRow();
+        codigo = tblReservas.getValueAt(fila, 0).toString();
+        rd = new ReservaDAO();
+        r = rd.listarUno(codigo);
+        
+        lblTema.setText(r.getClase().getTema().getNombre());
+        lblCodReserva.setText(r.getClase().getPersona().getApellido()+" , "+r.getClase().getPersona().getNombre());
+        lblClaseCod.setText(r.getClase().getCod_clase());
+        lblCodReserva.setText(r.getCodigo()+"");
+        
+        //Guardando el codigo del profe para buscar su imagen
+        String codProfe = r.getClase().getPersona().getDni();
+        pd = new PersonaDao();
+        
+        //Para cargar la imagen del profe
+        BufferedImage imagen = null;
+
+        try {
+        //Recuperar la imagen segun el codigo
+        imagen = pd.obtenerImagen(codProfe);
+
+        if (imagen != null) {
+            icono = new ImageIcon(imagen);
+            lblFotoProfe.setIcon(icono);
+        } else { // Si no se encuentra la imagen, se muestra una imagen por defecto en el JLabel
+            lblFotoProfe.setIcon(iconoDefault);
+            }
+        } catch (Exception ex) {
+            // Manejar cualquier excepción que pueda ocurrir durante la recuperación de la imagen
+    //        ex.printStackTrace(); // Opcional: imprime el stack trace para depuración
+        }
+        pnlDetalles.setVisible(true);
+    }//GEN-LAST:event_btnDetalleReservaActionPerformed
 
     public void mostrarClases(){
         modelo.setRowCount(0);
@@ -136,10 +224,23 @@ public class alum_clases extends javax.swing.JPanel {
         }
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnVerClases;
+    private javax.swing.JButton btnDetalleReserva;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable tblClases;
+    private javax.swing.JLabel lblClaseCod;
+    private javax.swing.JLabel lblCodReserva;
+    private javax.swing.JLabel lblFotoProfe;
+    private javax.swing.JLabel lblProfe;
+    private javax.swing.JLabel lblTema;
+    private javax.swing.JPanel pnlDetalles;
+    private javax.swing.JTable tblReservas;
     // End of variables declaration//GEN-END:variables
 }
